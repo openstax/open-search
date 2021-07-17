@@ -8,7 +8,7 @@ module Rex
       @data = data
     end
 
-    def pipeline_version
+    def pipeline
       data['REACT_APP_ARCHIVE_URL']&.match(/\/apps\/archive\/(.*)/).try(:[], 1)
     end
   end

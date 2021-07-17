@@ -10,9 +10,6 @@ module Books
 
     DEFAULT_INDEXING_STRATEGY = IndexingStrategies::I1::Strategy
 
-    RAP_URL_BASE = "https://openstax.org/apps/archive"
-    LEGACY_URL = "https://openstax.org/contents"
-
     class IndexResourceNotReadyError < StandardError; end
 
     WAIT_UNTIL_MAX_TRIES = 30
