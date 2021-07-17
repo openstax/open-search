@@ -5,7 +5,7 @@ class Book < OpenStax::Cnx::V1::Book
   # "pipeline/uuid@version".  These IDs flow elsewhere to index names, etc.
 
   RAP_URL_WITHOUT_PIPELINE = "https://openstax.org/apps/archive"
-  LEGACY_ARCHIVE_URL = "https://openstax.org/contents"
+  LEGACY_ARCHIVE_URL = "https://openstax.org"
 
   attr_reader :pipeline, :uuid, :version
 
