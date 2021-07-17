@@ -11,8 +11,8 @@ RSpec.describe Rex::Release do
     context 'when there is no config data' do
       let(:config) { OpenStruct.new(pipeline_version: nil) }
 
-      it 'uses legacy for the pipeline prefix' do
-        expect(instance.books).to contain_exactly("legacy/uid1@1.2", "legacy/uid2@1.1")
+      it 'does not show a pipeline prefix on IDs' do
+        expect(instance.books.map(&:id)).to contain_exactly("uid1@1.2", "uid2@1.1")
       end
     end
 
@@ -20,7 +20,7 @@ RSpec.describe Rex::Release do
       let(:config) { OpenStruct.new(pipeline_version: 'foo')}
 
       it 'uses the pipeline as a prefix' do
-        expect(instance.books).to contain_exactly("foo/uid1@1.2", "foo/uid2@1.1")
+        expect(instance.books.map(&:id)).to contain_exactly("foo/uid1@1.2", "foo/uid2@1.1")
       end
     end
   end

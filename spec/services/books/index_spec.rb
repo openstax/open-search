@@ -35,7 +35,7 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
 
   describe "#populate" do
     let(:test_book_url) {
-      "https://archive.cnx.org/contents/#{cnx_book_id}"
+      "https://openstax.org/contents/#{cnx_book_id}"
     }
     let(:test_page_url) {
       "#{test_book_url}:ada35081-9ec4-4eb8-98b2-3ce350d5427f@6"
@@ -61,7 +61,7 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
     let(:physics_id) { 'cce64fde-f448-43b8-ae88-27705cceb0da@14.21' }
     let(:physics_json) { JSON.parse(file_fixture('mini_physics.json').read) }
     let(:physics_url) {
-      "https://archive.cnx.org/contents/cce64fde-f448-43b8-ae88-27705cceb0da@14.21"
+      "https://openstax.org/contents/cce64fde-f448-43b8-ae88-27705cceb0da@14.21"
     }
     let(:physics_page_url) {
       "#{physics_url}:5f0710fe-1028-4ac4-b8fd-b0a6c792c642@11"

@@ -12,7 +12,7 @@ module Rex
 
     def books
       @books ||= @data["books"].map do |uuid, info|
-        "#{config.pipeline_version || 'legacy'}/#{uuid}@#{info["defaultVersion"]}"
+        Book.new(pipeline: config.pipeline_version, uuid: uuid, version: info["defaultVersion"])
       end
     end
   end

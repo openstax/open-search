@@ -15,6 +15,10 @@ module Rex
       load_releases
     end
 
+    def book_ids
+      map(&:books).map(&:id).flatten.uniq
+    end
+
     protected
 
     def load_releases

@@ -42,7 +42,10 @@ module Books
     # This method populates the index with pages from the book
     def populate
       log_debug("populate #{name} called")
-      @indexing_strategy.index(book: book, index_name: name)
+
+      book.with_its_archive_url do
+        @indexing_strategy.index(book: book, index_name: name)
+      end
 
       index_stats
     end
@@ -107,18 +110,7 @@ module Books
     end
 
     def book
-      @book ||= begin
-        uuid_at_number, pipeline_version = @book_version_id.split('/').reverse
-        pipeline_version ||= 'legacy'
-
-        archive_url = pipeline_version == "legacy" ?
-                      LEGACY_URL :
-                      "#{RAP_URL_BASE}/#{pipeline}"
-
-        OpenStax::Cnx::V1.with_archive_url(archive_url) do
-          OpenStax::Cnx::V1::Book.new(id: uuid_at_number)
-        end
-      end
+      @book ||= Book.from_id(@book_version_id)
     end
   end
 end
