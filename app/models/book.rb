@@ -1,5 +1,9 @@
 class Book < OpenStax::Cnx::V1::Book
 
+  # Modifies OpenStax::Cnx::V1::Book to be aware of RAP pipelines.  The ID of a
+  # legacy archive books is still "uuid@version".  The ID of a RAP book is
+  # "pipeline/uuid@version".  These IDs flow elsewhere to index names, etc.
+
   RAP_URL_WITHOUT_PIPELINE = "https://openstax.org/apps/archive"
   LEGACY_ARCHIVE_URL = "https://openstax.org/contents"
 
