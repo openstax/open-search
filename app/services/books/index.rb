@@ -20,7 +20,7 @@ module Books
     delegate :index_name, to: :class
 
     def self.index_name(book_version_id:, indexing_strategy_short_name:)
-      "#{book_version_id}_#{indexing_strategy_short_name.downcase}"
+      "#{book_version_id}_#{indexing_strategy_short_name.downcase}".gsub(/\//,'__')
     end
 
     def initialize(book_version_id: nil,
