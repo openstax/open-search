@@ -16,7 +16,7 @@ module Rex
     end
 
     def book_ids
-      map(&:books).map(&:id).flatten.uniq
+      map(&:books).flatten.map(&:id).uniq
     end
 
     protected

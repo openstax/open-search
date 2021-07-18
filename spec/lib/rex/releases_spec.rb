@@ -63,6 +63,7 @@ RSpec.describe Rex::Releases, vcr: VCR_OPTS do
         expect(instance.releases.map(&:id)).to contain_exactly('alpha/1', 'beta/foo/2/bar/3')
         expect(instance.releases.first.books.count).to eq 2
         expect(instance.releases.second.books.count).to eq 1
+        expect(instance.book_ids).to contain_exactly("uid1@1.2", "uid2@1.1", "uid3@2.4")
       end
     end
   end
