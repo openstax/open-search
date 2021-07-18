@@ -9,6 +9,7 @@ module Books
     prefix_logger "Books::Index"
 
     DEFAULT_INDEXING_STRATEGY = IndexingStrategies::I1::Strategy
+    BAD_INDEX_NAME_CHARACTERS = /\//
 
     class IndexResourceNotReadyError < StandardError; end
 
@@ -20,7 +21,8 @@ module Books
     delegate :index_name, to: :class
 
     def self.index_name(book_version_id:, indexing_strategy_short_name:)
-      "#{book_version_id}_#{indexing_strategy_short_name.downcase}".gsub(/\//,'__')
+      raw_name = "#{book_version_id}_#{indexing_strategy_short_name.downcase}"
+      raw_name.gsub(BAD_INDEX_NAME_CHARACTERS, '__')
     end
 
     def initialize(book_version_id: nil,
@@ -40,6 +42,7 @@ module Books
     def populate
       log_debug("populate #{name} called")
       @indexing_strategy.index(book: book, index_name: name)
+
       index_stats
     end
 
