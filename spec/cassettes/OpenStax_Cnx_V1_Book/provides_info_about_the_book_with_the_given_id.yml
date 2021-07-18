@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261
+    uri: https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261.json
     body:
       encoding: US-ASCII
       string: ''
@@ -35,7 +35,7 @@ http_interactions:
       Etag:
       - '"1B2M2Y8AsgTpgAmY7PhCfg"'
       Location:
-      - https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3
+      - https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3.json
       Server:
       - waitress
       X-Varnish-Status:
@@ -65,7 +65,7 @@ http_interactions:
   recorded_at: Thu, 14 Mar 2019 22:10:04 GMT
 - request:
     method: get
-    uri: https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3
+    uri: https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3.json
     body:
       encoding: US-ASCII
       string: ''

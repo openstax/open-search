@@ -26,13 +26,22 @@ class Book < OpenStax::Cnx::V1::Book
     super(id: id)
   end
 
-  def archive_url
-    pipeline.blank? ? LEGACY_ARCHIVE_URL : "#{RAP_URL_WITHOUT_PIPELINE}/#{pipeline}"
+  def rap?
+    pipeline.present?
   end
 
-  def with_its_archive_url
-    OpenStax::Cnx::V1.with_archive_url(archive_url) do
-      yield
-    end
+  def url
+    @url ||= canonical_url
   end
+
+  def canonical_url
+    # We use `File.join` instead of `Addressable::URI.join` because the latter strips
+    # path components off of the first argument.
+    @canonical_url ||= File.join(archive_url, '/contents/', "#{uuid}@#{version}").to_s
+  end
+
+  def archive_url
+    rap? ? "#{RAP_URL_WITHOUT_PIPELINE}/#{pipeline}" : LEGACY_ARCHIVE_URL
+  end
+
 end

@@ -83,7 +83,7 @@ http_interactions:
   recorded_at: Fri, 16 Jul 2021 22:13:43 GMT
 - request:
     method: get
-    uri: https://openstax.org/contents/cce64fde-f448-43b8-ae88-27705cceb0da@14.21:5f0710fe-1028-4ac4-b8fd-b0a6c792c642@11
+    uri: https://openstax.org/contents/cce64fde-f448-43b8-ae88-27705cceb0da@14.21:5f0710fe-1028-4ac4-b8fd-b0a6c792c642@11.json
     body:
       encoding: US-ASCII
       string: ''

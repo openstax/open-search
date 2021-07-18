@@ -39,11 +39,7 @@ module Books
     # This method populates the index with pages from the book
     def populate
       log_debug("populate #{name} called")
-
-      book.with_its_archive_url do
-        @indexing_strategy.index(book: book, index_name: name)
-      end
-
+      @indexing_strategy.index(book: book, index_name: name)
       index_stats
     end
 

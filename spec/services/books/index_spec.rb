@@ -61,10 +61,10 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
     let(:book_version_id) { "#{pipeline}/#{book_uuid_at_version}" }
 
     let(:test_book_url) {
-      "https://openstax.org/apps/archive/#{pipeline}/contents/#{book_uuid_at_version}.json"
+      "https://openstax.org/apps/archive/#{pipeline}/contents/#{book_uuid_at_version}"
     }
     let(:test_page_url) {
-      "#{test_book_url.gsub('.json','')}:ccc4ed14-6c87-408b-9934-7a0d279d853a.json"
+      "#{test_book_url.gsub('.json','')}:ccc4ed14-6c87-408b-9934-7a0d279d853a"
     }
     let(:test_book_json) { JSON.parse(file_fixture('rap_mini.json').read) }
 
