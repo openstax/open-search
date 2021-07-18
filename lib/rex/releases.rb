@@ -16,7 +16,8 @@ module Rex
     end
 
     def book_ids
-      map(&:books).flatten.map(&:id).uniq
+      # return rap books first to try to priotize their indexing first
+      map(&:books).flatten.sort_by{|book| book.rap? ? 0 : 1}.map(&:id).uniq
     end
 
     protected
