@@ -1,0 +1,456 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: put
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1
+    body:
+      encoding: UTF-8
+      string: '{"settings":{"index":{"number_of_shards":1,"number_of_replicas":1},"analysis":{"analyzer":{"default":{"tokenizer":"standard","char_filter":["quotes"],"filter":["lowercase"]}},"char_filter":{"quotes":{"mappings":["’=>''"],"type":"mapping"}}}},"mappings":{},"page_element":{"properties":{"element_type":{"type":"text"},"element_id":{"type":"text"},"page_id":{"type":"text"},"page_position":{"type":"integer"},"title":{"type":"text"},"visible_content":{"type":"text"},"hidden_content":{"type":"text"}}}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '120'
+    body:
+      encoding: UTF-8
+      string: '{"acknowledged":true,"shards_acknowledged":true,"index":"20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1"}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: head
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: get
+    uri: https://openstax.org/apps/archive/20210514.171726/contents/14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8:ccc4ed14-6c87-408b-9934-7a0d279d853a.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 02 Jul 2021 13:40:26 GMT
+      Last-Modified:
+      - Tue, 18 May 2021 20:15:13 GMT
+      X-Amz-Version-Id:
+      - q5YF3e30ev78g60PXZh5J5H151tnhrmN
+      Etag:
+      - W/"ccb9a0213c625946f2d971432301d30d"
+      Server:
+      - AmazonS3
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 5c9c9b31572217b4c76b784333248ffe.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - DEN52-C1
+      X-Amz-Cf-Id:
+      - kLty4oVaJvl65vdQhjJvNlw9BBSvexpq59oV3uk4GSsjiTDLlGXrbw==
+      Age:
+      - '1388079'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"slug": "1-introduction", "title": "Introduction ", "abstract": null,
+        "id": "ccc4ed14-6c87-408b-9934-7a0d279d853a", "revised": "2020-12-03T19:22:20Z",
+        "content": "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n  <head><style>\n            /*
+        STYLING_FOR_DEVS */\n            /* Linking to a specific element should highlight
+        the element */\n            :target {\n                background-color: #ffffcc;\n                border:
+        1px dotted #000000;\n\n                animation-name: cssAnimation;\n                animation-duration:
+        10s;\n                animation-timing-function: ease-out;\n                animation-delay:
+        0s;\n                animation-fill-mode: forwards;\n            }\n            @keyframes
+        cssAnimation {\n                to {\n                    background-color:
+        initial;\n                    border: initial;\n                }\n            }\n\n            /*
+        Style footnotes so that they stand out */\n            [role=\"doc-footnote\"]
+        {\n                background-color: #ffcccc;\n                border: 1px
+        dashed #ff0000;\n            }\n            [role=\"doc-footnote\"]:before
+        { content: \"FOOTNOTE \" ; }\n\n            /* Show a permalink when hovering
+        over a heading or paragraph */\n            *:not(:hover) &gt; a.-dev-permalinker
+        { display: none; }\n            * &gt; a.-dev-permalinker {\n                margin-left:
+        .1rem;\n                text-decoration: none;\n            }\n        </style><script>//&lt;![CDATA[\n            //
+        SCRIPTS_FOR_DEVS\n            window.addEventListener(''load'', () =&gt; {\n                const
+        pilcrow = ''\u00b6''\n\n                function addPermalink(parent, id)
+        {\n                    const link = window.document.createElement(''a'')\n                    link.classList.add(''-dev-permalinker'')\n                    link.setAttribute(''href'',
+        ''#'' + id)\n                    link.textContent = pilcrow\n                    parent.appendChild(link)\n                }\n\n                const
+        paragraphs = Array.from(\n                    document.querySelectorAll(''p[id]'')\n                )\n                paragraphs.forEach(p
+        =&gt; addPermalink(p, p.getAttribute(''id'')) )\n\n                const headings
+        = Array.from(\n                    document.querySelectorAll(\n                        ''*[id]
+        &gt; h1, *[id] &gt; h2, *[id] &gt; h3, '' +\n                        ''*[id]
+        &gt; h4, *[id] &gt; h5, *[id] &gt; h6''\n                    )\n                )\n                headings.forEach(h
+        =&gt; addPermalink(\n                    h, h.parentElement.getAttribute(''id''))\n                )\n            })\n        //
+        ]]&gt;</script></head><body><div data-type=\"page\" id=\"ccc4ed14-6c87-408b-9934-7a0d279d853a\"
+        class=\"introduction\" data-cnxml-to-html-ver=\"2.1.1\"><div class=\"os-figure
+        has-splash\"><figure id=\"fig-ch01_00_01\" class=\"splash\"><span data-type=\"media\"
+        id=\"fs-id2354221\" data-alt=\"This photo shows a nurse taking a woman\u2019s
+        blood pressure with a blood pressure cuff. The nurse is pumping the cuff with
+        her right hand and holding a stethoscope on the patient\u2019s arm with her
+        left hand.\">\n<img src=\"../resources/f387db54c348ed3b5c89ff0169c4b7687bbcb583\"
+        data-media-type=\"image/jpg\" alt=\"This photo shows a nurse taking a woman\u2019s
+        blood pressure with a blood pressure cuff. The nurse is pumping the cuff with
+        her right hand and holding a stethoscope on the patient\u2019s arm with her
+        left hand.\" width=\"600\" id=\"2\"/>\n</span>\n</figure><div class=\"os-caption-container\"><span
+        class=\"os-title-label\">Figure </span><span class=\"os-number\">1.1</span><span
+        class=\"os-divider\"> </span><span data-type=\"title\" id=\"1\" class=\"os-title\">Blood
+        Pressure</span><span class=\"os-divider\"> </span><span class=\"os-caption\">A
+        proficiency in anatomy and physiology is fundamental to any career in the
+        health professions. (credit: Bryan Mason/flickr)</span></div></div>\n\n\n\n\n\n\n
+        \n \n  <div class=\"intro-body\"><div data-type=\"note\" id=\"eip-646\" class=\"chapter-objectives\"><div
+        data-type=\"title\" id=\"3\">Chapter Objectives</div><p id=\"eip-id1169806921848\"
+        class=\" \">After studying this chapter, you will be able to:</p><ul id=\"eip-id1169806326587\">\n<li>Distinguish
+        between anatomy and physiology, and identify several branches of each</li>\n<li>Describe
+        the structure of the body, from simplest to most complex, in terms of the
+        six levels of organization</li>\n<li>Identify the functional characteristics
+        of human life</li>\n<li>Identify the four requirements for human survival</li>\n<li>Define
+        homeostasis and explain its importance to normal human functioning</li>\n<li>Use
+        appropriate anatomical terminology to identify key body structures, body regions,
+        and directions in the body</li>\n<li>Compare and contrast at least four medical
+        imaging techniques in terms of their function and use in medicine</li>\n</ul></div><div
+        class=\"intro-text\"><h2 data-type=\"document-title\" id=\"0\"><span data-type=\"\"
+        itemprop=\"\" class=\"os-text\">Introduction </span></h2><p id=\"fs-id2001253\"
+        class=\" \">Though you may approach a course in anatomy and physiology strictly
+        as a requirement for your field of study, the knowledge you gain in this course
+        will serve you well in many aspects of your life. An understanding of anatomy
+        and physiology is not only fundamental to any career in the health professions,
+        but it can also benefit your own health. Familiarity with the human body can
+        help you make healthful choices and prompt you to take appropriate action
+        when signs of illness arise. Your knowledge in this field will help you understand
+        news about nutrition, medications, medical devices, and procedures and help
+        you understand genetic or infectious diseases. At some point, everyone will
+        have a problem with some aspect of his or her body and your knowledge can
+        help you to be a better parent, spouse, partner, friend, colleague, or caregiver.</p><p
+        id=\"fs-id2990638\" class=\" \">This chapter begins with an overview of anatomy
+        and physiology and a preview of the body regions and functions. It then covers
+        the characteristics of life and how the body works to maintain stable conditions.
+        It introduces a set of standard terms for body structures and for planes and
+        positions in the body that will serve as a foundation for more comprehensive
+        information covered later in the text. It ends with examples of medical imaging
+        used to see inside the living body.</p></div></div></div></body>\n</html>"}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1/page_element
+    body:
+      encoding: UTF-8
+      string: '{"element_type":"figure","element_id":"fig-ch01_00_01","page_id":"ccc4ed14-6c87-408b-9934-7a0d279d853a@12","page_position":0,"title":null,"visible_content":"Figure
+        1.1 Blood Pressure A proficiency in anatomy and physiology is fundamental
+        to any career in the health professions. (credit: Bryan Mason/flickr)","hidden_content":"This
+        photo shows a nurse taking a woman’s blood pressure with a blood pressure
+        cuff. The nurse is pumping the cuff with her right hand and holding a stethoscope
+        on the patient’s arm with her left hand."}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Location:
+      - "/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22%4022.8_i1/page_element/UCYvunoBvY_T8rh6YM1M"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '236'
+    body:
+      encoding: UTF-8
+      string: '{"_index":"20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1","_type":"page_element","_id":"UCYvunoBvY_T8rh6YM1M","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":0,"_primary_term":1}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1/page_element
+    body:
+      encoding: UTF-8
+      string: '{"element_type":"paragraph","element_id":"eip-id1169806921848","page_id":"ccc4ed14-6c87-408b-9934-7a0d279d853a@12","page_position":1,"title":null,"visible_content":"After
+        studying this chapter, you will be able to:","hidden_content":null}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Location:
+      - "/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22%4022.8_i1/page_element/USYvunoBvY_T8rh6YM1w"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '236'
+    body:
+      encoding: UTF-8
+      string: '{"_index":"20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1","_type":"page_element","_id":"USYvunoBvY_T8rh6YM1w","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":1,"_primary_term":1}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1/page_element
+    body:
+      encoding: UTF-8
+      string: '{"element_type":"paragraph","element_id":"fs-id2001253","page_id":"ccc4ed14-6c87-408b-9934-7a0d279d853a@12","page_position":2,"title":null,"visible_content":"Though
+        you may approach a course in anatomy and physiology strictly as a requirement
+        for your field of study, the knowledge you gain in this course will serve
+        you well in many aspects of your life. An understanding of anatomy and physiology
+        is not only fundamental to any career in the health professions, but it can
+        also benefit your own health. Familiarity with the human body can help you
+        make healthful choices and prompt you to take appropriate action when signs
+        of illness arise. Your knowledge in this field will help you understand news
+        about nutrition, medications, medical devices, and procedures and help you
+        understand genetic or infectious diseases. At some point, everyone will have
+        a problem with some aspect of his or her body and your knowledge can help
+        you to be a better parent, spouse, partner, friend, colleague, or caregiver.","hidden_content":null}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Location:
+      - "/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22%4022.8_i1/page_element/UiYvunoBvY_T8rh6YM17"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '236'
+    body:
+      encoding: UTF-8
+      string: '{"_index":"20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1","_type":"page_element","_id":"UiYvunoBvY_T8rh6YM17","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":2,"_primary_term":1}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1/page_element
+    body:
+      encoding: UTF-8
+      string: '{"element_type":"paragraph","element_id":"fs-id2990638","page_id":"ccc4ed14-6c87-408b-9934-7a0d279d853a@12","page_position":3,"title":null,"visible_content":"This
+        chapter begins with an overview of anatomy and physiology and a preview of
+        the body regions and functions. It then covers the characteristics of life
+        and how the body works to maintain stable conditions. It introduces a set
+        of standard terms for body structures and for planes and positions in the
+        body that will serve as a foundation for more comprehensive information covered
+        later in the text. It ends with examples of medical imaging used to see inside
+        the living body.","hidden_content":null}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Location:
+      - "/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22%4022.8_i1/page_element/UyYvunoBvY_T8rh6YM2E"
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '236'
+    body:
+      encoding: UTF-8
+      string: '{"_index":"20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1","_type":"page_element","_id":"UyYvunoBvY_T8rh6YM2E","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":3,"_primary_term":1}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1/_stats
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '8268'
+    body:
+      encoding: UTF-8
+      string: '{"_shards":{"total":2,"successful":1,"failed":0},"_all":{"primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":230},"indexing":{"index_total":4,"index_time_in_millis":9,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"listeners":0},"flush":{"total":0,"periodic":0,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":524108,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":4,"size_in_bytes":2895,"uncommitted_operations":4,"uncommitted_size_in_bytes":2895,"earliest_last_modified_age":0},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":230},"indexing":{"index_total":4,"index_time_in_millis":9,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"listeners":0},"flush":{"total":0,"periodic":0,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":524108,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":4,"size_in_bytes":2895,"uncommitted_operations":4,"uncommitted_size_in_bytes":2895,"earliest_last_modified_age":0},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"indices":{"20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1":{"primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":230},"indexing":{"index_total":4,"index_time_in_millis":9,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"listeners":0},"flush":{"total":0,"periodic":0,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":524108,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":4,"size_in_bytes":2895,"uncommitted_operations":4,"uncommitted_size_in_bytes":2895,"earliest_last_modified_age":0},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":230},"indexing":{"index_total":4,"index_time_in_millis":9,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"listeners":0},"flush":{"total":0,"periodic":0,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":524108,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":4,"size_in_bytes":2895,"uncommitted_operations":4,"uncommitted_size_in_bytes":2895,"earliest_last_modified_age":0},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}}}}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:04 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1/_count?q=arm
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '71'
+    body:
+      encoding: UTF-8
+      string: '{"count":1,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0}}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:05 GMT
+- request:
+    method: head
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:05 GMT
+- request:
+    method: delete
+    uri: http://localhost:9200/20210514.171726__14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Type:
+      - application/json
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '21'
+    body:
+      encoding: UTF-8
+      string: '{"acknowledged":true}'
+    http_version: 
+  recorded_at: Sun, 18 Jul 2021 15:15:06 GMT
+recorded_with: VCR 4.0.0

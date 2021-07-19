@@ -81,10 +81,7 @@ class EnqueueIndexJobs
   end
 
   def released_book_ids
-    @released_book_ids ||= begin
-      rex_releases = Rex::Releases.new
-      rex_releases.map(&:books).flatten.uniq
-    end
+    @released_book_ids ||= Rex::Releases.new.book_ids
   end
 
   def new_jobs

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://archive.cnx.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261
+    uri: https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261.json
     body:
       encoding: US-ASCII
       string: ''
@@ -35,7 +35,7 @@ http_interactions:
       Etag:
       - '"1B2M2Y8AsgTpgAmY7PhCfg"'
       Location:
-      - https://archive.cnx.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3
+      - https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3.json
       Server:
       - waitress
       X-Varnish-Status:
@@ -61,11 +61,11 @@ http_interactions:
 
         The resource was found at /contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3; you should be redirected automatically.
 
-    http_version: 
+    http_version:
   recorded_at: Thu, 14 Mar 2019 22:10:04 GMT
 - request:
     method: get
-    uri: https://archive.cnx.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3
+    uri: https://openstax.org/contents/405335a3-7cff-4df2-a9ad-29062a4af261@7.3.json
     body:
       encoding: US-ASCII
       string: ''
@@ -3116,6 +3116,6 @@ http_interactions:
         "2016-05-17T15:36:38Z", "publisher": {"surname": "with Courseware", "suffix":
         null, "firstname": "OpenStax Physics", "title": "", "fullname": "OpenStax
         Physics with Courseware", "id": "cnxphyscw"}}]}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 14 Mar 2019 22:10:05 GMT
 recorded_with: VCR 4.0.0

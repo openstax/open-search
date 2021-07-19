@@ -8,14 +8,14 @@ require 'vcr_helper'
 # ElasticSearch must be running for this test to succeed
 # e.g  docker run
 #          -p 9200:9200 -p 9300:9300
-#          -v elasticsearch:/usr/share/elasticsearch/data
 #          -e "discovery.type=single-node"
 #          docker.elastic.co/elasticsearch/elasticsearch:6.3.2
 RSpec.describe Books::Index, vcr: VCR_OPTS do
-  let(:cnx_book_id) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
+  let(:book_uuid_at_version) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
+  let(:book_version_id) { book_uuid_at_version } # without RAP
   let(:test_book_json) { JSON.parse(file_fixture('mini.json').read) }
 
-  subject(:index) { described_class.new(book_version_id: cnx_book_id) }
+  subject(:index) { described_class.new(book_version_id: book_version_id) }
 
   def delete_index
     if OsElasticsearchClient.instance.indices.exists? index: index.name
@@ -35,7 +35,7 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
 
   describe "#populate" do
     let(:test_book_url) {
-      "https://archive.cnx.org/contents/#{cnx_book_id}"
+      "https://openstax.org/contents/#{book_uuid_at_version}"
     }
     let(:test_page_url) {
       "#{test_book_url}:ada35081-9ec4-4eb8-98b2-3ce350d5427f@6"
@@ -55,13 +55,41 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
     end
   end
 
+  describe '#populate with RAP' do
+    let(:pipeline) { '20210514.171726' }
+    let(:book_uuid_at_version) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8' }
+    let(:book_version_id) { "#{pipeline}/#{book_uuid_at_version}" }
+
+    let(:test_book_url) {
+      "https://openstax.org/apps/archive/#{pipeline}/contents/#{book_uuid_at_version}"
+    }
+    let(:test_page_url) {
+      "#{test_book_url.gsub('.json','')}:ccc4ed14-6c87-408b-9934-7a0d279d853a"
+    }
+    let(:test_book_json) { JSON.parse(file_fixture('rap_mini.json').read) }
+
+    before do
+      allow(OpenStax::Cnx::V1).to receive(:fetch).with(test_book_url).and_return(test_book_json)
+      allow(OpenStax::Cnx::V1).to receive(:fetch).with(test_page_url).and_call_original
+    end
+
+    it 'populates the index' do
+      index.create
+      index.populate
+      sleep 1 if VCR.current_cassette.try!(:recording?)  # wait for ES to finish
+
+      expect(OsElasticsearchClient.instance.count(index: index.name, q: "arm")["count"]).to eq 1
+    end
+
+  end
+
   describe "#hide_unwanted_items" do
     # This page from Physics book contains .os-teacher elements that should not be indexed
     # See https://github.com/openstax/unified/issues/1559
     let(:physics_id) { 'cce64fde-f448-43b8-ae88-27705cceb0da@14.21' }
     let(:physics_json) { JSON.parse(file_fixture('mini_physics.json').read) }
     let(:physics_url) {
-      "https://archive.cnx.org/contents/cce64fde-f448-43b8-ae88-27705cceb0da@14.21"
+      "https://openstax.org/contents/cce64fde-f448-43b8-ae88-27705cceb0da@14.21"
     }
     let(:physics_page_url) {
       "#{physics_url}:5f0710fe-1028-4ac4-b8fd-b0a6c792c642@11"

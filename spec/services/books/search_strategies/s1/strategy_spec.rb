@@ -71,7 +71,7 @@ RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0,
     let(:cnx_book_id) { '54fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
     let(:math_book_json) { JSON.parse(file_fixture('mini_math_book.json').read) }
     let(:math_page_json) { JSON.parse(file_fixture('mini_math_page.json').read) }
-    let(:math_book_url) { "https://archive.cnx.org/contents/#{cnx_book_id}"}
+    let(:math_book_url) { "https://openstax.org/contents/#{cnx_book_id}"}
     let(:math_page_url) { "#{math_book_url}:ada35081-9ec4-4eb8-98b2-3ce350d5427f@6"}
     let(:index) { Books::Index.new(book_version_id: cnx_book_id) }
     let(:index_names) { ['54fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1'] }
