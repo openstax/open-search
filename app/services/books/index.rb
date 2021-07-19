@@ -31,10 +31,32 @@ module Books
       @indexing_strategy = indexing_strategy.new
     end
 
+    def with_retry(action_for_log)
+      attempt_number = 0
+
+      begin
+        attempt_number += 1
+        yield
+      rescue Elasticsearch::Transport::Transport::ServerError => exception
+        log_error("#{action_for_log} error, attempt #{attempt_number}: " \
+                  "#{exception.class.name} #{exception.message}")
+        raise if attempt_number >= 4
+
+        sleep(2 ** attempt_number + 5) unless Rails.env.test?
+        retry
+      end
+    end
+
     def create(with_wait: true)
       log_debug("create #{name} called")
-      OsElasticsearchClient.instance.indices.create(index: name,
-                                                    body: @indexing_strategy.index_metadata)
+
+      with_retry("Index create") do
+        OsElasticsearchClient.instance.indices.create(
+          index: name,
+          body: @indexing_strategy.index_metadata
+        )
+      end
+
       wait_until(:exists?) if with_wait
     end
 

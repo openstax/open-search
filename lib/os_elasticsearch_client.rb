@@ -42,6 +42,7 @@ class OsElasticsearchClient
     {
       url: url,
       log: false,
+      retry_on_failure: 3,
       transport_options: {
         request: {
           timeout: 60 # default for open_timeout, write_timeout, read_timeout

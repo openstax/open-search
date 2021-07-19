@@ -18,8 +18,8 @@ module OpenStax::Cnx::V1
         original_fetch(url).tap do
           Rails.logger.info("Fetched #{url} on a retry.") if attempt_number > 1
         end
-      rescue OpenStax::HTTPError => exception
-        raise unless exception.message.match?(/503/)
+      rescue OpenStax::HTTPError, Errno::ECONNRESET => exception
+        raise unless exception.is_a?(Errno::ECONNRESET) || exception.message.match?(/503/)
 
         if attempt_number >= max_attempts
           Rails.logger.error("Fetching #{url} failed, tried #{max_attempts} times.")
