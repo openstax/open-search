@@ -3,10 +3,31 @@ module OpenStax::Cnx::V1
   class << self
 
     # RAP requires .json extensions on requests; on legacy archive, .json extensions are optional
-    # so here we require them and it will work for both
+    # so here we require them and it will work for both.  Also, Legacy sometimes gets overwhelmed
+    # by the volume of requests, so we retry a number of times for 503 status responses.
+
     alias_method :original_fetch, :fetch
+
     def fetch(url)
-      original_fetch("#{url}.json")
+      max_attempts = 5
+      attempt_number = 0
+      url = "#{url}.json"
+
+      begin
+        attempt_number += 1
+        original_fetch(url)
+      rescue OpenStax::HTTPError => exception
+        raise unless exception.message.match?(/503/)
+
+        if attempt_number >= max_attempts
+          Rails.logger.error("Fetching #{url} failed, tried #{max_attempts} times.")
+          raise
+        else
+          Rails.logger.warn("Fetching #{url} failed, sleeping and trying again.")
+          sleep 2 ** attempt_number unless Rails.env.test? # exponential backoff
+          retry
+        end
+      end
     end
 
   end
