@@ -44,8 +44,7 @@ class OsElasticsearchClient
       log: false,
       transport_options: {
         request: {
-          open_timeout: 5,
-          timeout: 20
+          timeout: 60 # default for open_timeout, write_timeout, read_timeout
         }
       }
     }
