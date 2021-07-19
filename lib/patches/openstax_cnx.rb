@@ -15,7 +15,9 @@ module OpenStax::Cnx::V1
 
       begin
         attempt_number += 1
-        original_fetch(url)
+        original_fetch(url).tap do
+          Rails.logger.info("Fetched #{url} on a retry.") if attempt_number > 1
+        end
       rescue OpenStax::HTTPError => exception
         raise unless exception.message.match?(/503/)
 
@@ -24,7 +26,8 @@ module OpenStax::Cnx::V1
           raise
         else
           Rails.logger.warn("Fetching #{url} failed, sleeping and trying again.")
-          sleep 2 ** attempt_number unless Rails.env.test? # exponential backoff
+          # exponential backoff, with 10 extra seconds for CloudFront 503 cache expiration
+          sleep(2 ** attempt_number + 10) unless Rails.env.test?
           retry
         end
       end
