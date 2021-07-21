@@ -9,6 +9,7 @@ module Books
     prefix_logger "Books::Index"
 
     DEFAULT_INDEXING_STRATEGY = IndexingStrategies::I1::Strategy
+    BAD_INDEX_NAME_CHARACTERS = /\//
 
     class IndexResourceNotReadyError < StandardError; end
 
@@ -20,7 +21,8 @@ module Books
     delegate :index_name, to: :class
 
     def self.index_name(book_version_id:, indexing_strategy_short_name:)
-      "#{book_version_id}_#{indexing_strategy_short_name.downcase}"
+      raw_name = "#{book_version_id}_#{indexing_strategy_short_name.downcase}"
+      raw_name.gsub(BAD_INDEX_NAME_CHARACTERS, '__')
     end
 
     def initialize(book_version_id: nil,
@@ -29,10 +31,32 @@ module Books
       @indexing_strategy = indexing_strategy.new
     end
 
+    def with_retry(action_for_log)
+      attempt_number = 0
+
+      begin
+        attempt_number += 1
+        yield
+      rescue Elasticsearch::Transport::Transport::ServerError => exception
+        log_error("#{action_for_log} error, attempt #{attempt_number}: " \
+                  "#{exception.class.name} #{exception.message}")
+        raise if attempt_number >= 4
+
+        sleep(2 ** attempt_number + 5) unless Rails.env.test?
+        retry
+      end
+    end
+
     def create(with_wait: true)
       log_debug("create #{name} called")
-      OsElasticsearchClient.instance.indices.create(index: name,
-                                                    body: @indexing_strategy.index_metadata)
+
+      with_retry("Index create") do
+        OsElasticsearchClient.instance.indices.create(
+          index: name,
+          body: @indexing_strategy.index_metadata
+        )
+      end
+
       wait_until(:exists?) if with_wait
     end
 
@@ -104,9 +128,7 @@ module Books
     end
 
     def book
-      @book ||= begin
-        OpenStax::Cnx::V1::Book.new(id: @book_version_id)
-      end
+      @book ||= Book.from_id(@book_version_id)
     end
   end
 end
