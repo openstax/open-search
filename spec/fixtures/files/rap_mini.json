@@ -1,0 +1,36 @@
+{
+  "id": "14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22",
+  "version": "22.8",
+  "legacy_id": "col11496",
+  "legacy_version": "1.22",
+  "title": "Anatomy and Physiology",
+  "revised": "2020-09-11T16:34:44.402000-05:00",
+  "tree": {
+    "id": "14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8",
+    "title": "Anatomy and Physiology",
+    "contents": [
+      {
+        "id": "d3ad443b-78fa-551e-a67f-182bd0cb4c77@22.8",
+        "title": "<span class=\"os-number\"><span class=\"os-part-text\">Unit </span>1</span><span class=\"os-divider\"> </span><span data-type=\"\" itemprop=\"\" class=\"os-text\">Levels of Organization</span>",
+        "contents": [
+          {
+            "id": "5ae6cc38-7b7b-5e9c-a7a4-5d8251baac7f@22.8",
+            "title": "<span class=\"os-number\"><span class=\"os-part-text\">Chapter </span>1</span><span class=\"os-divider\"> </span><span data-type=\"\" itemprop=\"\" class=\"os-text\">An Introduction to the Human Body</span>",
+            "contents": [
+              {
+                "id": "ccc4ed14-6c87-408b-9934-7a0d279d853a@12",
+                "title": "<span data-type=\"\" itemprop=\"\" class=\"os-text\">Introduction </span>",
+                "slug": "1-introduction"
+              }
+            ],
+            "slug": "1-an-introduction-to-the-human-body"
+          }
+        ],
+        "slug": "1-levels-of-organization"
+      }
+    ],
+    "slug": "anatomy-and-physiology"
+  },
+  "slug": "anatomy-and-physiology",
+  "language": "en"
+}
