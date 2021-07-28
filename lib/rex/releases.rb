@@ -15,7 +15,7 @@ module Rex
 
     def load_releases
       @releases = []
-      load_release_folder(folder_prefix: 'rex/releases/')
+      load_release_folder(folder_prefix: 'rex/releases/v4/')
     end
 
     def load_release_folder(folder_prefix:)
