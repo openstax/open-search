@@ -17,7 +17,7 @@ module Api::V0::Bindings
     # The page UUID@version containing the hit
     attr_accessor :page_id
 
-    # The element type of the hit.  One of [\"paragraph\", \"figure\"]
+    # The element type of the hit.  One of [\"paragraph\", \"figure\", \"key_term\"]
     attr_accessor :element_type
 
     # The element id of the hit.
@@ -121,7 +121,7 @@ module Api::V0::Bindings
     def valid?
       return false if @page_id.nil?
       return false if @element_type.nil?
-      element_type_validator = EnumAttributeValidator.new('String', ['paragraph', 'figure'])
+      element_type_validator = EnumAttributeValidator.new('String', ['paragraph', 'figure', 'key_term'])
       return false unless element_type_validator.valid?(@element_type)
       return false if @element_id.nil?
       return false if @page_position.nil?
@@ -131,7 +131,7 @@ module Api::V0::Bindings
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] element_type Object to be assigned
     def element_type=(element_type)
-      validator = EnumAttributeValidator.new('String', ['paragraph', 'figure'])
+      validator = EnumAttributeValidator.new('String', ['paragraph', 'figure', 'key_term'])
       unless validator.valid?(element_type)
         fail ArgumentError, 'invalid value for "element_type", must be one of #{validator.allowable_values}.'
       end
