@@ -92,7 +92,7 @@ RSpec.describe WorkIndexJobs do
 
       context 'the job raises a 404 error' do
         before do
-          stub_request(:get, /archive.cnx.org/).to_return(status: 404, headers: {})
+          stub_request(:get, /openstax.org/).to_return(status: 404, headers: {})
         end
 
         it 'calls handle error with correct status' do
@@ -106,7 +106,7 @@ RSpec.describe WorkIndexJobs do
 
       context 'the job raises a 5xx' do
         before do
-          stub_request(:get, /archive.cnx.org/).to_return(status: 503, headers: {})
+          stub_request(:get, /openstax.org/).to_return(status: 503, headers: {})
         end
 
         it 'calls handle error with correct status' do
@@ -121,7 +121,7 @@ RSpec.describe WorkIndexJobs do
       context 'the job raises a http other error (other than 404 and 5xx http errors' do
         before do
           # raise a 403 forbidden error
-          stub_request(:get, /archive.cnx.org/).to_return(status: 403 , headers: {})
+          stub_request(:get, /openstax.org/).to_return(status: 403 , headers: {})
         end
 
         it 'calls handle error with correct status' do
