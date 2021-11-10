@@ -17,17 +17,22 @@ module Api::V0::Bindings
     # The highlights in visible content
     attr_accessor :visible_content
 
+    # The title of this element.
+    attr_accessor :title
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'visible_content' => :'visible_content'
+        :'visible_content' => :'visible_content',
+        :'title' => :'title'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'visible_content' => :'Array<String>'
+        :'visible_content' => :'Array<String>',
+        :'title' => :'String'
       }
     end
 
@@ -43,6 +48,10 @@ module Api::V0::Bindings
         if (value = attributes[:'visible_content']).is_a?(Array)
           self.visible_content = value
         end
+      end
+
+      if attributes.has_key?(:'title')
+        self.title = attributes[:'title']
       end
     end
 
@@ -69,7 +78,8 @@ module Api::V0::Bindings
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          visible_content == o.visible_content
+          visible_content == o.visible_content &&
+          title == o.title
     end
 
     # @see the `==` method
@@ -81,7 +91,7 @@ module Api::V0::Bindings
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [visible_content].hash
+      [visible_content, title].hash
     end
 
     # Builds the object from hash
