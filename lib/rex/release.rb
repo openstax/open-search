@@ -12,7 +12,10 @@ module Rex
 
     def books
       @books ||= @data["books"].map do |uuid, info|
-        Book.new(pipeline: config.pipeline, uuid: uuid, version: info["defaultVersion"])
+        pipeline = config.pipeline
+        pipeline = info['archiveOverride'].delete_prefix('/apps/archive/') if info.has_key?(:archiveOverride)
+
+        Book.new(pipeline: pipeline, uuid: uuid, version: info["defaultVersion"])
       end
     end
   end
