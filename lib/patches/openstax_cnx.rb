@@ -37,7 +37,7 @@ module OpenStax::Cnx::V1
 
   class Page
     def id_without_version
-      id.gsub(/@[\d\.]+$/,'')
+      id.gsub(/@[\d\.]*$/,'')
     end
 
     def url
