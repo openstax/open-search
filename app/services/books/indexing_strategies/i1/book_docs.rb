@@ -17,9 +17,10 @@ module Books::IndexingStrategies::I1
 
           page.remove_elements(xpath: "//*[contains(@class, 'os-teacher')]")
 
-          page.
-            elements(element_classes: DESIRED_ELEMENTS_TO_DOCUMENTS.keys).
-            each_with_index { |element, page_position|
+          page
+            .elements(element_classes: DESIRED_ELEMENTS_TO_DOCUMENTS.keys)
+            .select { |element| !element.id.nil? }
+            .each_with_index { |element, page_position|
               doc = create_document(element, page_position, page.id)
               accum << doc
             }
