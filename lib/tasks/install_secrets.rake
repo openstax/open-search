@@ -7,7 +7,7 @@ DESC
 task :install_secrets, [] do
   # Load the system-wide and local env vars here since the Rails application isn't loaded
   # for this rake task
-  Dotenv.load('/etc/.env', '.env')
+  Dotenv.load('.env', '/etc/.env', '/etc/default/openstax')
 
   # Secrets live in the AWS Parameter Store under a /env_name/parameter_namespace/
   # hierarchy.  Several environment variables are set by the AWS cloudformation scripts.
