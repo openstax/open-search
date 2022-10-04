@@ -53,7 +53,28 @@ module Books::IndexingStrategies::I1
         settings: {
           index: {
             number_of_shards: NUM_SHARDS,
-            number_of_replicas: NUM_REPLICAS
+            number_of_replicas: NUM_REPLICAS,
+            indexing: {
+              slowlog: {
+                threshold: {
+                  index: {
+                    warn: '0ms'
+                  }
+                }
+              }
+            },
+            search: {
+              slowlog: {
+                threshold: {
+                  query: {
+                    warn: '0ms'
+                  },
+                  fetch: {
+                    warn: '0ms'
+                  }
+                }
+              }
+            }
           },
           analysis: {
             analyzer: {
