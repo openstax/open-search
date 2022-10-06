@@ -54,15 +54,6 @@ module Books::IndexingStrategies::I1
           index: {
             number_of_shards: NUM_SHARDS,
             number_of_replicas: NUM_REPLICAS,
-            indexing: {
-              slowlog: {
-                threshold: {
-                  index: {
-                    warn: '0ms'
-                  }
-                }
-              }
-            },
             search: {
               slowlog: {
                 threshold: {
