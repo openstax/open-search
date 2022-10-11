@@ -58,10 +58,10 @@ module Books::IndexingStrategies::I1
               slowlog: {
                 threshold: {
                   query: {
-                    warn: '0ms'
+                    warn: '10s'
                   },
                   fetch: {
-                    warn: '0ms'
+                    warn: '1s'
                   }
                 }
               }
