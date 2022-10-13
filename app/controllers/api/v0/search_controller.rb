@@ -77,10 +77,15 @@ class Api::V0::SearchController < Api::V0::BaseController
 
     raw_results = search_strategy_instance.search(query_string: params[:q])
 
-    response = Api::V0::Bindings::SearchResult.new.build_from_hash(raw_results.with_indifferent_access)
+    # #bind now checks for the presence of overall_took so we have to set it before calling it
+    raw_results['overall_took'] = ((Time.now - started_at)*1000).round
 
-    response.overall_took = ((Time.now - started_at)*1000).round
+    binding, error = bind(raw_results.with_indifferent_access, Api::V0::Bindings::SearchResult)
 
-    render json: response, status: :ok
+    if error.nil?
+      render json: binding, status: :ok
+    else
+      render json: error, status: 500
+    end
   end
 end
