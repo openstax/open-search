@@ -32,10 +32,10 @@ GIT
 
 GIT
   remote: https://github.com/openstax/swagger-rails.git
-  revision: abf8508de50d25c4beb265288290dc770952629a
-  ref: abf8508
+  revision: c88e569861378fa858e98da55eefe6da31b121c2
+  ref: c88e569
   specs:
-    openstax_swagger (0.1.0)
+    openstax_swagger (1.0.0)
       oj
       oj_mimic_json
       rails (>= 5.2.3, < 7.0)
