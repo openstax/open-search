@@ -73,6 +73,52 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
         expect(json_response[:messages]).to include(/or the value is empty: book/)
       end
     end
+
+    context 'server errors' do
+      it "500's for invalid response from Elasticsearch" do
+        expect_any_instance_of(Books::SearchStrategies::S1::Strategy).to(
+          receive(:search).and_return(
+            # This is the valid response with hits: { total: 1 }, removed to make it invalid
+            {
+              took: 156,
+              timed_out: false,
+              _shards: { total: 1, successful: 1, skipped: 0, failed: 0 },
+              hits: {
+                max_score: 9.082203,
+                hits: [
+                  {
+                    _index: '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1',
+                    _type: 'page_element',
+                    _id: 'bskMq2wB2NuZq8GSEI5w',
+                    _score: 9.082203,
+                    _source: {
+                      page_id: '2c60e072-7665-49b9-a2c9-2736b72b533c@8',
+                      element_id: 'fs-id2113058',
+                      element_type: 'paragraph',
+                      page_position: 3
+                    },
+                    highlight: {
+                      visible_content: [
+                        '<strong>Recall</strong>
+                <strong>that</strong> <strong>an</strong> <strong>atom</strong> typically
+                has the same number of positively charged protons and negatively charged'
+                      ]
+                    }
+                  }
+                ]
+              }
+            }.deep_stringify_keys
+          )
+        )
+        api_get "search?#{
+          query(q: "\"Recall that an atom\"", index_strategy: "i1", search_strategy: "s1")
+        }"
+        expect(response).to have_http_status(:internal_server_error)
+        expect(json_response[:messages]).to eq [
+          'hits: [ invalid value for "total", total cannot be nil. ]'
+        ]
+      end
+    end
   end
 
   def query(q: nil, index_strategy: nil, search_strategy: nil, book_id: book_version_id)
