@@ -9,7 +9,6 @@ module Api::V0::Swagger::Models::Search
   ].map(&:element_type)
 
   swagger_schema :SearchResultHitHighlight do
-    key :required, [:visible_content]
     property :visible_content do
       key :type, :array
       key :description, "The highlights in visible content"
