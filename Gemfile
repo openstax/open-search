@@ -61,6 +61,9 @@ gem 'openstax_cnx', github: 'openstax/cnx-ruby', ref: '480b4285e'
 
 gem "openstax_swagger", github: 'openstax/swagger-rails', ref: 'c88e569'
 
+# CORS
+gem 'rack-cors'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
