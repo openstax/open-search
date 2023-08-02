@@ -24,7 +24,7 @@ RSpec.describe Books::IndexingStrategies::I1::PageElementDocument do
 
   describe ".mapping" do
     it 'builds the page_element properties' do
-      expect(described_class.mapping).to include(:page_element)
+      expect(described_class.mapping).to include(:properties)
     end
   end
 
