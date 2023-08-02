@@ -22,7 +22,7 @@ class TempAwsEnv
   def initialize(region: "us-east-1", namespace: "")
     @region = region
     @buckets = []
-    @es_domain_names_to_regions = {}
+    @os_domain_names_to_regions = {}
     @random_string_count = 0
     @namespace = namespace
   end
@@ -44,19 +44,20 @@ class TempAwsEnv
     @sqs_queue_url ||= Sqs.create_test_queue(name: name)
   end
 
-  def create_elasticsearch_domain(name:, region: @region, restrict_access_to_me: true, filter: true)
-    filter_value(value: name, with: "some_esdomain_name") if filter
+  def create_open_search_domain(name:, region: @region, restrict_access_to_me: true, filter: true)
+    filter_value(value: name, with: "some_osdomain_name") if filter
 
-    resp = aws_es_client(region).create_elasticsearch_domain({
+    resp = aws_os_client(region).create_open_search_domain({
       domain_name: name,
-      elasticsearch_version: "6.4",
-      elasticsearch_cluster_config: {
-        instance_type: "m4.xlarge.elasticsearch",
+      open_search_version: "2.7",
+      cluster_config: {
+        instance_type: "m4.xlarge.search",
         instance_count: 1,
       },
       ebs_options: {
         ebs_enabled: true,
-        volume_type: "gp2",
+        iops: 3000,
+        volume_type: "gp3",
         volume_size: 10,
       },
       access_policies: {
@@ -72,16 +73,16 @@ class TempAwsEnv
       }.to_json
     })
 
-    @es_domain_names_to_regions[name] = region
+    @os_domain_names_to_regions[name] = region
 
     do_not_record_or_playback do
-      until es_domain_created?(region: region, name: name) do
-        Rails.logger.debug("Waiting for #{name} ES domain to create")
+      until os_domain_created?(region: region, name: name) do
+        Rails.logger.debug("Waiting for #{name} OpenSearch domain to create")
         sleep(30)
       end
     end
 
-    es_domain_status(region: region, name: name).tap do |domain_status|
+    os_domain_status(region: region, name: name).tap do |domain_status|
       random_part_of_endpoint = domain_status.endpoint.match(/([a-z0-9]*).us-east-1.es.amazonaws.com/)[1]
       filter_value(value: random_part_of_endpoint, with: "randompartofendpoint") if filter
     end
@@ -94,8 +95,8 @@ class TempAwsEnv
 
     Sqs.delete_test_queue(@sqs_queue_url) if @sqs_queue_url
 
-    @es_domain_names_to_regions.each do |domain_name, region|
-      aws_es_client(region).delete_elasticsearch_domain(domain_name: domain_name)
+    @os_domain_names_to_regions.each do |domain_name, region|
+      aws_os_client(region).delete_open_search_domain(domain_name: domain_name)
     end
   end
 
@@ -155,16 +156,16 @@ class TempAwsEnv
     end
   end
 
-  def aws_es_client(region)
-    Aws::ElasticsearchService::Client.new(region: region)
+  def aws_os_client(region)
+    Aws::OpenSearchService::Client.new(region: region)
   end
 
-  def es_domain_created?(region:, name:)
-    domain_status = es_domain_status(region: region, name: name)
+  def os_domain_created?(region:, name:)
+    domain_status = os_domain_status(region: region, name: name)
     domain_status.created == true && domain_status.processing == false && domain_status.endpoint.present?
   end
 
-  def es_domain_status(region:, name:)
-    aws_es_client(region).describe_elasticsearch_domain(domain_name: name).domain_status
+  def os_domain_status(region:, name:)
+    aws_os_client(region).describe_open_search_domain(domain_name: name).domain_status
   end
 end

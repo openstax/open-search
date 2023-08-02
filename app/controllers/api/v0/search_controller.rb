@@ -11,7 +11,7 @@ class Api::V0::SearchController < Api::V0::BaseController
     end
   end
 
-  rescue_from_unless_local Elasticsearch::Transport::Transport::Errors::NotFound do |_|
+  rescue_from_unless_local OpenSearch::Transport::Transport::Errors::NotFound do |_|
     render json: 'The specified resource was not found', status: 404
   end
 

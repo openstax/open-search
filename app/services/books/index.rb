@@ -37,7 +37,7 @@ module Books
       begin
         attempt_number += 1
         yield
-      rescue Elasticsearch::Transport::Transport::ServerError => exception
+      rescue OpenSearch::Transport::Transport::ServerError => exception
         log_error("#{action_for_log} error, attempt #{attempt_number}: " \
                   "#{exception.class.name} #{exception.message}")
         raise if attempt_number >= 4
@@ -51,7 +51,7 @@ module Books
       log_debug("create #{name} called")
 
       with_retry("Index create") do
-        OsElasticsearchClient.instance.indices.create(
+        OxOpenSearchClient.instance.indices.create(
           index: name,
           body: @indexing_strategy.index_metadata
         )
@@ -69,14 +69,14 @@ module Books
     end
 
     def recreate
-      delete rescue Elasticsearch::Transport::Transport::Errors::NotFound
+      delete rescue OpenSearch::Transport::Transport::Errors::NotFound
       create
       populate
     end
 
     def delete(with_wait: true)
       log_debug("delete #{name} called")
-      OsElasticsearchClient.instance.indices.delete(index: name)
+      OxOpenSearchClient.instance.indices.delete(index: name)
       wait_until(:not_exists?) if with_wait
     end
 
@@ -86,11 +86,11 @@ module Books
     end
 
     def exists?
-      OsElasticsearchClient.instance.indices.exists?(index: name)
+      OxOpenSearchClient.instance.indices.exists?(index: name)
     end
 
     def not_exists?
-      !OsElasticsearchClient.instance.indices.exists?(index: name)
+      !OxOpenSearchClient.instance.indices.exists?(index: name)
     end
 
     private
@@ -111,11 +111,11 @@ module Books
     end
 
     def indices
-      @indices ||= OsElasticsearchClient.instance.indices
+      @indices ||= OxOpenSearchClient.instance.indices
     end
 
     def index_stats
-      es_stats = OsElasticsearchClient.instance.indices.stats(index: name)
+      es_stats = OxOpenSearchClient.instance.indices.stats(index: name)
       {
         num_docs_in_index: es_stats["indices"][name]['primaries']['docs']['count'],
         index_name: name

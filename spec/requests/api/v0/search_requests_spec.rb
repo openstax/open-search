@@ -75,7 +75,7 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
     end
 
     context 'server errors' do
-      it "500's for invalid response from Elasticsearch" do
+      it "500's for invalid response from OpenSearch" do
         expect_any_instance_of(Books::SearchStrategies::S1::Strategy).to(
           receive(:search).and_return(
             # This is the valid response with hits: { total: 1 }, removed to make it invalid

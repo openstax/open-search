@@ -6,7 +6,7 @@ A search app supporting OpenStax's unified reading experience.
 
 ## Dependencies
 
-This app proxies Elasticsearch and is intended to be deployed to AWS, where it uses DynamoDB and SQS.  It indexes OpenStax book and exercise content.
+This app proxies OpenSearch and is intended to be deployed to AWS, where it uses DynamoDB and SQS.  It indexes OpenStax book and exercise content.
 
 
 ## Configuration
@@ -24,7 +24,7 @@ Automatically set to on for production.
 $> bundle install
 ```
 
-TBD instructions for installing and configuring Elasticsearch.
+TBD instructions for installing and configuring OpenSearch.
 
 ## Swagger, Clients, and Bindings
 
@@ -54,4 +54,3 @@ Run the tests with `rspec` or `rake`.
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
-

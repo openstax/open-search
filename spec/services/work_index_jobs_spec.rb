@@ -38,7 +38,7 @@ RSpec.describe WorkIndexJobs do
         allow_any_instance_of(TodoJobsQueue).to receive(:read).and_return(create_job)
       end
 
-      it 'calls to create elasticsearch index & then adds to done queue' do
+      it 'calls to create OpenSearch index & then adds to done queue' do
         expect_any_instance_of(CreateIndexJob).to receive(:call).once
         expect_any_instance_of(DoneJobsQueue).to receive(:write).once
         work_index_jobs.call
@@ -50,7 +50,7 @@ RSpec.describe WorkIndexJobs do
         allow_any_instance_of(TodoJobsQueue).to receive(:read).and_return(delete_job)
       end
 
-      it 'calls to delete elasticsearch index & then adds to done queue' do
+      it 'calls to delete OpenSearch index & then adds to done queue' do
         expect_any_instance_of(DeleteIndexJob).to receive(:call).once
         expect_any_instance_of(DoneJobsQueue).to receive(:write).once
         work_index_jobs.call

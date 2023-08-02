@@ -11,8 +11,8 @@ services:
       - .:/code
       - /code/tmp
       - /code/log
-  elasticsearch:
-    image: "elasticsearch:6.8.15"
+  opensearch:
+    image: "opensearchproject/opensearch:2.7"
     networks:
       - search 
     ports:

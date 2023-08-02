@@ -20,7 +20,7 @@ class IndexInfo
   end
 
   def es_version
-    OsElasticsearchClient.instance.info["version"]["number"]
+    OxOpenSearchClient.instance.info["version"]["number"]
   end
 
   def all_the_books
@@ -66,7 +66,7 @@ class IndexInfo
   end
 
   def all_es_indices
-    @all_es_indices ||= OsElasticsearchClient.instance.indices
+    @all_es_indices ||= OxOpenSearchClient.instance.indices
   end
 
   def update_stat(index:, value_sym:, value:)

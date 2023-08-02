@@ -7,7 +7,7 @@ module Books::IndexingStrategies::I1
 
   # A PageElementDocument is the index document structure.
   #
-  # Note: ElasticSearch is standardizing to the use of one type per index.
+  # Note: one type per index.
   class PageElementDocument
     attr_reader :element, :element_type, :element_id, :page_position, :page_id
 

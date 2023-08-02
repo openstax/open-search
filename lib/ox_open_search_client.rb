@@ -1,13 +1,13 @@
-require 'elasticsearch'
+require 'opensearch'
 require 'typhoeus'
 require 'typhoeus/adapters/faraday'
 
-class OsElasticsearchClient
+class OxOpenSearchClient
   delegate_missing_to :@internal_client
 
   def self.instance
     Thread.current[:es_client] ||= begin
-      secrets = Rails.application.secrets.elasticsearch
+      secrets = Rails.application.secrets.open_search
 
       new(
         url: "#{secrets[:protocol]}://#{secrets[:endpoint]}",
@@ -17,10 +17,9 @@ class OsElasticsearchClient
   end
 
   def initialize(url:, sign_aws_requests: false)
-    @internal_client = Elasticsearch::Client.new(elasticsearch_client_options(url)) do |f|
+    @internal_client = OpenSearch::Client.new(open_search_client_options(url)) do |f|
       if sign_aws_requests
-        # Borrowed from https://github.com/elastic/elasticsearch-ruby/issues/232#issuecomment-168479765
-        # and modified for the new version of the middleware.
+        # Borrowed from https://docs.aws.amazon.com/opensearch-service/latest/developerguide/request-signing.html#request-signing-ruby
         # Also see # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Sigv4/Signer.html
 
         require 'faraday_middleware'
@@ -29,7 +28,7 @@ class OsElasticsearchClient
         f.request :aws_sigv4,
                   credentials_provider: aws_credentials_provider,
                   service: 'es',
-                  region: aws_elasticsearch_region(url)
+                  region: aws_open_search_region(url)
       end
 
       f.adapter :typhoeus
@@ -38,7 +37,7 @@ class OsElasticsearchClient
 
   protected
 
-  def elasticsearch_client_options(url)
+  def open_search_client_options(url)
     {
       url: url,
       log: false,
@@ -63,8 +62,8 @@ class OsElasticsearchClient
     end
   end
 
-  def aws_elasticsearch_region(endpoint_url)
-    # AWS ES endpoint URLs are of the form blah.region.es.amazonaws.com
+  def aws_open_search_region(endpoint_url)
+    # AWS OpenSearch endpoint URLs are of the form blah.region.es.amazonaws.com
     # so just extract the region using a regex
     endpoint_url.match(/\.([^\.]*)\.es\.amazonaws\.com$/)[1]
   end

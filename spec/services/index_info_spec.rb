@@ -23,7 +23,7 @@ RSpec.describe IndexInfo, vcr: VCR_OPTS do
       /^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z)?$/
     }
 
-    context "elasticsearch and dynamodb records both exist" do
+    context "OpenSearch and dynamodb records both exist" do
       it "gets the info" do
         TempAwsEnv.make do |env|
           env.create_dynamodb_table
@@ -39,7 +39,7 @@ RSpec.describe IndexInfo, vcr: VCR_OPTS do
       end
     end
 
-    context "elasticsearch exists but not a dynamodb" do
+    context "OpenSearch exists but not a dynamodb" do
       it "gets the info" do
         TempAwsEnv.make do |env|
           env.create_dynamodb_table

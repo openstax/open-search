@@ -39,9 +39,9 @@ module Books::IndexingStrategies::I1
 
     def index_document(document:, index_name:)
       begin
-        OsElasticsearchClient.instance.index(index: index_name,
-                                             type:  document.type,
-                                             body:  document.body)
+        OxOpenSearchClient.instance.index(index: index_name,
+                                          type:  document.type,
+                                          body:  document.body)
       rescue ElementIdMissing => ex
         Raven.capture_message(ex.message, :extra => element.to_json)
         log_error(ex)
