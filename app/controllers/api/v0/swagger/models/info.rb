@@ -27,13 +27,13 @@ module Api::V0::Swagger::Models::Info
   end
   
   swagger_schema :EsInfoResults do
-    key :required, [:overall_took, :os_version]
+    key :required, [:overall_took, :es_version]
     property :overall_took_ms do
       key :type, :integer
       key :readOnly, true
       key :description, "How long the request took (ms)"
     end
-    property :os_version do
+    property :es_version do
       key :type, :string
       key :readOnly, true
       key :description, "Current version of OpenSearch"

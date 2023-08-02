@@ -14,7 +14,7 @@ class IndexInfo
 
   def results
     {
-      os_version: os_version,
+      es_version: os_version,
       book_indexes: all_the_books
     }
   end
