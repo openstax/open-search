@@ -12,11 +12,11 @@ RSpec.describe OxOpenSearchClient, vcr: VCR_OPTS do
     ENV['AWS_SECRET_ACCESS_KEY'] ||= 'bar'
   }
 
-  let(:fake_es_domain_name) { "spec-esdomain-#{SecureRandom.hex(7)}" }
+  let(:fake_os_domain_name) { "spec-esdomain-#{SecureRandom.hex(7)}" }
 
   it 'can access a restricted AWS OpenSearch domain using signed requests' do
     TempAwsEnv.make do |env|
-      domain_status = env.create_open_search_domain(name: fake_es_domain_name)
+      domain_status = env.create_open_search_domain(name: fake_os_domain_name)
 
       signing_client = described_class.new(
         url: "https://#{domain_status.endpoint}",

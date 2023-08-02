@@ -115,9 +115,9 @@ module Books
     end
 
     def index_stats
-      es_stats = OxOpenSearchClient.instance.indices.stats(index: name)
+      os_stats = OxOpenSearchClient.instance.indices.stats(index: name)
       {
-        num_docs_in_index: es_stats["indices"][name]['primaries']['docs']['count'],
+        num_docs_in_index: os_stats["indices"][name]['primaries']['docs']['count'],
         index_name: name
         # todo more stats?
       }

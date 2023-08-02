@@ -14,17 +14,17 @@ class IndexInfo
 
   def results
     {
-      es_version: es_version,
+      os_version: os_version,
       book_indexes: all_the_books
     }
   end
 
-  def es_version
+  def os_version
     OxOpenSearchClient.instance.info["version"]["number"]
   end
 
   def all_the_books
-    filtered_es_indices
+    filtered_os_indices
     dynamo_books
     result = @book_indexes.map{|k,v| v.merge(id: k)}
     result.sort_by{|book_index| book_index[:id]}
@@ -43,30 +43,30 @@ class IndexInfo
     end
   end
 
-  def filtered_es_indices
-    es_indices = all_es_indices.stats["indices"]
-    es_indices.each do |es_index|
-      index_name = es_index.first
+  def filtered_os_indices
+    os_indices = all_os_indices.stats["indices"]
+    os_indices.each do |os_index|
+      index_name = os_index.first
       if BOOK_INDEX_MATCH.match?(index_name)
         update_stat(index: index_name,
                     value_sym: :num_docs,
-                    value: es_index.second["primaries"]["docs"]["count"])
+                    value: os_index.second["primaries"]["docs"]["count"])
 
         update_stat(index: index_name,
                     value_sym: :created_at,
-                    value: es_created_at(index_name))
+                    value: os_created_at(index_name))
       end
     end
   end
 
-  def es_created_at(index_name)
-    index = all_es_indices.get(index: index_name)
-    es_created_at_ms = index[index_name]["settings"]["index"]["creation_date"]
-    Time.at(es_created_at_ms.to_i/1000).utc.iso8601
+  def os_created_at(index_name)
+    index = all_os_indices.get(index: index_name)
+    os_created_at_ms = index[index_name]["settings"]["index"]["creation_date"]
+    Time.at(os_created_at_ms.to_i/1000).utc.iso8601
   end
 
-  def all_es_indices
-    @all_es_indices ||= OxOpenSearchClient.instance.indices
+  def all_os_indices
+    @all_os_indices ||= OxOpenSearchClient.instance.indices
   end
 
   def update_stat(index:, value_sym:, value:)

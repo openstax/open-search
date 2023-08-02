@@ -33,14 +33,14 @@ class WorkIndexJobs
 
       starting = Time.now
 
-      es_stats = job.call
+      os_stats = job.call
       time_took = Time.at(Time.now - starting).utc.strftime("%H:%M:%S")
 
       log_info("job #{job.class.to_s} #{job.to_json} took #{time_took} time.")
 
       enqueue_done_job(job: job,
                        status: DoneIndexJob::STATUS_SUCCESSFUL,
-                       es_stats: es_stats,
+                       os_stats: os_stats,
                        time_took: time_took)
     rescue InvalidIndexingStrategy => ex
       handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_INVALID_INDEXING_STRATEGY)
@@ -88,12 +88,12 @@ class WorkIndexJobs
     end
   end
 
-  def enqueue_done_job(job:, status:, message: nil, time_took: nil, es_stats: nil)
+  def enqueue_done_job(job:, status:, message: nil, time_took: nil, os_stats: nil)
     done_job = DoneIndexJob.new(status: status,
                                 message: message,
                                 ran_job: job,
                                 time_took: time_took,
-                                es_stats: es_stats)
+                                os_stats: os_stats)
     enqueue_to_done(done_job)
 
     record_job_stat(job)

@@ -6,7 +6,7 @@ class OxOpenSearchClient
   delegate_missing_to :@internal_client
 
   def self.instance
-    Thread.current[:es_client] ||= begin
+    Thread.current[:os_client] ||= begin
       secrets = Rails.application.secrets.open_search
 
       new(

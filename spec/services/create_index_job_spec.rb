@@ -7,7 +7,7 @@ RSpec.describe CreateIndexJob do
       book_version_id: "foo@1",
       indexing_strategy_name: "I1",
       status: { status: "successful" },
-      es_stats: { num_docs_in_index: 7000 },
+      os_stats: { num_docs_in_index: 7000 },
       time_took: '00:05:00'
     }
   }
