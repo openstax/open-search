@@ -1,0 +1,256 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://es.us-east-1.amazonaws.com/2021-01-01/opensearch/domain
+    body:
+      encoding: UTF-8
+      string: '{"DomainName":"some_osdomain_name","EngineVersion":"OpenSearch_2.7","ClusterConfig":{"InstanceType":"t3.small.search","InstanceCount":1},"EBSOptions":{"EBSEnabled":true,"Iops":3000,"VolumeType":"gp3","VolumeSize":10},"AccessPolicies":"{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"es:ESHttpDelete\",\"es:ESHttpGet\",\"es:ESHttpHead\",\"es:ESHttpPost\",\"es:ESHttpPut\"],\"Principal\":{\"AWS\":\"arn:aws:sts::AWS_ACCOUNT_ID:assumed-role/full-admin/AssumedRole\"},\"Resource\":\"arn:aws:es:us-east-1:AWS_ACCOUNT_ID:domain/some_osdomain_name/*\"}]}"}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/json
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/opensearch#1.26.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy
+      Host:
+      - es.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20230805T040212Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - 771c89135e2cd267c1f3a3cbfeb04de04576f271524814d01ec3dfe9caeaa42c
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-1/es/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '596'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 6dd2616b-4613-4da4-8087-2543e72c3024
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2495'
+      Date:
+      - Sat, 05 Aug 2023 04:02:13 GMT
+    body:
+      encoding: UTF-8
+      string: '{"DomainStatus":{"ARN":"arn:aws:es:us-east-1:AWS_ACCOUNT_ID:domain/some_osdomain_name","AccessPolicies":"{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:sts::AWS_ACCOUNT_ID:assumed-role/full-admin/AssumedRole\"},\"Action\":[\"es:ESHttpDelete\",\"es:ESHttpGet\",\"es:ESHttpHead\",\"es:ESHttpPost\",\"es:ESHttpPut\"],\"Resource\":\"arn:aws:es:us-east-1:AWS_ACCOUNT_ID:domain/some_osdomain_name/*\"}]}","AdvancedOptions":{"override_main_response_version":"false","rest.action.multi.allow_explicit_index":"true"},"AdvancedSecurityOptions":{"AnonymousAuthDisableDate":null,"AnonymousAuthEnabled":false,"Enabled":false,"InternalUserDatabaseEnabled":false,"SAMLOptions":null},"AutoTuneOptions":{"ErrorMessage":null,"State":"DISABLED","UseOffPeakWindow":false},"ChangeProgressDetails":{"ChangeId":"f639d691-b2bc-4e48-a861-a9cc3e99e65f","Message":null,"StartTime":1.691208133809E9},"ClusterConfig":{"ColdStorageOptions":{"Enabled":false},"DedicatedMasterCount":null,"DedicatedMasterEnabled":false,"DedicatedMasterType":null,"InstanceCount":1,"InstanceType":"t3.small.search","MultiAZWithStandbyEnabled":false,"WarmCount":null,"WarmEnabled":false,"WarmStorage":null,"WarmType":null,"ZoneAwarenessConfig":null,"ZoneAwarenessEnabled":false},"CognitoOptions":{"Enabled":false,"IdentityPoolId":null,"RoleArn":null,"UserPoolId":null},"Created":true,"Deleted":false,"DomainEndpointOptions":{"CustomEndpoint":null,"CustomEndpointCertificateArn":null,"CustomEndpointEnabled":false,"EnforceHTTPS":false,"TLSSecurityPolicy":"Policy-Min-TLS-1-0-2019-07"},"DomainId":"AWS_ACCOUNT_ID/some_osdomain_name","DomainName":"some_osdomain_name","EBSOptions":{"EBSEnabled":true,"Iops":3000,"Throughput":125,"VolumeSize":10,"VolumeType":"gp3"},"EncryptionAtRestOptions":{"Enabled":false,"KmsKeyId":null},"Endpoint":null,"Endpoints":null,"EngineVersion":"OpenSearch_2.7","LogPublishingOptions":null,"NodeToNodeEncryptionOptions":{"Enabled":false},"OffPeakWindowOptions":{"Enabled":true,"OffPeakWindow":{"WindowStartTime":{"Hours":2,"Minutes":0}}},"Processing":true,"ServiceSoftwareOptions":{"AutomatedUpdateDate":0.0,"Cancellable":false,"CurrentVersion":"","Description":"There
+        is no software update available for this domain.","NewVersion":"","OptionalDeployment":true,"UpdateAvailable":false,"UpdateStatus":"COMPLETED"},"SnapshotOptions":{"AutomatedSnapshotStartHour":0},"SoftwareUpdateOptions":{"AutoSoftwareUpdateEnabled":false},"UpgradeProcessing":false,"VPCOptions":null}}'
+  recorded_at: Sat, 05 Aug 2023 04:02:14 GMT
+- request:
+    method: get
+    uri: https://es.us-east-1.amazonaws.com/2021-01-01/opensearch/domain/some_osdomain_name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/opensearch#1.26.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy
+      Host:
+      - es.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042258Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-1/es/aws4_request,
+        SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-security-token, Signature=<SignatureValue>
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - b22932fd-be2e-48b2-9f52-26795209a85c
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2591'
+      Date:
+      - Sat, 05 Aug 2023 04:22:57 GMT
+    body:
+      encoding: UTF-8
+      string: '{"DomainStatus":{"ARN":"arn:aws:es:us-east-1:AWS_ACCOUNT_ID:domain/some_osdomain_name","AccessPolicies":"{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:sts::AWS_ACCOUNT_ID:assumed-role/full-admin/AssumedRole\"},\"Action\":[\"es:ESHttpDelete\",\"es:ESHttpGet\",\"es:ESHttpHead\",\"es:ESHttpPost\",\"es:ESHttpPut\"],\"Resource\":\"arn:aws:es:us-east-1:AWS_ACCOUNT_ID:domain/some_osdomain_name/*\"}]}","AdvancedOptions":{"override_main_response_version":"false","rest.action.multi.allow_explicit_index":"true"},"AdvancedSecurityOptions":{"AnonymousAuthDisableDate":null,"AnonymousAuthEnabled":false,"Enabled":false,"InternalUserDatabaseEnabled":false,"SAMLOptions":null},"AutoTuneOptions":{"ErrorMessage":null,"State":"DISABLED","UseOffPeakWindow":false},"ChangeProgressDetails":{"ChangeId":"f639d691-b2bc-4e48-a861-a9cc3e99e65f","Message":null,"StartTime":1.691208133809E9},"ClusterConfig":{"ColdStorageOptions":{"Enabled":false},"DedicatedMasterCount":null,"DedicatedMasterEnabled":false,"DedicatedMasterType":null,"InstanceCount":1,"InstanceType":"t3.small.search","MultiAZWithStandbyEnabled":false,"WarmCount":null,"WarmEnabled":false,"WarmStorage":null,"WarmType":null,"ZoneAwarenessConfig":null,"ZoneAwarenessEnabled":false},"CognitoOptions":{"Enabled":false,"IdentityPoolId":null,"RoleArn":null,"UserPoolId":null},"Created":true,"Deleted":false,"DomainEndpointOptions":{"CustomEndpoint":null,"CustomEndpointCertificateArn":null,"CustomEndpointEnabled":false,"EnforceHTTPS":false,"TLSSecurityPolicy":"Policy-Min-TLS-1-0-2019-07"},"DomainId":"AWS_ACCOUNT_ID/some_osdomain_name","DomainName":"some_osdomain_name","EBSOptions":{"EBSEnabled":true,"Iops":3000,"Throughput":125,"VolumeSize":10,"VolumeType":"gp3"},"EncryptionAtRestOptions":{"Enabled":false,"KmsKeyId":null},"Endpoint":"search-some_osdomain_name-randompartofendpoint.us-east-1.es.amazonaws.com","Endpoints":null,"EngineVersion":"OpenSearch_2.7","LogPublishingOptions":null,"NodeToNodeEncryptionOptions":{"Enabled":false},"OffPeakWindowOptions":{"Enabled":true,"OffPeakWindow":{"WindowStartTime":{"Hours":2,"Minutes":0}}},"Processing":false,"ServiceSoftwareOptions":{"AutomatedUpdateDate":0.0,"Cancellable":false,"CurrentVersion":"OpenSearch_2_7_R20230706","Description":"There
+        is no software update available for this domain.","NewVersion":"","OptionalDeployment":true,"UpdateAvailable":false,"UpdateStatus":"COMPLETED"},"SnapshotOptions":{"AutomatedSnapshotStartHour":0},"SoftwareUpdateOptions":{"AutoSoftwareUpdateEnabled":false},"UpgradeProcessing":false,"VPCOptions":null}}'
+  recorded_at: Sat, 05 Aug 2023 04:22:58 GMT
+- request:
+    method: get
+    uri: https://search-some_osdomain_name-randompartofendpoint.us-east-1.es.amazonaws.com/_search?q=test
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Host:
+      - search-some_osdomain_name-randompartofendpoint.us-east-1.es.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042258Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-1/es/aws4_request,
+        SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-security-token, Signature=<SignatureValue>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 05 Aug 2023 04:23:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '161'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"took":95,"timed_out":false,"_shards":{"total":2,"successful":2,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}'
+  recorded_at: Sat, 05 Aug 2023 04:23:00 GMT
+- request:
+    method: get
+    uri: https://search-some_osdomain_name-randompartofendpoint.us-east-1.es.amazonaws.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Date:
+      - Sat, 05 Aug 2023 04:23:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '136'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - 52dd273c-b527-42c5-a61a-fc1e6d04c37d
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"Message":"User: anonymous is not authorized to perform: es:ESHttpGet
+        because no resource-based policy allows the es:ESHttpGet action"}'
+  recorded_at: Sat, 05 Aug 2023 04:23:00 GMT
+- request:
+    method: get
+    uri: https://search-some_osdomain_name-randompartofendpoint.us-east-1.es.amazonaws.com/_search?q=test
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Date:
+      - Sat, 05 Aug 2023 04:23:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '136'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - '038a2640-4f7d-4acf-8525-29de972be560'
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"Message":"User: anonymous is not authorized to perform: es:ESHttpGet
+        because no resource-based policy allows the es:ESHttpGet action"}'
+  recorded_at: Sat, 05 Aug 2023 04:23:00 GMT
+- request:
+    method: delete
+    uri: https://es.us-east-1.amazonaws.com/2021-01-01/opensearch/domain/some_osdomain_name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/opensearch#1.26.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy
+      Host:
+      - es.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042300Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-1/es/aws4_request,
+        SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-security-token, Signature=<SignatureValue>
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 289afe55-3835-41e3-9259-66fdc5e8b450
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2589'
+      Date:
+      - Sat, 05 Aug 2023 04:23:00 GMT
+    body:
+      encoding: UTF-8
+      string: '{"DomainStatus":{"ARN":"arn:aws:es:us-east-1:AWS_ACCOUNT_ID:domain/some_osdomain_name","AccessPolicies":"{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:sts::AWS_ACCOUNT_ID:assumed-role/full-admin/AssumedRole\"},\"Action\":[\"es:ESHttpDelete\",\"es:ESHttpGet\",\"es:ESHttpHead\",\"es:ESHttpPost\",\"es:ESHttpPut\"],\"Resource\":\"arn:aws:es:us-east-1:AWS_ACCOUNT_ID:domain/some_osdomain_name/*\"}]}","AdvancedOptions":{"override_main_response_version":"false","rest.action.multi.allow_explicit_index":"true"},"AdvancedSecurityOptions":{"AnonymousAuthDisableDate":null,"AnonymousAuthEnabled":false,"Enabled":false,"InternalUserDatabaseEnabled":false,"SAMLOptions":null},"AutoTuneOptions":{"ErrorMessage":null,"State":"DISABLED","UseOffPeakWindow":false},"ChangeProgressDetails":{"ChangeId":"c5a866b3-fbaa-42df-8719-03d1619a5927","Message":null,"StartTime":1.691209380832E9},"ClusterConfig":{"ColdStorageOptions":{"Enabled":false},"DedicatedMasterCount":null,"DedicatedMasterEnabled":false,"DedicatedMasterType":null,"InstanceCount":1,"InstanceType":"t3.small.search","MultiAZWithStandbyEnabled":false,"WarmCount":null,"WarmEnabled":false,"WarmStorage":null,"WarmType":null,"ZoneAwarenessConfig":null,"ZoneAwarenessEnabled":false},"CognitoOptions":{"Enabled":false,"IdentityPoolId":null,"RoleArn":null,"UserPoolId":null},"Created":true,"Deleted":true,"DomainEndpointOptions":{"CustomEndpoint":null,"CustomEndpointCertificateArn":null,"CustomEndpointEnabled":false,"EnforceHTTPS":false,"TLSSecurityPolicy":"Policy-Min-TLS-1-0-2019-07"},"DomainId":"AWS_ACCOUNT_ID/some_osdomain_name","DomainName":"some_osdomain_name","EBSOptions":{"EBSEnabled":true,"Iops":3000,"Throughput":125,"VolumeSize":10,"VolumeType":"gp3"},"EncryptionAtRestOptions":{"Enabled":false,"KmsKeyId":null},"Endpoint":"search-some_osdomain_name-randompartofendpoint.us-east-1.es.amazonaws.com","Endpoints":null,"EngineVersion":"OpenSearch_2.7","LogPublishingOptions":null,"NodeToNodeEncryptionOptions":{"Enabled":false},"OffPeakWindowOptions":{"Enabled":true,"OffPeakWindow":{"WindowStartTime":{"Hours":2,"Minutes":0}}},"Processing":true,"ServiceSoftwareOptions":{"AutomatedUpdateDate":0.0,"Cancellable":false,"CurrentVersion":"OpenSearch_2_7_R20230706","Description":"There
+        is no software update available for this domain.","NewVersion":"","OptionalDeployment":true,"UpdateAvailable":false,"UpdateStatus":"COMPLETED"},"SnapshotOptions":{"AutomatedSnapshotStartHour":0},"SoftwareUpdateOptions":{"AutoSoftwareUpdateEnabled":false},"UpgradeProcessing":false,"VPCOptions":null}}'
+  recorded_at: Sat, 05 Aug 2023 04:23:01 GMT
+recorded_with: VCR 6.1.0

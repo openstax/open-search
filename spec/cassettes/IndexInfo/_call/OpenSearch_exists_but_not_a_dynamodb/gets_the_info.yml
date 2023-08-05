@@ -1,0 +1,723 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://dynamodb.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"AttributeDefinitions":[{"AttributeName":"book_version_id","AttributeType":"S"},{"AttributeName":"indexing_strategy_name","AttributeType":"S"}],"TableName":"test_indexing","KeySchema":[{"AttributeName":"book_version_id","KeyType":"HASH"},{"AttributeName":"indexing_strategy_name","KeyType":"RANGE"}],"ProvisionedThroughput":{"ReadCapacityUnits":2,"WriteCapacityUnits":2}}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20120810.CreateTable
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/dynamodb#1.93.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy
+      Host:
+      - dynamodb.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042914Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - 560d274fe07649d0c2046c4fbc04178d9e9663e684bb1f2a1fe02b6ee31d301e
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-2/dynamodb/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '372'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sat, 05 Aug 2023 04:29:14 GMT
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '672'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - NN9V1UE1K711B5I2O8GI009LC7VV4KQNSO5AEMVJF66Q9ASUAAJG
+      X-Amz-Crc32:
+      - '954903019'
+    body:
+      encoding: UTF-8
+      string: '{"TableDescription":{"AttributeDefinitions":[{"AttributeName":"book_version_id","AttributeType":"S"},{"AttributeName":"indexing_strategy_name","AttributeType":"S"}],"CreationDateTime":1.691209754545E9,"DeletionProtectionEnabled":false,"ItemCount":0,"KeySchema":[{"AttributeName":"book_version_id","KeyType":"HASH"},{"AttributeName":"indexing_strategy_name","KeyType":"RANGE"}],"ProvisionedThroughput":{"NumberOfDecreasesToday":0,"ReadCapacityUnits":2,"WriteCapacityUnits":2},"TableArn":"arn:aws:dynamodb:us-east-2:AWS_ACCOUNT_ID:table/test_indexing","TableId":"478845ca-fc9e-488d-87e5-166ddc57d00e","TableName":"test_indexing","TableSizeBytes":0,"TableStatus":"CREATING"}}'
+  recorded_at: Sat, 05 Aug 2023 04:29:14 GMT
+- request:
+    method: post
+    uri: https://dynamodb.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"TableName":"test_indexing"}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20120810.DescribeTable
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/dynamodb#1.93.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy ft/waiter
+      Host:
+      - dynamodb.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042914Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - b769faf39a6d0d44a0e395242dec7e6988e15b38ec5ad2735c8e20b1cb6c56c3
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-2/dynamodb/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '29'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sat, 05 Aug 2023 04:29:14 GMT
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '661'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - HHLJN9EB6RL92B1MMPFVSU7LBNVV4KQNSO5AEMVJF66Q9ASUAAJG
+      X-Amz-Crc32:
+      - '195948960'
+    body:
+      encoding: UTF-8
+      string: '{"Table":{"AttributeDefinitions":[{"AttributeName":"book_version_id","AttributeType":"S"},{"AttributeName":"indexing_strategy_name","AttributeType":"S"}],"CreationDateTime":1.691209754545E9,"DeletionProtectionEnabled":false,"ItemCount":0,"KeySchema":[{"AttributeName":"book_version_id","KeyType":"HASH"},{"AttributeName":"indexing_strategy_name","KeyType":"RANGE"}],"ProvisionedThroughput":{"NumberOfDecreasesToday":0,"ReadCapacityUnits":2,"WriteCapacityUnits":2},"TableArn":"arn:aws:dynamodb:us-east-2:AWS_ACCOUNT_ID:table/test_indexing","TableId":"478845ca-fc9e-488d-87e5-166ddc57d00e","TableName":"test_indexing","TableSizeBytes":0,"TableStatus":"CREATING"}}'
+  recorded_at: Sat, 05 Aug 2023 04:29:14 GMT
+- request:
+    method: post
+    uri: https://dynamodb.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"TableName":"test_indexing"}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20120810.DescribeTable
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/dynamodb#1.93.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy ft/waiter
+      Host:
+      - dynamodb.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042934Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - b769faf39a6d0d44a0e395242dec7e6988e15b38ec5ad2735c8e20b1cb6c56c3
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-2/dynamodb/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '29'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sat, 05 Aug 2023 04:29:34 GMT
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '659'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - P3U9S7GFMVEBBM2B4PI2PB90MNVV4KQNSO5AEMVJF66Q9ASUAAJG
+      X-Amz-Crc32:
+      - '2341994742'
+    body:
+      encoding: UTF-8
+      string: '{"Table":{"AttributeDefinitions":[{"AttributeName":"book_version_id","AttributeType":"S"},{"AttributeName":"indexing_strategy_name","AttributeType":"S"}],"CreationDateTime":1.691209754545E9,"DeletionProtectionEnabled":false,"ItemCount":0,"KeySchema":[{"AttributeName":"book_version_id","KeyType":"HASH"},{"AttributeName":"indexing_strategy_name","KeyType":"RANGE"}],"ProvisionedThroughput":{"NumberOfDecreasesToday":0,"ReadCapacityUnits":2,"WriteCapacityUnits":2},"TableArn":"arn:aws:dynamodb:us-east-2:AWS_ACCOUNT_ID:table/test_indexing","TableId":"478845ca-fc9e-488d-87e5-166ddc57d00e","TableName":"test_indexing","TableSizeBytes":0,"TableStatus":"ACTIVE"}}'
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '526'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "name" : "F3H494FFQ5",
+          "cluster_name" : "opensearch_homebrew",
+          "cluster_uuid" : "HbG6dYzIRuWoBkpeyN0Tow",
+          "version" : {
+            "distribution" : "opensearch",
+            "number" : "2.9.0",
+            "build_type" : "tar",
+            "build_hash" : "unknown",
+            "build_date" : "2023-07-18T15:33:47Z",
+            "build_snapshot" : false,
+            "lucene_version" : "9.7.0",
+            "minimum_wire_compatibility_version" : "7.10.0",
+            "minimum_index_compatibility_version" : "7.0.0"
+          },
+          "tagline" : "The OpenSearch Project: https://opensearch.org/"
+        }
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/_stats
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '44762'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"_shards":{"total":18,"successful":9,"failed":0},"_all":{"primaries":{"docs":{"count":9310,"deleted":0},"store":{"size_in_bytes":4125257,"reserved_in_bytes":0},"indexing":{"index_total":9310,"index_time_in_millis":1677,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":21,"query_time_in_millis":2,"query_current":0,"fetch_total":13,"fetch_time_in_millis":4,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":188743680},"refresh":{"total":20,"total_time_in_millis":247,"external_total":20,"external_total_time_in_millis":247,"listeners":0},"flush":{"total":8,"periodic":8,"total_time_in_millis":0},"warmer":{"current":0,"total":11,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":2,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":9310,"size_in_bytes":5762987,"uncommitted_operations":9310,"uncommitted_size_in_bytes":5762987,"earliest_last_modified_age":62797},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":9310,"deleted":0},"store":{"size_in_bytes":4125257,"reserved_in_bytes":0},"indexing":{"index_total":9310,"index_time_in_millis":1677,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":21,"query_time_in_millis":2,"query_current":0,"fetch_total":13,"fetch_time_in_millis":4,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":188743680},"refresh":{"total":20,"total_time_in_millis":247,"external_total":20,"external_total_time_in_millis":247,"listeners":0},"flush":{"total":8,"periodic":8,"total_time_in_millis":0},"warmer":{"current":0,"total":11,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":2,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":9310,"size_in_bytes":5762987,"uncommitted_operations":9310,"uncommitted_size_in_bytes":5762987,"earliest_last_modified_age":62797},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"indices":{"14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1":{"uuid":"6d17UXpkSrSs1to4FkK-yw","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":2,"query_time_in_millis":0,"query_current":0,"fetch_total":2,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34649688},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":2,"query_time_in_millis":0,"query_current":0,"fetch_total":2,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34649688},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"8d50a0af-948b-4204-a71d-4826cba765b8@15.3_i1":{"uuid":"RD3vG9zZQE-8m-kogcvfHQ","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34619181},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34619181},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"cce64fde-f448-43b8-ae88-27705cceb0da@72af53d_i1":{"uuid":"SX2ZenTjQiSqpbRYsyyL6g","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":29162250},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":29162250},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"8d50a0af-948b-4204-a71d-4826cba765b8@3bf8607_i1":{"uuid":"DExXH0UEQJGUgm0DrRIXvw","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":1,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":29101147},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":1,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":29101147},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1":{"uuid":"M5EWtS3kT-aQcPCVyUg-ew","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":3,"query_time_in_millis":1,"query_current":0,"fetch_total":2,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":21966182},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":3,"query_time_in_millis":1,"query_current":0,"fetch_total":2,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":21966182},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"cce64fde-f448-43b8-ae88-27705cceb0da@14.21_i1":{"uuid":"XPCQpXrKT3Cy-4jmo20BMQ","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34680378},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":0,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34680378},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1":{"uuid":"z6mUGeQdQKexSdOcjwgwOA","primaries":{"docs":{"count":9310,"deleted":0},"store":{"size_in_bytes":4123593,"reserved_in_bytes":0},"indexing":{"index_total":9310,"index_time_in_millis":1677,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":7,"query_time_in_millis":1,"query_current":0,"fetch_total":7,"fetch_time_in_millis":4,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":4,"total_time_in_millis":247,"external_total":4,"external_total_time_in_millis":247,"listeners":0},"flush":{"total":0,"periodic":0,"total_time_in_millis":0},"warmer":{"current":0,"total":3,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":2,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":9310,"size_in_bytes":5762547,"uncommitted_operations":9310,"uncommitted_size_in_bytes":5762547,"earliest_last_modified_age":62797},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":9310,"deleted":0},"store":{"size_in_bytes":4123593,"reserved_in_bytes":0},"indexing":{"index_total":9310,"index_time_in_millis":1677,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":7,"query_time_in_millis":1,"query_current":0,"fetch_total":7,"fetch_time_in_millis":4,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":4,"total_time_in_millis":247,"external_total":4,"external_total_time_in_millis":247,"listeners":0},"flush":{"total":0,"periodic":0,"total_time_in_millis":0},"warmer":{"current":0,"total":3,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":2,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":9310,"size_in_bytes":5762547,"uncommitted_operations":9310,"uncommitted_size_in_bytes":5762547,"earliest_last_modified_age":62797},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"20230620.181811__8d50a0af-948b-4204-a71d-4826cba765b8@3bf8607_i1":{"uuid":"0uZ7iNliSy-TrCPBwRLJjQ","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":6,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":18712230},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":6,"query_time_in_millis":0,"query_current":0,"fetch_total":0,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":18712230},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}},"54fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1":{"uuid":"2Q0LVT4hQ1qL1Y2pVZhUag","primaries":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":2,"query_time_in_millis":0,"query_current":0,"fetch_total":2,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34588735},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}},"total":{"docs":{"count":0,"deleted":0},"store":{"size_in_bytes":208,"reserved_in_bytes":0},"indexing":{"index_total":0,"index_time_in_millis":0,"index_current":0,"index_failed":0,"delete_total":0,"delete_time_in_millis":0,"delete_current":0,"noop_update_total":0,"is_throttled":false,"throttle_time_in_millis":0},"get":{"total":0,"time_in_millis":0,"exists_total":0,"exists_time_in_millis":0,"missing_total":0,"missing_time_in_millis":0,"current":0},"search":{"open_contexts":0,"query_total":2,"query_time_in_millis":0,"query_current":0,"fetch_total":2,"fetch_time_in_millis":0,"fetch_current":0,"scroll_total":0,"scroll_time_in_millis":0,"scroll_current":0,"point_in_time_total":0,"point_in_time_time_in_millis":0,"point_in_time_current":0,"suggest_total":0,"suggest_time_in_millis":0,"suggest_current":0},"merges":{"current":0,"current_docs":0,"current_size_in_bytes":0,"total":0,"total_time_in_millis":0,"total_docs":0,"total_size_in_bytes":0,"total_stopped_time_in_millis":0,"total_throttled_time_in_millis":0,"total_auto_throttle_in_bytes":20971520},"refresh":{"total":2,"total_time_in_millis":0,"external_total":2,"external_total_time_in_millis":0,"listeners":0},"flush":{"total":1,"periodic":1,"total_time_in_millis":0},"warmer":{"current":0,"total":1,"total_time_in_millis":0},"query_cache":{"memory_size_in_bytes":0,"total_count":0,"hit_count":0,"miss_count":0,"cache_size":0,"cache_count":0,"evictions":0},"fielddata":{"memory_size_in_bytes":0,"evictions":0},"completion":{"size_in_bytes":0},"segments":{"count":0,"memory_in_bytes":0,"terms_memory_in_bytes":0,"stored_fields_memory_in_bytes":0,"term_vectors_memory_in_bytes":0,"norms_memory_in_bytes":0,"points_memory_in_bytes":0,"doc_values_memory_in_bytes":0,"index_writer_memory_in_bytes":0,"version_map_memory_in_bytes":0,"fixed_bit_set_memory_in_bytes":0,"max_unsafe_auto_id_timestamp":-1,"file_sizes":{}},"translog":{"operations":0,"size_in_bytes":55,"uncommitted_operations":0,"uncommitted_size_in_bytes":55,"earliest_last_modified_age":34588735},"request_cache":{"memory_size_in_bytes":0,"evictions":0,"hit_count":0,"miss_count":0},"recovery":{"current_as_source":0,"current_as_target":0,"throttle_time_in_millis":0}}}}}'
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '826'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyIxNGZiNGFkNy0zOWExLTRlZWUtYWI2ZS0zZWYyNDgyZTNlMjJAMTUuMV9pMSI6eyJhbGlhc2VzIjp7fSwibWFwcGluZ3MiOnsicHJvcGVydGllcyI6eyJlbGVtZW50X2lkIjp7InR5cGUiOiJ0ZXh0In0sImVsZW1lbnRfdHlwZSI6eyJ0eXBlIjoidGV4dCJ9LCJoaWRkZW5fY29udGVudCI6eyJ0eXBlIjoidGV4dCJ9LCJwYWdlX2lkIjp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfcG9zaXRpb24iOnsidHlwZSI6ImludGVnZXIifSwidGl0bGUiOnsidHlwZSI6InRleHQifSwidmlzaWJsZV9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In19fSwic2V0dGluZ3MiOnsiaW5kZXgiOnsicmVwbGljYXRpb24iOnsidHlwZSI6IkRPQ1VNRU5UIn0sInNlYXJjaCI6eyJzbG93bG9nIjp7InRocmVzaG9sZCI6eyJmZXRjaCI6eyJ3YXJuIjoiMXMifSwicXVlcnkiOnsid2FybiI6IjEwcyJ9fX19LCJudW1iZXJfb2Zfc2hhcmRzIjoiMSIsInByb3ZpZGVkX25hbWUiOiIxNGZiNGFkNy0zOWExLTRlZWUtYWI2ZS0zZWYyNDgyZTNlMjJAMTUuMV9pMSIsImNyZWF0aW9uX2RhdGUiOiIxNjkxMTc1MTI1MTI5IiwiYW5hbHlzaXMiOnsiYW5hbHl6ZXIiOnsiZGVmYXVsdCI6eyJmaWx0ZXIiOlsibG93ZXJjYXNlIl0sImNoYXJfZmlsdGVyIjpbInF1b3RlcyJdLCJ0b2tlbml6ZXIiOiJzdGFuZGFyZCJ9fSwiY2hhcl9maWx0ZXIiOnsicXVvdGVzIjp7InR5cGUiOiJtYXBwaW5nIiwibWFwcGluZ3MiOlsi4oCZPT4nIl19fX0sIm51bWJlcl9vZl9yZXBsaWNhcyI6IjEiLCJ1dWlkIjoiNmQxN1VYcGtTclNzMXRvNEZrSy15dyIsInZlcnNpb24iOnsiY3JlYXRlZCI6IjEzNjMwNzgyNyJ9fX19fQ==
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/8d50a0af-948b-4204-a71d-4826cba765b8@15.3_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '826'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyI4ZDUwYTBhZi05NDhiLTQyMDQtYTcxZC00ODI2Y2JhNzY1YjhAMTUuM19pMSI6eyJhbGlhc2VzIjp7fSwibWFwcGluZ3MiOnsicHJvcGVydGllcyI6eyJlbGVtZW50X2lkIjp7InR5cGUiOiJ0ZXh0In0sImVsZW1lbnRfdHlwZSI6eyJ0eXBlIjoidGV4dCJ9LCJoaWRkZW5fY29udGVudCI6eyJ0eXBlIjoidGV4dCJ9LCJwYWdlX2lkIjp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfcG9zaXRpb24iOnsidHlwZSI6ImludGVnZXIifSwidGl0bGUiOnsidHlwZSI6InRleHQifSwidmlzaWJsZV9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In19fSwic2V0dGluZ3MiOnsiaW5kZXgiOnsicmVwbGljYXRpb24iOnsidHlwZSI6IkRPQ1VNRU5UIn0sInNlYXJjaCI6eyJzbG93bG9nIjp7InRocmVzaG9sZCI6eyJmZXRjaCI6eyJ3YXJuIjoiMXMifSwicXVlcnkiOnsid2FybiI6IjEwcyJ9fX19LCJudW1iZXJfb2Zfc2hhcmRzIjoiMSIsInByb3ZpZGVkX25hbWUiOiI4ZDUwYTBhZi05NDhiLTQyMDQtYTcxZC00ODI2Y2JhNzY1YjhAMTUuM19pMSIsImNyZWF0aW9uX2RhdGUiOiIxNjkxMTc1MTU1NjMzIiwiYW5hbHlzaXMiOnsiYW5hbHl6ZXIiOnsiZGVmYXVsdCI6eyJmaWx0ZXIiOlsibG93ZXJjYXNlIl0sImNoYXJfZmlsdGVyIjpbInF1b3RlcyJdLCJ0b2tlbml6ZXIiOiJzdGFuZGFyZCJ9fSwiY2hhcl9maWx0ZXIiOnsicXVvdGVzIjp7InR5cGUiOiJtYXBwaW5nIiwibWFwcGluZ3MiOlsi4oCZPT4nIl19fX0sIm51bWJlcl9vZl9yZXBsaWNhcyI6IjEiLCJ1dWlkIjoiUkQzdkc5elpRRS04bS1rb2djdmZIUSIsInZlcnNpb24iOnsiY3JlYXRlZCI6IjEzNjMwNzgyNyJ9fX19fQ==
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/cce64fde-f448-43b8-ae88-27705cceb0da@72af53d_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '832'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjY2U2NGZkZS1mNDQ4LTQzYjgtYWU4OC0yNzcwNWNjZWIwZGFANzJhZjUzZF9pMSI6eyJhbGlhc2VzIjp7fSwibWFwcGluZ3MiOnsicHJvcGVydGllcyI6eyJlbGVtZW50X2lkIjp7InR5cGUiOiJ0ZXh0In0sImVsZW1lbnRfdHlwZSI6eyJ0eXBlIjoidGV4dCJ9LCJoaWRkZW5fY29udGVudCI6eyJ0eXBlIjoidGV4dCJ9LCJwYWdlX2lkIjp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfcG9zaXRpb24iOnsidHlwZSI6ImludGVnZXIifSwidGl0bGUiOnsidHlwZSI6InRleHQifSwidmlzaWJsZV9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In19fSwic2V0dGluZ3MiOnsiaW5kZXgiOnsicmVwbGljYXRpb24iOnsidHlwZSI6IkRPQ1VNRU5UIn0sInNlYXJjaCI6eyJzbG93bG9nIjp7InRocmVzaG9sZCI6eyJmZXRjaCI6eyJ3YXJuIjoiMXMifSwicXVlcnkiOnsid2FybiI6IjEwcyJ9fX19LCJudW1iZXJfb2Zfc2hhcmRzIjoiMSIsInByb3ZpZGVkX25hbWUiOiJjY2U2NGZkZS1mNDQ4LTQzYjgtYWU4OC0yNzcwNWNjZWIwZGFANzJhZjUzZF9pMSIsImNyZWF0aW9uX2RhdGUiOiIxNjkxMTgwNjEyNTczIiwiYW5hbHlzaXMiOnsiYW5hbHl6ZXIiOnsiZGVmYXVsdCI6eyJmaWx0ZXIiOlsibG93ZXJjYXNlIl0sImNoYXJfZmlsdGVyIjpbInF1b3RlcyJdLCJ0b2tlbml6ZXIiOiJzdGFuZGFyZCJ9fSwiY2hhcl9maWx0ZXIiOnsicXVvdGVzIjp7InR5cGUiOiJtYXBwaW5nIiwibWFwcGluZ3MiOlsi4oCZPT4nIl19fX0sIm51bWJlcl9vZl9yZXBsaWNhcyI6IjEiLCJ1dWlkIjoiU1gyWmVuVGpRaVNxcGJSWXN5eUw2ZyIsInZlcnNpb24iOnsiY3JlYXRlZCI6IjEzNjMwNzgyNyJ9fX19fQ==
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/8d50a0af-948b-4204-a71d-4826cba765b8@3bf8607_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '832'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyI4ZDUwYTBhZi05NDhiLTQyMDQtYTcxZC00ODI2Y2JhNzY1YjhAM2JmODYwN19pMSI6eyJhbGlhc2VzIjp7fSwibWFwcGluZ3MiOnsicHJvcGVydGllcyI6eyJlbGVtZW50X2lkIjp7InR5cGUiOiJ0ZXh0In0sImVsZW1lbnRfdHlwZSI6eyJ0eXBlIjoidGV4dCJ9LCJoaWRkZW5fY29udGVudCI6eyJ0eXBlIjoidGV4dCJ9LCJwYWdlX2lkIjp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfcG9zaXRpb24iOnsidHlwZSI6ImludGVnZXIifSwidGl0bGUiOnsidHlwZSI6InRleHQifSwidmlzaWJsZV9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In19fSwic2V0dGluZ3MiOnsiaW5kZXgiOnsicmVwbGljYXRpb24iOnsidHlwZSI6IkRPQ1VNRU5UIn0sInNlYXJjaCI6eyJzbG93bG9nIjp7InRocmVzaG9sZCI6eyJmZXRjaCI6eyJ3YXJuIjoiMXMifSwicXVlcnkiOnsid2FybiI6IjEwcyJ9fX19LCJudW1iZXJfb2Zfc2hhcmRzIjoiMSIsInByb3ZpZGVkX25hbWUiOiI4ZDUwYTBhZi05NDhiLTQyMDQtYTcxZC00ODI2Y2JhNzY1YjhAM2JmODYwN19pMSIsImNyZWF0aW9uX2RhdGUiOiIxNjkxMTgwNjczNjY4IiwiYW5hbHlzaXMiOnsiYW5hbHl6ZXIiOnsiZGVmYXVsdCI6eyJmaWx0ZXIiOlsibG93ZXJjYXNlIl0sImNoYXJfZmlsdGVyIjpbInF1b3RlcyJdLCJ0b2tlbml6ZXIiOiJzdGFuZGFyZCJ9fSwiY2hhcl9maWx0ZXIiOnsicXVvdGVzIjp7InR5cGUiOiJtYXBwaW5nIiwibWFwcGluZ3MiOlsi4oCZPT4nIl19fX0sIm51bWJlcl9vZl9yZXBsaWNhcyI6IjEiLCJ1dWlkIjoiREV4WEgwVUVRSkdVZ20wRHJSSVh2dyIsInZlcnNpb24iOnsiY3JlYXRlZCI6IjEzNjMwNzgyNyJ9fX19fQ==
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '832'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyI0ZmQ5OTQ1OC02ZmRmLTQ5YmMtODY4OC1hNmRjMTdhMTI2OGRAZjFjZTllYV9pMSI6eyJhbGlhc2VzIjp7fSwibWFwcGluZ3MiOnsicHJvcGVydGllcyI6eyJlbGVtZW50X2lkIjp7InR5cGUiOiJ0ZXh0In0sImVsZW1lbnRfdHlwZSI6eyJ0eXBlIjoidGV4dCJ9LCJoaWRkZW5fY29udGVudCI6eyJ0eXBlIjoidGV4dCJ9LCJwYWdlX2lkIjp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfcG9zaXRpb24iOnsidHlwZSI6ImludGVnZXIifSwidGl0bGUiOnsidHlwZSI6InRleHQifSwidmlzaWJsZV9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In19fSwic2V0dGluZ3MiOnsiaW5kZXgiOnsicmVwbGljYXRpb24iOnsidHlwZSI6IkRPQ1VNRU5UIn0sInNlYXJjaCI6eyJzbG93bG9nIjp7InRocmVzaG9sZCI6eyJmZXRjaCI6eyJ3YXJuIjoiMXMifSwicXVlcnkiOnsid2FybiI6IjEwcyJ9fX19LCJudW1iZXJfb2Zfc2hhcmRzIjoiMSIsInByb3ZpZGVkX25hbWUiOiI0ZmQ5OTQ1OC02ZmRmLTQ5YmMtODY4OC1hNmRjMTdhMTI2OGRAZjFjZTllYV9pMSIsImNyZWF0aW9uX2RhdGUiOiIxNjkxMTg3ODA4NjQ1IiwiYW5hbHlzaXMiOnsiYW5hbHl6ZXIiOnsiZGVmYXVsdCI6eyJmaWx0ZXIiOlsibG93ZXJjYXNlIl0sImNoYXJfZmlsdGVyIjpbInF1b3RlcyJdLCJ0b2tlbml6ZXIiOiJzdGFuZGFyZCJ9fSwiY2hhcl9maWx0ZXIiOnsicXVvdGVzIjp7InR5cGUiOiJtYXBwaW5nIiwibWFwcGluZ3MiOlsi4oCZPT4nIl19fX0sIm51bWJlcl9vZl9yZXBsaWNhcyI6IjEiLCJ1dWlkIjoiTTVFV3RTM2tULWFRY1BDVnlVZy1ldyIsInZlcnNpb24iOnsiY3JlYXRlZCI6IjEzNjMwNzgyNyJ9fX19fQ==
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/cce64fde-f448-43b8-ae88-27705cceb0da@14.21_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '828'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjY2U2NGZkZS1mNDQ4LTQzYjgtYWU4OC0yNzcwNWNjZWIwZGFAMTQuMjFfaTEiOnsiYWxpYXNlcyI6e30sIm1hcHBpbmdzIjp7InByb3BlcnRpZXMiOnsiZWxlbWVudF9pZCI6eyJ0eXBlIjoidGV4dCJ9LCJlbGVtZW50X3R5cGUiOnsidHlwZSI6InRleHQifSwiaGlkZGVuX2NvbnRlbnQiOnsidHlwZSI6InRleHQifSwicGFnZV9pZCI6eyJ0eXBlIjoidGV4dCJ9LCJwYWdlX3Bvc2l0aW9uIjp7InR5cGUiOiJpbnRlZ2VyIn0sInRpdGxlIjp7InR5cGUiOiJ0ZXh0In0sInZpc2libGVfY29udGVudCI6eyJ0eXBlIjoidGV4dCJ9fX0sInNldHRpbmdzIjp7ImluZGV4Ijp7InJlcGxpY2F0aW9uIjp7InR5cGUiOiJET0NVTUVOVCJ9LCJzZWFyY2giOnsic2xvd2xvZyI6eyJ0aHJlc2hvbGQiOnsiZmV0Y2giOnsid2FybiI6IjFzIn0sInF1ZXJ5Ijp7Indhcm4iOiIxMHMifX19fSwibnVtYmVyX29mX3NoYXJkcyI6IjEiLCJwcm92aWRlZF9uYW1lIjoiY2NlNjRmZGUtZjQ0OC00M2I4LWFlODgtMjc3MDVjY2ViMGRhQDE0LjIxX2kxIiwiY3JlYXRpb25fZGF0ZSI6IjE2OTExNzUwOTQ0NDQiLCJhbmFseXNpcyI6eyJhbmFseXplciI6eyJkZWZhdWx0Ijp7ImZpbHRlciI6WyJsb3dlcmNhc2UiXSwiY2hhcl9maWx0ZXIiOlsicXVvdGVzIl0sInRva2VuaXplciI6InN0YW5kYXJkIn19LCJjaGFyX2ZpbHRlciI6eyJxdW90ZXMiOnsidHlwZSI6Im1hcHBpbmciLCJtYXBwaW5ncyI6WyLigJk9PiciXX19fSwibnVtYmVyX29mX3JlcGxpY2FzIjoiMSIsInV1aWQiOiJYUENRcFhyS1QzQ3ktNGptbzIwQk1RIiwidmVyc2lvbiI6eyJjcmVhdGVkIjoiMTM2MzA3ODI3In19fX19
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '866'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyIyMDIzMDYyMC4xODE4MTFfXzRmZDk5NDU4LTZmZGYtNDliYy04Njg4LWE2ZGMxN2ExMjY4ZEBmMWNlOWVhX2kxIjp7ImFsaWFzZXMiOnt9LCJtYXBwaW5ncyI6eyJwcm9wZXJ0aWVzIjp7ImVsZW1lbnRfaWQiOnsidHlwZSI6InRleHQifSwiZWxlbWVudF90eXBlIjp7InR5cGUiOiJ0ZXh0In0sImhpZGRlbl9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfaWQiOnsidHlwZSI6InRleHQifSwicGFnZV9wb3NpdGlvbiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJ0aXRsZSI6eyJ0eXBlIjoidGV4dCJ9LCJ2aXNpYmxlX2NvbnRlbnQiOnsidHlwZSI6InRleHQifX19LCJzZXR0aW5ncyI6eyJpbmRleCI6eyJyZXBsaWNhdGlvbiI6eyJ0eXBlIjoiRE9DVU1FTlQifSwic2VhcmNoIjp7InNsb3dsb2ciOnsidGhyZXNob2xkIjp7ImZldGNoIjp7Indhcm4iOiIxcyJ9LCJxdWVyeSI6eyJ3YXJuIjoiMTBzIn19fX0sIm51bWJlcl9vZl9zaGFyZHMiOiIxIiwicHJvdmlkZWRfbmFtZSI6IjIwMjMwNjIwLjE4MTgxMV9fNGZkOTk0NTgtNmZkZi00OWJjLTg2ODgtYTZkYzE3YTEyNjhkQGYxY2U5ZWFfaTEiLCJjcmVhdGlvbl9kYXRlIjoiMTY5MTIwOTU1MDU2NSIsImFuYWx5c2lzIjp7ImFuYWx5emVyIjp7ImRlZmF1bHQiOnsiZmlsdGVyIjpbImxvd2VyY2FzZSJdLCJjaGFyX2ZpbHRlciI6WyJxdW90ZXMiXSwidG9rZW5pemVyIjoic3RhbmRhcmQifX0sImNoYXJfZmlsdGVyIjp7InF1b3RlcyI6eyJ0eXBlIjoibWFwcGluZyIsIm1hcHBpbmdzIjpbIuKAmT0+JyJdfX19LCJudW1iZXJfb2ZfcmVwbGljYXMiOiIxIiwidXVpZCI6Ino2bVVHZVFkUUtleFNkT2Nqd2d3T0EiLCJ2ZXJzaW9uIjp7ImNyZWF0ZWQiOiIxMzYzMDc4MjcifX19fX0=
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/20230620.181811__8d50a0af-948b-4204-a71d-4826cba765b8@3bf8607_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '866'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyIyMDIzMDYyMC4xODE4MTFfXzhkNTBhMGFmLTk0OGItNDIwNC1hNzFkLTQ4MjZjYmE3NjViOEAzYmY4NjA3X2kxIjp7ImFsaWFzZXMiOnt9LCJtYXBwaW5ncyI6eyJwcm9wZXJ0aWVzIjp7ImVsZW1lbnRfaWQiOnsidHlwZSI6InRleHQifSwiZWxlbWVudF90eXBlIjp7InR5cGUiOiJ0ZXh0In0sImhpZGRlbl9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfaWQiOnsidHlwZSI6InRleHQifSwicGFnZV9wb3NpdGlvbiI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJ0aXRsZSI6eyJ0eXBlIjoidGV4dCJ9LCJ2aXNpYmxlX2NvbnRlbnQiOnsidHlwZSI6InRleHQifX19LCJzZXR0aW5ncyI6eyJpbmRleCI6eyJyZXBsaWNhdGlvbiI6eyJ0eXBlIjoiRE9DVU1FTlQifSwic2VhcmNoIjp7InNsb3dsb2ciOnsidGhyZXNob2xkIjp7ImZldGNoIjp7Indhcm4iOiIxcyJ9LCJxdWVyeSI6eyJ3YXJuIjoiMTBzIn19fX0sIm51bWJlcl9vZl9zaGFyZHMiOiIxIiwicHJvdmlkZWRfbmFtZSI6IjIwMjMwNjIwLjE4MTgxMV9fOGQ1MGEwYWYtOTQ4Yi00MjA0LWE3MWQtNDgyNmNiYTc2NWI4QDNiZjg2MDdfaTEiLCJjcmVhdGlvbl9kYXRlIjoiMTY5MTE5MTA2MjU3MSIsImFuYWx5c2lzIjp7ImFuYWx5emVyIjp7ImRlZmF1bHQiOnsiZmlsdGVyIjpbImxvd2VyY2FzZSJdLCJjaGFyX2ZpbHRlciI6WyJxdW90ZXMiXSwidG9rZW5pemVyIjoic3RhbmRhcmQifX0sImNoYXJfZmlsdGVyIjp7InF1b3RlcyI6eyJ0eXBlIjoibWFwcGluZyIsIm1hcHBpbmdzIjpbIuKAmT0+JyJdfX19LCJudW1iZXJfb2ZfcmVwbGljYXMiOiIxIiwidXVpZCI6IjB1WjdpTmxpU3ktVHJDUEJ3UkxKalEiLCJ2ZXJzaW9uIjp7ImNyZWF0ZWQiOiIxMzYzMDc4MjcifX19fX0=
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/54fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '826'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyI1NGZiNGFkNy0zOWExLTRlZWUtYWI2ZS0zZWYyNDgyZTNlMjJAMTUuMV9pMSI6eyJhbGlhc2VzIjp7fSwibWFwcGluZ3MiOnsicHJvcGVydGllcyI6eyJlbGVtZW50X2lkIjp7InR5cGUiOiJ0ZXh0In0sImVsZW1lbnRfdHlwZSI6eyJ0eXBlIjoidGV4dCJ9LCJoaWRkZW5fY29udGVudCI6eyJ0eXBlIjoidGV4dCJ9LCJwYWdlX2lkIjp7InR5cGUiOiJ0ZXh0In0sInBhZ2VfcG9zaXRpb24iOnsidHlwZSI6ImludGVnZXIifSwidGl0bGUiOnsidHlwZSI6InRleHQifSwidmlzaWJsZV9jb250ZW50Ijp7InR5cGUiOiJ0ZXh0In19fSwic2V0dGluZ3MiOnsiaW5kZXgiOnsicmVwbGljYXRpb24iOnsidHlwZSI6IkRPQ1VNRU5UIn0sInNlYXJjaCI6eyJzbG93bG9nIjp7InRocmVzaG9sZCI6eyJmZXRjaCI6eyJ3YXJuIjoiMXMifSwicXVlcnkiOnsid2FybiI6IjEwcyJ9fX19LCJudW1iZXJfb2Zfc2hhcmRzIjoiMSIsInByb3ZpZGVkX25hbWUiOiI1NGZiNGFkNy0zOWExLTRlZWUtYWI2ZS0zZWYyNDgyZTNlMjJAMTUuMV9pMSIsImNyZWF0aW9uX2RhdGUiOiIxNjkxMTc1MTg2MDc5IiwiYW5hbHlzaXMiOnsiYW5hbHl6ZXIiOnsiZGVmYXVsdCI6eyJmaWx0ZXIiOlsibG93ZXJjYXNlIl0sImNoYXJfZmlsdGVyIjpbInF1b3RlcyJdLCJ0b2tlbml6ZXIiOiJzdGFuZGFyZCJ9fSwiY2hhcl9maWx0ZXIiOnsicXVvdGVzIjp7InR5cGUiOiJtYXBwaW5nIiwibWFwcGluZ3MiOlsi4oCZPT4nIl19fX0sIm51bWJlcl9vZl9yZXBsaWNhcyI6IjEiLCJ1dWlkIjoiMlEwTFZUNGhRMXFMMVkycFZaaFVhZyIsInZlcnNpb24iOnsiY3JlYXRlZCI6IjEzNjMwNzgyNyJ9fX19fQ==
+  recorded_at: Sat, 05 Aug 2023 04:29:34 GMT
+- request:
+    method: post
+    uri: https://dynamodb.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"TableName":"test_indexing","ScanFilter":{}}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20120810.Scan
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/dynamodb#1.93.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy
+      Host:
+      - dynamodb.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042934Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - fa367b39423b3c7d2c1dc1c973fa658c3d085ee3123624f53579fdc2b8d8f0ce
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-2/dynamodb/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '45'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sat, 05 Aug 2023 04:29:34 GMT
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '39'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - D6NNCR5S74GS14J1195FB0179BVV4KQNSO5AEMVJF66Q9ASUAAJG
+      X-Amz-Crc32:
+      - '3413411624'
+    body:
+      encoding: UTF-8
+      string: '{"Count":0,"Items":[],"ScannedCount":0}'
+  recorded_at: Sat, 05 Aug 2023 04:29:35 GMT
+- request:
+    method: post
+    uri: https://dynamodb.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"TableName":"test_indexing"}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20120810.DeleteTable
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/dynamodb#1.93.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy
+      Host:
+      - dynamodb.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042935Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - b769faf39a6d0d44a0e395242dec7e6988e15b38ec5ad2735c8e20b1cb6c56c3
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-2/dynamodb/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '29'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sat, 05 Aug 2023 04:29:34 GMT
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '364'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - RIQG49JSMH4KPLPFPN1KDOVIF3VV4KQNSO5AEMVJF66Q9ASUAAJG
+      X-Amz-Crc32:
+      - '3313782217'
+    body:
+      encoding: UTF-8
+      string: '{"TableDescription":{"DeletionProtectionEnabled":false,"ItemCount":0,"ProvisionedThroughput":{"NumberOfDecreasesToday":0,"ReadCapacityUnits":2,"WriteCapacityUnits":2},"TableArn":"arn:aws:dynamodb:us-east-2:AWS_ACCOUNT_ID:table/test_indexing","TableId":"478845ca-fc9e-488d-87e5-166ddc57d00e","TableName":"test_indexing","TableSizeBytes":0,"TableStatus":"DELETING"}}'
+  recorded_at: Sat, 05 Aug 2023 04:29:35 GMT
+- request:
+    method: post
+    uri: https://dynamodb.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"TableName":"test_indexing"}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20120810.DescribeTable
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/dynamodb#1.93.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy ft/waiter
+      Host:
+      - dynamodb.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042935Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - b769faf39a6d0d44a0e395242dec7e6988e15b38ec5ad2735c8e20b1cb6c56c3
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-2/dynamodb/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '29'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sat, 05 Aug 2023 04:29:35 GMT
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '353'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - V00NJ0UFKAE5VBFJCI8MNMUNH7VV4KQNSO5AEMVJF66Q9ASUAAJG
+      X-Amz-Crc32:
+      - '2605226140'
+    body:
+      encoding: UTF-8
+      string: '{"Table":{"DeletionProtectionEnabled":false,"ItemCount":0,"ProvisionedThroughput":{"NumberOfDecreasesToday":0,"ReadCapacityUnits":2,"WriteCapacityUnits":2},"TableArn":"arn:aws:dynamodb:us-east-2:AWS_ACCOUNT_ID:table/test_indexing","TableId":"478845ca-fc9e-488d-87e5-166ddc57d00e","TableName":"test_indexing","TableSizeBytes":0,"TableStatus":"DELETING"}}'
+  recorded_at: Sat, 05 Aug 2023 04:29:35 GMT
+- request:
+    method: post
+    uri: https://dynamodb.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"TableName":"test_indexing"}'
+    headers:
+      Accept-Encoding:
+      - ''
+      Content-Type:
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - DynamoDB_20120810.DescribeTable
+      User-Agent:
+      - aws-sdk-ruby3/3.180.1 ua/2.0 api/dynamodb#1.93.0 os/macos#22 md/arm lang/ruby#2.6.5
+        md/2.6.5 cfg/retry-mode#legacy ft/waiter
+      Host:
+      - dynamodb.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20230805T042955Z
+      X-Amz-Security-Token:
+      - AWS_SESSION_TOKEN
+      X-Amz-Content-Sha256:
+      - b769faf39a6d0d44a0e395242dec7e6988e15b38ec5ad2735c8e20b1cb6c56c3
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230805/us-east-2/dynamodb/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
+        Signature=<SignatureValue>
+      Content-Length:
+      - '29'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - Server
+      Date:
+      - Sat, 05 Aug 2023 04:29:55 GMT
+      Content-Type:
+      - application/x-amz-json-1.0
+      Content-Length:
+      - '144'
+      Connection:
+      - keep-alive
+      X-Amzn-Requestid:
+      - REVQRL298TKJ2QH46UC5T9DHT3VV4KQNSO5AEMVJF66Q9ASUAAJG
+      X-Amz-Crc32:
+      - '504833711'
+    body:
+      encoding: UTF-8
+      string: '{"__type":"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException","message":"Requested
+        resource not found: Table: test_indexing not found"}'
+  recorded_at: Sat, 05 Aug 2023 04:29:55 GMT
+recorded_with: VCR 6.1.0

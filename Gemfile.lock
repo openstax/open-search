@@ -153,8 +153,6 @@ GEM
       aws-sdk-dynamodb (~> 1.0)
       concurrent-ruby (>= 1.0)
     erubi (1.12.0)
-    ethon (0.16.0)
-      ffi (>= 1.15.0)
     faraday (1.10.3)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -178,11 +176,6 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
-    faraday_middleware (1.2.0)
-      faraday (~> 1.0)
-    faraday_middleware-aws-sigv4 (0.6.1)
-      aws-sigv4 (~> 1.0)
-      faraday (>= 1.8, < 2)
     ffi (1.15.5)
     git (1.18.0)
       addressable (~> 2.8)
@@ -236,6 +229,9 @@ GEM
     oj_mimic_json (1.0.1)
     opensearch-api (2.2.0)
       multi_json
+    opensearch-aws-sigv4 (1.2.0)
+      aws-sigv4 (~> 1)
+      opensearch-ruby (>= 1.0.1)
     opensearch-ruby (2.1.0)
       opensearch-api (~> 2.1)
       opensearch-transport (~> 2.0)
@@ -347,8 +343,6 @@ GEM
     thor (1.2.2)
     thread_safe (0.3.6)
     timeout (0.4.0)
-    typhoeus (1.4.0)
-      ethon (>= 0.9.0)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
     unicode-display_width (2.4.2)
@@ -385,12 +379,11 @@ DEPENDENCIES
   byebug
   dotenv-rails
   dynamoid
-  faraday_middleware
-  faraday_middleware-aws-sigv4
   listen (>= 3.0.5, < 3.2)
   lograge
   nokogiri
-  opensearch-ruby (~> 2.1.0)
+  opensearch-aws-sigv4
+  opensearch-ruby
   openstax_aws!
   openstax_cnx!
   openstax_healthcheck
@@ -406,7 +399,6 @@ DEPENDENCIES
   sentry-raven
   spring
   spring-watcher-listen (~> 2.0.0)
-  typhoeus
   vcr
   versionist
   webmock

@@ -14,7 +14,6 @@ require 'date'
 
 module Api::V0::Bindings
   class SearchResultHits
-    # The number of hits
     attr_accessor :total
 
     # The largest hit score
@@ -35,7 +34,7 @@ module Api::V0::Bindings
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'total' => :'Integer',
+        :'total' => :'SearchResultHitsTotal',
         :'max_score' => :'Float',
         :'hits' => :'Array<SearchResultHit>'
       }

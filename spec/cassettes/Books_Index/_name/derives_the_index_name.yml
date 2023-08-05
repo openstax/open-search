@@ -2,17 +2,17 @@
 http_interactions:
 - request:
     method: head
-    uri: http://localhost:9200/14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1
+    uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.15.3
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
       Content-Type:
       - application/json
-      Expect:
-      - ''
+      Accept:
+      - "*/*"
   response:
     status:
       code: 404
@@ -25,21 +25,20 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
-  recorded_at: Fri, 16 Jul 2021 22:13:45 GMT
+  recorded_at: Sat, 05 Aug 2023 04:25:50 GMT
 - request:
     method: head
-    uri: http://localhost:9200/14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1
+    uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.15.3
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
       Content-Type:
       - application/json
-      Expect:
-      - ''
+      Accept:
+      - "*/*"
   response:
     status:
       code: 404
@@ -52,6 +51,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
-  recorded_at: Fri, 16 Jul 2021 22:13:45 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Sat, 05 Aug 2023 04:25:50 GMT
+recorded_with: VCR 6.1.0

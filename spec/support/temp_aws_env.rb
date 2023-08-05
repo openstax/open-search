@@ -44,14 +44,14 @@ class TempAwsEnv
     @sqs_queue_url ||= Sqs.create_test_queue(name: name)
   end
 
-  def create_open_search_domain(name:, region: @region, restrict_access_to_me: true, filter: true)
+  def create_domain(name:, region: @region, restrict_access_to_me: true, filter: true)
     filter_value(value: name, with: "some_osdomain_name") if filter
 
-    resp = aws_os_client(region).create_open_search_domain({
+    resp = aws_os_client(region).create_domain({
       domain_name: name,
-      open_search_version: "2.7",
+      engine_version: "OpenSearch_2.7",
       cluster_config: {
-        instance_type: "m4.xlarge.search",
+        instance_type: "t3.small.search",
         instance_count: 1,
       },
       ebs_options: {
@@ -96,7 +96,7 @@ class TempAwsEnv
     Sqs.delete_test_queue(@sqs_queue_url) if @sqs_queue_url
 
     @os_domain_names_to_regions.each do |domain_name, region|
-      aws_os_client(region).delete_open_search_domain(domain_name: domain_name)
+      aws_os_client(region).delete_domain(domain_name: domain_name)
     end
   end
 
@@ -166,6 +166,6 @@ class TempAwsEnv
   end
 
   def os_domain_status(region:, name:)
-    aws_os_client(region).describe_open_search_domain(domain_name: name).domain_status
+    aws_os_client(region).describe_domain(domain_name: name).domain_status
   end
 end

@@ -6,12 +6,12 @@ RSpec.describe 'api v0 info requests', type: :request, api: :v0 do
       es_version: "6.7.2",
       book_indexes: [
         {
-          id: "8d50a0af-948b-4204-a71d-4826cba765b8@15.3_i1",
+          id: "8d50a0af-948b-4204-a71d-4826cba765b8@3bf8607_i1",
           num_docs: "7166",
           state: "create pending"
         },
         {
-          id: "031da8d3-b525-429c-80cf-6c8ed997733a@14.4_i1",
+          id: "a31df062-930a-4f46-8953-605711e6d204@b637022_i1",
           num_docs: "12349", state: "created"
         }
       ]

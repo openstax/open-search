@@ -17,12 +17,12 @@ RSpec.describe Api::V0::Bindings::SearchResult do
         max_score: 11.151909,
         hits: [
           {
-            _index: "031da8d3-b525-429c-80cf-6c8ed997733a@14.4_i1",
+            _index: "a31df062-930a-4f46-8953-605711e6d204@b637022_i1",
             _type: "page_element",
             _id: "1c8yCWsBijBxrdvYQcsE",
             _score: 11.151909,
             _source: {
-              page_id: "4a4407ed-0969-4018-806f-6ea728d6efb4@10",
+              page_id: "4a4407ed-0969-4018-806f-6ea728d6efb4@",
               element_type: "paragraph",
               page_position: 37
             },

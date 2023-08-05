@@ -1,0 +1,93 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:9200/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '526'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "name" : "F3H494FFQ5",
+          "cluster_name" : "opensearch_homebrew",
+          "cluster_uuid" : "HbG6dYzIRuWoBkpeyN0Tow",
+          "version" : {
+            "distribution" : "opensearch",
+            "number" : "2.9.0",
+            "build_type" : "tar",
+            "build_hash" : "unknown",
+            "build_date" : "2023-07-18T15:33:47Z",
+            "build_snapshot" : false,
+            "lucene_version" : "9.7.0",
+            "minimum_wire_compatibility_version" : "7.10.0",
+            "minimum_index_compatibility_version" : "7.0.0"
+          },
+          "tagline" : "The OpenSearch Project: https://opensearch.org/"
+        }
+  recorded_at: Sat, 05 Aug 2023 04:02:12 GMT
+- request:
+    method: get
+    uri: http://localhost:9200/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '526'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "name" : "F3H494FFQ5",
+          "cluster_name" : "opensearch_homebrew",
+          "cluster_uuid" : "HbG6dYzIRuWoBkpeyN0Tow",
+          "version" : {
+            "distribution" : "opensearch",
+            "number" : "2.9.0",
+            "build_type" : "tar",
+            "build_hash" : "unknown",
+            "build_date" : "2023-07-18T15:33:47Z",
+            "build_snapshot" : false,
+            "lucene_version" : "9.7.0",
+            "minimum_wire_compatibility_version" : "7.10.0",
+            "minimum_index_compatibility_version" : "7.0.0"
+          },
+          "tagline" : "The OpenSearch Project: https://opensearch.org/"
+        }
+  recorded_at: Sat, 05 Aug 2023 04:02:12 GMT
+recorded_with: VCR 6.1.0

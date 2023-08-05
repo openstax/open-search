@@ -11,8 +11,9 @@ require 'vcr_helper'
 #          -e "discovery.type=single-node"
 #          opensearchproject/opensearch:2.7
 RSpec.describe Books::Index, vcr: VCR_OPTS do
-  let(:book_uuid_at_version) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
-  let(:book_version_id) { book_uuid_at_version } # without RAP
+  let(:pipeline) { '20230620.181811' }
+  let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
+  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:test_book_json) { JSON.parse(file_fixture('mini.json').read) }
 
   subject(:index) { described_class.new(book_version_id: book_version_id) }
@@ -33,35 +34,9 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
     end
   end
 
-  describe "#populate" do
+  describe '#populate' do
     let(:test_book_url) {
-      "https://openstax.org/contents/#{book_uuid_at_version}"
-    }
-    let(:test_page_url) {
-      "#{test_book_url}:ada35081-9ec4-4eb8-98b2-3ce350d5427f@6"
-    }
-
-    before do
-      allow(OpenStax::Cnx::V1).to receive(:fetch).with(test_book_url).and_return(test_book_json)
-      allow(OpenStax::Cnx::V1).to receive(:fetch).with(test_page_url).and_call_original
-    end
-
-    it 'populates the index' do
-      index.create
-      index.populate
-      sleep 1 if VCR.current_cassette.try!(:recording?)  # wait for OpenSearch to finish
-
-      expect(OxOpenSearchClient.instance.count(index: index.name)["count"]).to eq 8
-    end
-  end
-
-  describe '#populate with RAP' do
-    let(:pipeline) { '20210514.171726' }
-    let(:book_uuid_at_version) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@22.8' }
-    let(:book_version_id) { "#{pipeline}/#{book_uuid_at_version}" }
-
-    let(:test_book_url) {
-      "https://openstax.org/apps/archive/#{pipeline}/contents/#{book_uuid_at_version}"
+      "https://openstax.org/apps/archive/#{pipeline}/contents/#{book_id_at_version}"
     }
     let(:test_page_url) {
       "#{test_book_url.gsub('.json','')}:ccc4ed14-6c87-408b-9934-7a0d279d853a"
@@ -86,16 +61,14 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
   describe "#hide_unwanted_items" do
     # This page from Physics book contains .os-teacher elements that should not be indexed
     # See https://github.com/openstax/unified/issues/1559
-    let(:physics_id) { 'cce64fde-f448-43b8-ae88-27705cceb0da@14.21' }
+    let(:pipeline) { '20230620.181811' }
+    let(:physics_id_at_version) { 'cce64fde-f448-43b8-ae88-27705cceb0da@72af53d' }
+    let(:physics_version_id) { "#{pipeline}/#{physics_id_at_version}" }
     let(:physics_json) { JSON.parse(file_fixture('mini_physics.json').read) }
-    let(:physics_url) {
-      "https://openstax.org/contents/cce64fde-f448-43b8-ae88-27705cceb0da@14.21"
-    }
-    let(:physics_page_url) {
-      "#{physics_url}:5f0710fe-1028-4ac4-b8fd-b0a6c792c642@11"
-    }
+    let(:physics_url) { "https://openstax.org/apps/archive/#{pipeline}/contents/#{physics_id_at_version}" }
+    let(:physics_page_url) { "#{physics_url}:5f0710fe-1028-4ac4-b8fd-b0a6c792c642" }
 
-    subject(:index_physics) { described_class.new(book_version_id: physics_id) }
+    subject(:index) { described_class.new(book_version_id: physics_version_id) }
 
     before do
       allow(OpenStax::Cnx::V1).to receive(:fetch).with(physics_url).and_return(physics_json)
@@ -103,11 +76,11 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
     end
 
     it 'does not include unwanted elements in index' do
-      index_physics.create
-      index_physics.populate
+      index.create
+      index.populate
       sleep 1 if VCR.current_cassette.try!(:recording?)  # wait for OpenSearch to finish
 
-      expect(OxOpenSearchClient.instance.count(index: index_physics.name)["count"]).to eq 50
+      expect(OxOpenSearchClient.instance.count(index: index.name)["count"]).to eq 50
     end
   end
 
@@ -122,7 +95,7 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
 
   describe "#name" do
     it 'derives the index name' do
-      expect(index.name).to eq "14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1"
+      expect(index.name).to eq '20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1'
     end
   end
 end

@@ -36,10 +36,8 @@ gem "yard", ">= 0.9.20"
 gem 'dynamoid'
 
 # Access OpenSearch (with signed requests)
-gem 'opensearch-ruby', '~> 2.1.0'
-gem 'typhoeus'
-gem 'faraday_middleware'
-gem 'faraday_middleware-aws-sigv4'
+gem 'opensearch-ruby'
+gem 'opensearch-aws-sigv4'
 
 gem "whenever"
 

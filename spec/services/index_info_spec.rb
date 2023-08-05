@@ -2,10 +2,12 @@ require 'rails_helper'
 require 'vcr_helper'
 
 RSpec.describe IndexInfo, vcr: VCR_OPTS do
-  let(:book_version_id) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
+  let(:pipeline) { '20230620.181811' }
+  let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
+  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:index) { Books::Index.new(book_version_id: book_version_id) }
   let(:indexing_strategy) { "I1" }
-  let(:book_index_name) { "#{book_version_id}_#{indexing_strategy}".downcase }
+  let(:book_index_name) { "#{pipeline}__#{book_id_at_version}_#{indexing_strategy}".downcase }
 
   before(:each) do
     do_not_record_or_playback do

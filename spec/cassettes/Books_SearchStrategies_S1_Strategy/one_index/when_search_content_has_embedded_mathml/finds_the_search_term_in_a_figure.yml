@@ -1,0 +1,33 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":1000,"query":{"simple_query_string":{"fields":["title","visible_content"],"query":"proficiency","flags":"WHITESPACE|PHRASE","minimum_should_match":"100%","default_operator":"AND"}},"_source":["element_type","element_id","page_id","page_position"],"highlight":{"number_of_fragments":20,"pre_tags":["\u003cstrong\u003e"],"post_tags":["\u003c/strong\u003e"],"fields":{"title":{},"visible_content":{}}}}'
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '581'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"took":2,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":11.403854,"hits":[{"_index":"20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1","_id":"BRxWxIkBBh0efepVsWq2","_score":11.403854,"_source":{"page_id":"ccc4ed14-6c87-408b-9934-7a0d279d853a@","element_id":"fig-ch01_00_01","element_type":"figure","page_position":0},"highlight":{"visible_content":["Figure
+        \n1.1\n \nBlood Pressure\n\n   \n  A <strong>proficiency</strong> in anatomy
+        and physiology is fundamental to any"]}}]}}'
+  recorded_at: Sat, 05 Aug 2023 06:34:42 GMT
+recorded_with: VCR 6.1.0

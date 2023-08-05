@@ -1,0 +1,33 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":1000,"query":{"simple_query_string":{"fields":["title","visible_content"],"query":"general
+        equation","flags":"WHITESPACE|PHRASE","minimum_should_match":"100%","default_operator":"AND"}},"_source":["element_type","element_id","page_id","page_position"],"highlight":{"number_of_fragments":20,"pre_tags":["\u003cstrong\u003e"],"post_tags":["\u003c/strong\u003e"],"fields":{"title":{},"visible_content":{}}}}'
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '938'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ0b29rIjozLCJ0aW1lZF9vdXQiOmZhbHNlLCJfc2hhcmRzIjp7InRvdGFsIjoxLCJzdWNjZXNzZnVsIjoxLCJza2lwcGVkIjowLCJmYWlsZWQiOjB9LCJoaXRzIjp7InRvdGFsIjp7InZhbHVlIjoyLCJyZWxhdGlvbiI6ImVxIn0sIm1heF9zY29yZSI6MTAuNzg4MDU1LCJoaXRzIjpbeyJfaW5kZXgiOiIyMDIzMDYyMC4xODE4MTFfXzRmZDk5NDU4LTZmZGYtNDliYy04Njg4LWE2ZGMxN2ExMjY4ZEBmMWNlOWVhX2kxIiwiX2lkIjoiTXh4V3hJa0JCaDBlZmVwVncydW4iLCJfc2NvcmUiOjEwLjc4ODA1NSwiX3NvdXJjZSI6eyJwYWdlX2lkIjoiYTE5NzlhZjYtNTc2MS00NDgzLThhNTAtNmJhNTc3MjlmNzY5QCIsImVsZW1lbnRfaWQiOiJmcy1pZDIxNTI0NjEiLCJlbGVtZW50X3R5cGUiOiJwYXJhZ3JhcGgiLCJwYWdlX3Bvc2l0aW9uIjoxMX0sImhpZ2hsaWdodCI6eyJ2aXNpYmxlX2NvbnRlbnQiOlsiVGhlIDxzdHJvbmc+Z2VuZXJhbDwvc3Ryb25nPiA8c3Ryb25nPmVxdWF0aW9uPC9zdHJvbmc+IGZvciBhIGRlY29tcG9zaXRpb24gcmVhY3Rpb24gaXM6IOKApi4iXX19LHsiX2luZGV4IjoiMjAyMzA2MjAuMTgxODExX180ZmQ5OTQ1OC02ZmRmLTQ5YmMtODY4OC1hNmRjMTdhMTI2OGRAZjFjZTllYV9pMSIsIl9pZCI6Ik1SeFd4SWtCQmgwZWZlcFZ3MnVLIiwiX3Njb3JlIjo5LjE4Njg4OSwiX3NvdXJjZSI6eyJwYWdlX2lkIjoiYTE5NzlhZjYtNTc2MS00NDgzLThhNTAtNmJhNTc3MjlmNzY5QCIsImVsZW1lbnRfaWQiOiJmcy1pZDIwNjk5MzUiLCJlbGVtZW50X3R5cGUiOiJwYXJhZ3JhcGgiLCJwYWdlX3Bvc2l0aW9uIjo5fSwiaGlnaGxpZ2h0Ijp7InZpc2libGVfY29udGVudCI6WyJUaGUgPHN0cm9uZz5nZW5lcmFsPC9zdHJvbmc+IDxzdHJvbmc+ZXF1YXRpb248L3N0cm9uZz4gZm9yIGEgc3ludGhlc2lzIHJlYWN0aW9uIGlzIOKApiJdfX1dfX0=
+  recorded_at: Sat, 05 Aug 2023 06:34:42 GMT
+recorded_with: VCR 6.1.0

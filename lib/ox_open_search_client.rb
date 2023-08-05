@@ -1,6 +1,4 @@
 require 'opensearch'
-require 'typhoeus'
-require 'typhoeus/adapters/faraday'
 
 class OxOpenSearchClient
   delegate_missing_to :@internal_client
@@ -17,21 +15,16 @@ class OxOpenSearchClient
   end
 
   def initialize(url:, sign_aws_requests: false)
-    @internal_client = OpenSearch::Client.new(open_search_client_options(url)) do |f|
-      if sign_aws_requests
-        # Borrowed from https://docs.aws.amazon.com/opensearch-service/latest/developerguide/request-signing.html#request-signing-ruby
-        # Also see # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Sigv4/Signer.html
+    @internal_client = if sign_aws_requests
+      # Borrowed from https://opensearch.org/docs/latest/clients/ruby/#connecting-to-amazon-opensearch-service
+      # Also see # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Sigv4/Signer.html
+      signer = Aws::Sigv4::Signer.new(service: 'es',
+                                      credentials_provider: aws_credentials_provider,
+                                      region: aws_open_search_region(url))
 
-        require 'faraday_middleware'
-        require 'faraday_middleware/aws_sigv4'
-
-        f.request :aws_sigv4,
-                  credentials_provider: aws_credentials_provider,
-                  service: 'es',
-                  region: aws_open_search_region(url)
-      end
-
-      f.adapter :typhoeus
+      OpenSearch::Aws::Sigv4Client.new(open_search_client_options(url), signer)
+    else
+      OpenSearch::Client.new(open_search_client_options(url))
     end
   end
 
@@ -40,13 +33,9 @@ class OxOpenSearchClient
   def open_search_client_options(url)
     {
       url: url,
-      log: false,
+      log: ENV['INDEXING_HTTP_LOGGING'] == 'true',
       retry_on_failure: 3,
-      transport_options: {
-        request: {
-          timeout: 60 # default for open_timeout, write_timeout, read_timeout
-        }
-      }
+      request_timeout: 60 # default for open_timeout, write_timeout, read_timeout
     }
   end
 

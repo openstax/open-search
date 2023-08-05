@@ -15,15 +15,13 @@ module Books::IndexingStrategies::I1
 
     def self.mapping
       {
-        properties: {
-          element_type: { type: 'text' },
-          element_id: { type: 'text' },
-          page_id: { type: 'text' },
-          page_position: { type: 'integer' },
-          title: { type: 'text' },
-          visible_content: { type: 'text' },
-          hidden_content: { type: 'text' }
-        }
+        element_type: { type: 'text' },
+        element_id: { type: 'text' },
+        page_id: { type: 'text' },
+        page_position: { type: 'integer' },
+        title: { type: 'text' },
+        visible_content: { type: 'text' },
+        hidden_content: { type: 'text' }
       }
     end
 
