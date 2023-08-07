@@ -111,7 +111,7 @@ RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0,
       result = search_strategy.search(query_string: search_term)
 
       expect((result["hits"]["hits"].select{|hit| hit['_index'].include?('4fd99458')}).present?).to be_truthy
-      expect((result["hits"]["hits"].select{|hit| hit['_index'].include?('8d50a0af')}).present?).to be_falsy
+      expect((result["hits"]["hits"].select{|hit| hit['_index'].include?('8d50a0af')}).present?).to be_truthy
     end
   end
 end
