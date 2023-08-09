@@ -96,17 +96,9 @@ module Api::V0::Swagger::Models::Search
     property :hits do
       key :required, [:total, :hits]
       property :total do
-        key :required, [:value, :relation]
-        property :value do
-          key :type, :integer
-          key :readOnly, true
-          key :description, "The exact or approximate of hits"
-        end
-        property :relation do
-          key :type, :string
-          key :readOnly, true
-          key :description, "Modifier for value"
-        end
+        key :type, :integer
+        key :readOnly, true
+        key :description, "The number of hits"
       end
       property :max_score do
         key :type, :number

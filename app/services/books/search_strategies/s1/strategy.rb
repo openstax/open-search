@@ -12,6 +12,7 @@ module Books::SearchStrategies::S1
     end
 
     def initialize(index_names:, options: {})
+      @options = options
       super(index_names: index_names)
     end
 
@@ -35,6 +36,7 @@ module Books::SearchStrategies::S1
             default_operator: "AND"
           }
         },
+        track_total_hits: !!@options[:track_total_hits],
         _source: %w(element_type element_id page_id page_position),
         highlight: {
           number_of_fragments: 20,

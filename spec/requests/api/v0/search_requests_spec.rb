@@ -23,8 +23,7 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
 
       json = json_response
       expect(json[:overall_took]).not_to be_nil
-      expect(json[:hits][:total][:value]).to eq 1
-      expect(json[:hits][:total][:relation]).to eq 'eq'
+      expect(json[:hits][:total]).to eq 1
       expect(json[:hits][:hits][0][:_source]).to include(
         page_id: "2c60e072-7665-49b9-a2c9-2736b72b533c@",
         element_type: "paragraph",
@@ -40,8 +39,7 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
 
       json = json_response
       expect(json[:overall_took]).not_to be_nil
-      expect(json[:hits][:total][:value]).to eq 37
-      expect(json[:hits][:total][:relation]).to eq 'eq'
+      expect(json[:hits][:total]).to eq 37
       expect(json[:hits][:hits][0][:_source]).to include(
         page_id: "6d66e593-841c-55bc-8036-fedc5a6972f9@f1ce9ea",
         element_type: "key_term",
