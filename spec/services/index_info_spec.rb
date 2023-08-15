@@ -2,10 +2,12 @@ require 'rails_helper'
 require 'vcr_helper'
 
 RSpec.describe IndexInfo, vcr: VCR_OPTS do
-  let(:book_version_id) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
+  let(:pipeline) { '20230620.181811' }
+  let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
+  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:index) { Books::Index.new(book_version_id: book_version_id) }
   let(:indexing_strategy) { "I1" }
-  let(:book_index_name) { "#{book_version_id}_#{indexing_strategy}".downcase }
+  let(:book_index_name) { "#{pipeline}__#{book_id_at_version}_#{indexing_strategy}".downcase }
 
   before(:each) do
     do_not_record_or_playback do
@@ -23,7 +25,7 @@ RSpec.describe IndexInfo, vcr: VCR_OPTS do
       /^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z)?$/
     }
 
-    context "elasticsearch and dynamodb records both exist" do
+    context "OpenSearch and dynamodb records both exist" do
       it "gets the info" do
         TempAwsEnv.make do |env|
           env.create_dynamodb_table
@@ -39,7 +41,7 @@ RSpec.describe IndexInfo, vcr: VCR_OPTS do
       end
     end
 
-    context "elasticsearch exists but not a dynamodb" do
+    context "OpenSearch exists but not a dynamodb" do
       it "gets the info" do
         TempAwsEnv.make do |env|
           env.create_dynamodb_table

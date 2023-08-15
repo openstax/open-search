@@ -1,14 +1,12 @@
 require 'rails_helper'
 require 'vcr_helper'
 
-amazon_api_header_matcher = lambda do |request_1, request_2|
-  request_1.headers["X-Amz-Target"] == request_2.headers["X-Amz-Target"]
-end
-
 # A BookIndexState model is the ORM to the AWS dynamo db.  This table records
 # book indexing jobs enqueuing, starting, and finishing.
-RSpec.describe BookIndexState, vcr: VCR_OPTS.merge!({match_requests_on: [:method, :uri, amazon_api_header_matcher]}) do
-  let(:book_id) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
+RSpec.describe BookIndexState, vcr: VCR_OPTS do
+  let(:pipeline) { '20230620.181811' }
+  let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
+  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:indexing_strategy_name) { 'I1' }
 
   subject(:book_index_state) { described_class }
@@ -18,8 +16,8 @@ RSpec.describe BookIndexState, vcr: VCR_OPTS.merge!({match_requests_on: [:method
       TempAwsEnv.make do |env|
         env.create_dynamodb_table
 
-        book = book_index_state.create(book_version_id: book_id, indexing_strategy_name: indexing_strategy_name)
-        created_book_arel = BookIndexState.where(book_version_id: book_id)
+        book = book_index_state.create(book_version_id: book_version_id, indexing_strategy_name: indexing_strategy_name)
+        created_book_arel = BookIndexState.where(book_version_id: book_version_id)
         expect(created_book_arel.count).to eq 1
 
         book_status_log = book.status_log
@@ -67,7 +65,7 @@ RSpec.describe BookIndexState, vcr: VCR_OPTS.merge!({match_requests_on: [:method
 
   describe "#mark_queued_for_deletion" do
     let(:live_indexing) do
-      book_index_state.create(book_version_id: book_id, indexing_strategy_name: indexing_strategy_name)
+      book_index_state.create(book_version_id: book_version_id, indexing_strategy_name: indexing_strategy_name)
     end
 
     it 'updates the document to be deleted' do
@@ -83,7 +81,7 @@ RSpec.describe BookIndexState, vcr: VCR_OPTS.merge!({match_requests_on: [:method
 
   describe "#mark_created" do
     let(:live_indexing) do
-      book_index_state.create(book_version_id: book_id, indexing_strategy_name: indexing_strategy_name)
+      book_index_state.create(book_version_id: book_version_id, indexing_strategy_name: indexing_strategy_name)
     end
 
     it 'updates the document to created and updates the status log' do

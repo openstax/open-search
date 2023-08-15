@@ -1,7 +1,7 @@
 class DoneIndexJob < BaseIndexJob
   attr_reader :status,
               :ran_job,
-              :es_stats,
+              :os_stats,
               :time_took,
               :message,
               :book_version_id,
@@ -22,7 +22,7 @@ class DoneIndexJob < BaseIndexJob
     ran_job = ran_job_type.build_object(params: ran_job_params)
 
     new(status: params[:status],
-        es_stats: params[:es_stats],
+        os_stats: params[:os_stats],
         time_took: params[:time_took],
         message: params[:message],
         cleanup_after_call: cleanup_after_call,
@@ -30,14 +30,14 @@ class DoneIndexJob < BaseIndexJob
   end
 
   def initialize(status: STATUS_SUCCESSFUL,
-                 es_stats: nil,
+                 os_stats: nil,
                  time_took: nil,
                  ran_job: nil,
                  message: nil,
                  cleanup_after_call: nil)
     super(cleanup_after_call: cleanup_after_call)
     @status = status
-    @es_stats = es_stats
+    @os_stats = os_stats
     @time_took = time_took
     @message = message
     @ran_job = ran_job
@@ -61,7 +61,7 @@ class DoneIndexJob < BaseIndexJob
     {
       type: type,
       status: status,
-      es_stats: es_stats,
+      os_stats: os_stats,
       time_took: time_took,
       ran_job: ran_job,
       message: message

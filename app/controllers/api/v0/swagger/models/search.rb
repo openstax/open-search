@@ -76,22 +76,22 @@ module Api::V0::Swagger::Models::Search
     property :overall_took do
       key :type, :integer
       key :readOnly, true
-      key :description, "How long the request took inside Open-Search, including ES 'took' (ms)"
+      key :description, "How long the request took inside OpenSearch, including 'took' (ms)"
     end
     property :took do
       key :type, :integer
       key :readOnly, true
-      key :description, "How long the request took inside Elasticsearch (ms)"
+      key :description, "How long the request took inside OpenSearch (ms)"
     end
     property :timed_out do
       key :type, :boolean
       key :readOnly, true
-      key :description, "Whether the request in Elasticsearch timed out"
+      key :description, "Whether the request in OpenSearch timed out"
     end
     property :_shards do
       key :type, :object
       key :readOnly, true
-      key :description, "Shard stats from Elasticsearch"
+      key :description, "Shard stats from OpenSearch"
     end
     property :hits do
       key :required, [:total, :hits]
@@ -108,7 +108,7 @@ module Api::V0::Swagger::Models::Search
       end
       property :hits do
         key :type, :array
-        key :description, "Elasticsearch search hits"
+        key :description, "OpenSearch search hits"
         items do
           key :'$ref', :SearchResultHit
         end

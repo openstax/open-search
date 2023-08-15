@@ -17,10 +17,10 @@ module Books::IndexingStrategies::I1
     end
 
     def index_metadata
-      @index_meta ||= begin
-        metadata_hashes = [settings, mappings]
-        metadata_hashes.inject({}) { |aggregate, hash| aggregate.merge! hash }
-      end
+      @index_meta ||= {
+        settings: settings,
+        mappings: mappings
+      }
     end
 
     def index(book:, index_name:)
@@ -39,9 +39,7 @@ module Books::IndexingStrategies::I1
 
     def index_document(document:, index_name:)
       begin
-        OsElasticsearchClient.instance.index(index: index_name,
-                                             type:  document.type,
-                                             body:  document.body)
+        OxOpenSearchClient.instance.index(index: index_name, body:  document.body)
       rescue ElementIdMissing => ex
         Raven.capture_message(ex.message, :extra => element.to_json)
         log_error(ex)
@@ -50,42 +48,40 @@ module Books::IndexingStrategies::I1
 
     def settings
       {
-        settings: {
-          index: {
-            number_of_shards: NUM_SHARDS,
-            number_of_replicas: NUM_REPLICAS,
-            search: {
-              slowlog: {
-                threshold: {
-                  query: {
-                    warn: '10s'
-                  },
-                  fetch: {
-                    warn: '1s'
-                  }
+        index: {
+          number_of_shards: NUM_SHARDS,
+          number_of_replicas: NUM_REPLICAS,
+          search: {
+            slowlog: {
+              threshold: {
+                query: {
+                  warn: '10s'
+                },
+                fetch: {
+                  warn: '1s'
                 }
               }
             }
+          }
+        },
+        analysis: {
+          analyzer: {
+            default: {
+              tokenizer: "standard",
+              char_filter: [
+                "quotes"
+              ],
+              filter: [
+                "lowercase"
+              ]
+            }
           },
-          analysis: {
-            analyzer: {
-              default: {
-                tokenizer: "standard",
-                char_filter: [
-                  "quotes"
-                ],
-                filter: [
-                  "lowercase"
-                ]
-              }
-            },
-            char_filter: {
-              quotes: {
-                mappings: [
-                  "’=>'",
-                ],
-                type: "mapping"
-              }
+          char_filter: {
+            quotes: {
+              mappings: [
+                "’=>'",
+              ],
+              type: "mapping"
             }
           }
         }
@@ -93,7 +89,7 @@ module Books::IndexingStrategies::I1
     end
 
     def mappings
-      { mappings: {} }.merge(PageElementDocument.mapping)
+      { properties: PageElementDocument.mapping }
     end
   end
 end

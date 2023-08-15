@@ -7,7 +7,7 @@ module Books::IndexingStrategies::I1
 
   # A PageElementDocument is the index document structure.
   #
-  # Note: ElasticSearch is standardizing to the use of one type per index.
+  # Note: one type per index.
   class PageElementDocument
     attr_reader :element, :element_type, :element_id, :page_position, :page_id
 
@@ -15,17 +15,13 @@ module Books::IndexingStrategies::I1
 
     def self.mapping
       {
-        page_element: {
-          properties: {
-            element_type: { type: 'text' },
-            element_id: { type: 'text' },
-            page_id: { type: 'text' },
-            page_position: { type: 'integer' },
-            title: { type: 'text' },
-            visible_content: { type: 'text' },
-            hidden_content: { type: 'text' }
-          }
-        }
+        element_type: { type: 'text' },
+        element_id: { type: 'text' },
+        page_id: { type: 'text' },
+        page_position: { type: 'integer' },
+        title: { type: 'text' },
+        visible_content: { type: 'text' },
+        hidden_content: { type: 'text' }
       }
     end
 

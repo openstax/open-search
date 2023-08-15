@@ -1,5 +1,5 @@
 # Use this (testing) code with caution: it uses a lot of memory
-# Note for future: refactor to random content from elasticsearch instead
+# Note for future: refactor to random content from OpenSearch instead
 class LoadTestingUrlsWriter
   LOAD_URLS_FILE_NAME = "load_urls.txt"
 

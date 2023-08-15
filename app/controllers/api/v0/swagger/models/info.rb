@@ -17,7 +17,7 @@ module Api::V0::Swagger::Models::Info
     property :created_at do
       key :type, :string
       key :readOnly, true
-      key :description, "The (elasticsearch) created_at time. Originates in  ISO 8601 format."
+      key :description, "The (OpenSearch) created_at time. Originates in  ISO 8601 format."
     end
     property :state do
       key :type, :string
@@ -36,7 +36,7 @@ module Api::V0::Swagger::Models::Info
     property :es_version do
       key :type, :string
       key :readOnly, true
-      key :description, "Current version of Elasticsearch"
+      key :description, "Current version of OpenSearch"
     end
     property :book_indexes do
       key :type, :array

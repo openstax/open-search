@@ -44,7 +44,7 @@ class Api::V0::InfoController < Api::V0::BaseController
     end
   end
   
-  def es_info
+  def os_info
     started_at = Time.now
 
     info_results = IndexInfo.new.call

@@ -53,13 +53,17 @@ VCR.configure do |c|
       interaction.response.headers["X-Amz-Crc32"] = [Zlib.crc32(interaction.response.body).to_s]
     end
   end
+end
 
+amazon_api_header_matcher = lambda do |request_1, request_2|
+  request_1.headers["X-Amz-Target"] == request_2.headers["X-Amz-Target"]
 end
 
 VCR_OPTS = {
   # This should default to :none
   record: ENV['VCR_OPTS_RECORD'].try!(:to_sym) || :none,
-  allow_unused_http_interactions: false
+  allow_unused_http_interactions: false,
+  match_requests_on: [:method, :uri, amazon_api_header_matcher]
 }
 
 # VCR can update content length headers to solve various problems caused
@@ -81,3 +85,6 @@ class VCR::HTTPInteraction::HookAware
     response.update_content_length_header
   end
 end
+
+# Initialize OxOpenSearchClient.instance using a separate cassette
+VCR.use_cassette('OxOpenSearchClient/instance', VCR_OPTS) { OxOpenSearchClient.instance.info }

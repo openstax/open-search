@@ -11,7 +11,7 @@ class Api::V0::SearchController < Api::V0::BaseController
     end
   end
 
-  rescue_from_unless_local Elasticsearch::Transport::Transport::Errors::NotFound do |_|
+  rescue_from_unless_local OpenSearch::Transport::Transport::Errors::NotFound do |_|
     render json: 'The specified resource was not found', status: 404
   end
 
@@ -65,6 +65,8 @@ class Api::V0::SearchController < Api::V0::BaseController
     end
   end
 
+  PERMITTED_SEARCH_OPTIONS = []
+
   def search
     started_at = Time.now
 
@@ -72,13 +74,18 @@ class Api::V0::SearchController < Api::V0::BaseController
       book_version_ids: params.require(:books).split(','),
       index_strategy: params.require(:index_strategy),
       search_strategy: params.require(:search_strategy),
-      options: params # passthrough for other options the search strategy may need
+      # V0 API assumes search result counts are always exact
+      options: params.permit(*PERMITTED_SEARCH_OPTIONS).merge(track_total_hits: true)
     )
 
     raw_results = search_strategy_instance.search(query_string: params[:q])
 
     # #bind now checks for the presence of overall_took so we have to set it before calling it
     raw_results['overall_took'] = ((Time.now - started_at)*1000).round
+
+    # translate total from OpenSearch object format back to integer for our V0 API
+    hits = raw_results['hits']
+    hits['total'] = hits['total']['value'] if hits.respond_to?(:[]) && hits['total'].respond_to?(:[])
 
     binding, error = bind(raw_results.with_indifferent_access, Api::V0::Bindings::SearchResult)
 

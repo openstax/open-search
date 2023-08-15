@@ -1,18 +1,20 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: http://localhost:9200/14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1/_search
+    method: post
+    uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1/_search
     body:
       encoding: UTF-8
-      string: '{"size":150,"query":{"simple_query_string":{"fields":["title","visible_content"],"query":"defnotthereforsure","flags":"WHITESPACE|PHRASE","minimum_should_match":"100%","default_operator":"AND"}},"_source":["element_type","element_id","page_id","page_position"],"highlight":{"number_of_fragments":20,"pre_tags":["\u003cstrong\u003e"],"post_tags":["\u003c/strong\u003e"],"fields":{"title":{},"visible_content":{}}}}'
+      string: '{"size":1000,"query":{"simple_query_string":{"fields":["title","visible_content"],"query":"defnotthereforsure","flags":"WHITESPACE|PHRASE","minimum_should_match":"100%","default_operator":"AND"}},"_source":["element_type","element_id","page_id","page_position"],"highlight":{"number_of_fragments":20,"pre_tags":["\u003cstrong\u003e"],"post_tags":["\u003c/strong\u003e"],"fields":{"title":{},"visible_content":{}}}}'
     headers:
       User-Agent:
-      - Faraday v0.15.3
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
       Content-Type:
       - application/json
-      Expect:
-      - ''
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
   response:
     status:
       code: 200
@@ -21,10 +23,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '134'
+      - '160'
     body:
-      encoding: UTF-8
-      string: '{"took":2,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":0,"max_score":null,"hits":[]}}'
-    http_version: 
-  recorded_at: Tue, 13 Aug 2019 00:11:39 GMT
-recorded_with: VCR 4.0.0
+      encoding: ASCII-8BIT
+      string: '{"took":0,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":0,"relation":"eq"},"max_score":null,"hits":[]}}'
+  recorded_at: Sat, 05 Aug 2023 06:34:42 GMT
+recorded_with: VCR 6.1.0

@@ -2,7 +2,9 @@ require 'rails_helper'
 require 'vcr_helper'
 
 RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS do
-  let(:book_version_id) { '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1' }
+  let(:pipeline) { '20230620.181811' }
+  let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
+  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:index) { Books::Index.new(book_version_id: book_version_id) }
 
   before(:each) do
@@ -23,9 +25,9 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
       expect(json[:overall_took]).not_to be_nil
       expect(json[:hits][:total]).to eq 1
       expect(json[:hits][:hits][0][:_source]).to include(
-        page_id: "2c60e072-7665-49b9-a2c9-2736b72b533c@8",
+        page_id: "2c60e072-7665-49b9-a2c9-2736b72b533c@",
         element_type: "paragraph",
-        page_position: 3
+        page_position: 4
       )
       expect(json[:hits][:hits][0][:highlight][:visible_content][0]).to start_with "<strong>Recall</strong>"
     end
@@ -37,13 +39,13 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
 
       json = json_response
       expect(json[:overall_took]).not_to be_nil
-      expect(json[:hits][:total]).to eq 25
+      expect(json[:hits][:total]).to eq 37
       expect(json[:hits][:hits][0][:_source]).to include(
-        page_id: "ab65fdf7-9137-48d6-b949-5da675cda5e4@16",
-        element_type: "paragraph",
-        page_position: 9
+        page_id: "6d66e593-841c-55bc-8036-fedc5a6972f9@f1ce9ea",
+        element_type: "key_term",
+        page_position: 23
       )
-      expect(json[:hits][:hits][0][:highlight][:visible_content][0]).to eq "The glycocalyces found in a <strong>person’s</strong> body are products of that <strong>person’s</strong> genetic makeup."
+      expect(json[:hits][:hits][0][:highlight][:visible_content][0]).to eq "ratio of solutes to a volume of solvent in the plasma; plasma osmolality reflects a <strong>person’s</strong> state of"
     end
 
     context "client errors" do
@@ -75,7 +77,7 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
     end
 
     context 'server errors' do
-      it "500's for invalid response from Elasticsearch" do
+      it "500's for invalid response from OpenSearch" do
         expect_any_instance_of(Books::SearchStrategies::S1::Strategy).to(
           receive(:search).and_return(
             # This is the valid response with hits: { total: 1 }, removed to make it invalid
@@ -87,15 +89,15 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
                 max_score: 9.082203,
                 hits: [
                   {
-                    _index: '14fb4ad7-39a1-4eee-ab6e-3ef2482e3e22@15.1_i1',
+                    _index: '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1',
                     _type: 'page_element',
                     _id: 'bskMq2wB2NuZq8GSEI5w',
                     _score: 9.082203,
                     _source: {
-                      page_id: '2c60e072-7665-49b9-a2c9-2736b72b533c@8',
+                      page_id: '2c60e072-7665-49b9-a2c9-2736b72b533c@',
                       element_id: 'fs-id2113058',
                       element_type: 'paragraph',
-                      page_position: 3
+                      page_position: 4
                     },
                     highlight: {
                       visible_content: [

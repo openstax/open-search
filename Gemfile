@@ -35,11 +35,9 @@ gem "yard", ">= 0.9.20"
 # Access AWS dynamo db
 gem 'dynamoid'
 
-# Access elasticsearch (with signed requests)
-gem "elasticsearch", '~> 6.1.0'
-gem 'typhoeus'
-gem 'faraday_middleware'
-gem 'faraday_middleware-aws-sigv4'
+# Access OpenSearch (with signed requests)
+gem 'opensearch-ruby'
+gem 'opensearch-aws-sigv4'
 
 gem "whenever"
 
@@ -81,7 +79,7 @@ group :development, :test do
 
   gem 'whenever-test'
 
-  gem 'aws-sdk-elasticsearchservice'
+  gem 'aws-sdk-opensearchservice'
   gem 'aws-sdk-autoscaling'
 
   # For getting information about AWS users in tests

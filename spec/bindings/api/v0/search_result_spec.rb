@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V0::Bindings::SearchResult do
 
-  let(:raw_es_results_1) {
+  let(:raw_os_results_1) {
     {
       took: 4,
       timed_out: false,
@@ -17,12 +17,12 @@ RSpec.describe Api::V0::Bindings::SearchResult do
         max_score: 11.151909,
         hits: [
           {
-            _index: "031da8d3-b525-429c-80cf-6c8ed997733a@14.4_i1",
+            _index: "a31df062-930a-4f46-8953-605711e6d204@b637022_i1",
             _type: "page_element",
             _id: "1c8yCWsBijBxrdvYQcsE",
             _score: 11.151909,
             _source: {
-              page_id: "4a4407ed-0969-4018-806f-6ea728d6efb4@10",
+              page_id: "4a4407ed-0969-4018-806f-6ea728d6efb4@",
               element_type: "paragraph",
               page_position: 37
             },
@@ -38,7 +38,7 @@ RSpec.describe Api::V0::Bindings::SearchResult do
   }
 
   it "works" do
-    bound = described_class.new.build_from_hash(raw_es_results_1)
+    bound = described_class.new.build_from_hash(raw_os_results_1)
 
     expect(bound.hits).to be_a Api::V0::Bindings::SearchResultHits
     expect(bound.hits.hits[0]._source.element_type).to eq "paragraph"

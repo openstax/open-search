@@ -3,7 +3,7 @@ require 'vcr_helper'
 
 require 'rex/releases'
 
-RSpec.describe OsElasticsearchClient, vcr: VCR_OPTS do
+RSpec.describe OxOpenSearchClient, vcr: VCR_OPTS do
 
   before {
     # Even in VCR playback, the code freaks out if these aren't set (in
@@ -12,11 +12,11 @@ RSpec.describe OsElasticsearchClient, vcr: VCR_OPTS do
     ENV['AWS_SECRET_ACCESS_KEY'] ||= 'bar'
   }
 
-  let(:fake_es_domain_name) { "spec-esdomain-#{SecureRandom.hex(7)}" }
+  let(:fake_os_domain_name) { "spec-osdomain-#{SecureRandom.hex(7)}" }
 
-  it 'can access a restricted AWS ES domain using signed requests' do
+  it 'can access a restricted AWS OpenSearch domain using signed requests' do
     TempAwsEnv.make do |env|
-      domain_status = env.create_elasticsearch_domain(name: fake_es_domain_name)
+      domain_status = env.create_domain(name: fake_os_domain_name)
 
       signing_client = described_class.new(
         url: "https://#{domain_status.endpoint}",
@@ -33,7 +33,7 @@ RSpec.describe OsElasticsearchClient, vcr: VCR_OPTS do
 
       expect {
         non_signing_client.search q: "test"
-      }.to raise_error(Elasticsearch::Transport::Transport::Errors::Forbidden)
+      }.to raise_error(OpenSearch::Transport::Transport::Errors::Forbidden)
     end
   end
 
