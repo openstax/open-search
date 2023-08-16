@@ -23,7 +23,7 @@ class EnqueueIndexJobs
       end
     end
 
-    _, unneeded_book_indexings = index_states.partition(&:in_demand)
+    unneeded_book_indexings = index_states.reject(&:in_demand)
 
     unneeded_book_indexings.each do |unneeded_book_indexing|
       enqueue_delete_index_job(unneeded_book_indexing)
@@ -44,7 +44,7 @@ class EnqueueIndexJobs
   end
 
   def index_states
-    @index_states ||= BookIndexState.live
+    @index_states ||= BookIndexState.live.to_a
   end
 
   def find_book_indexing(book_id, indexing_strategy_name)
