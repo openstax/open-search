@@ -78,10 +78,9 @@ module Books::IndexingStrategies::I1
           },
           char_filter: {
             quotes: {
-              mappings: [
-                "’=>'",
-              ],
-              type: "mapping"
+              type: "pattern_replace",
+              pattern: "’",
+              replacement: "'"
             }
           }
         }
