@@ -24,7 +24,7 @@ module Books::IndexingStrategies::I1
     end
 
     def index(book:, index_name:)
-      documents = I1::BookDocs.new(book: book).docs
+      documents = Books::IndexingStrategies::I1::BookDocs.new(book: book).docs
 
       log_info("Creating index #{index_name} with #{documents.count} documents")
       documents.each {|document| index_document(document: document, index_name: index_name) }
@@ -32,7 +32,7 @@ module Books::IndexingStrategies::I1
     end
 
     def total_number_of_documents_to_index(book:)
-      I1::BookDocs.new(book: book).docs.count
+      Books::IndexingStrategies::I1::BookDocs.new(book: book).docs.count
     end
 
     private

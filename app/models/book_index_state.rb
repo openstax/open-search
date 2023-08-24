@@ -53,7 +53,7 @@ class BookIndexState
     STATE_HTTP_ERROR = "http error",
     STATE_CREATED = "created"
   ]
-  VALID_INDEXING_STRATEGY_NAMES = %w(I1)
+  VALID_INDEXING_STRATEGY_NAMES = %w(I1 I2 I3)
 
   validates :state, inclusion: { in: STATES }
   validates :indexing_strategy_name, inclusion: { in: VALID_INDEXING_STRATEGY_NAMES }

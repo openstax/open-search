@@ -60,7 +60,7 @@ class EnqueueIndexJobs
                              indexing_strategy_name: indexing_strategy_name)
     @todo_jobs_queue.write(job)
 
-    BookIndexState.create(book_version_id:  book_id,
+    BookIndexState.create(book_version_id: book_id,
                           indexing_strategy_name: indexing_strategy_name)
 
     @new_create_index_jobs += 1
