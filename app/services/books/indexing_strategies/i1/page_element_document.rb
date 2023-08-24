@@ -6,8 +6,6 @@ module Books::IndexingStrategies::I1
   end
 
   # A PageElementDocument is the index document structure.
-  #
-  # Note: one type per index.
   class PageElementDocument
     attr_reader :element, :element_type, :element_id, :page_position, :page_id
 

@@ -1,12 +1,12 @@
-module Books::IndexingStrategies::I1
+module Books::IndexingStrategies::I2
   # The indexing strategy is the encapsulation for the index's structure and
   # inspect (including index settings & mappings).
   #
-  # The strategy also declares what page element objects it wants indexed.
+  # The strategy also declares what book objects it wants indexed.
   class Strategy
-    prefix_logger "Books::IndexingStrategies::I1::Strategy"
+    prefix_logger 'Books::IndexingStrategies::I2::Strategy'
 
-    SHORT_NAME = "i1"
+    SHORT_NAME = 'i2'
     NUM_SHARDS = 1
     NUM_REPLICAS = 1
 
@@ -24,7 +24,7 @@ module Books::IndexingStrategies::I1
     end
 
     def index(book:, index_name:)
-      documents = I1::BookDocs.new(book: book).docs
+      documents = BookDocument.new(book: book).docs
 
       log_info("Creating index #{index_name} with #{documents.count} documents")
       documents.each {|document| index_document(document: document, index_name: index_name) }
@@ -32,14 +32,14 @@ module Books::IndexingStrategies::I1
     end
 
     def total_number_of_documents_to_index(book:)
-      I1::BookDocs.new(book: book).docs.count
+      BookDocument.new(book: book).docs.count
     end
 
     private
 
     def index_document(document:, index_name:)
       begin
-        OxOpenSearchClient.instance.index(index: index_name, body: document.body)
+        OxOpenSearchClient.instance.index(index: index_name, body: document)
       rescue ElementIdMissing => ex
         Raven.capture_message(ex.message, :extra => element.to_json)
         log_error(ex)
@@ -67,12 +67,12 @@ module Books::IndexingStrategies::I1
         analysis: {
           analyzer: {
             default: {
-              tokenizer: "standard",
+              tokenizer: 'standard',
               char_filter: [
-                "quotes"
+                'quotes'
               ],
               filter: [
-                "lowercase"
+                'lowercase'
               ]
             }
           },
@@ -81,7 +81,7 @@ module Books::IndexingStrategies::I1
               mappings: [
                 "’=>'",
               ],
-              type: "mapping"
+              type: 'mapping'
             }
           }
         }
@@ -89,7 +89,7 @@ module Books::IndexingStrategies::I1
     end
 
     def mappings
-      { properties: PageElementDocument.mapping }
+      { dynamic: false, properties: BookDocument.mapping }
     end
   end
 end

@@ -1,12 +1,12 @@
-module Books::IndexingStrategies::I1
+module Books::IndexingStrategies::I3
   # The indexing strategy is the encapsulation for the index's structure and
   # inspect (including index settings & mappings).
   #
   # The strategy also declares what page element objects it wants indexed.
   class Strategy
-    prefix_logger "Books::IndexingStrategies::I1::Strategy"
+    prefix_logger 'Books::IndexingStrategies::I3::Strategy'
 
-    SHORT_NAME = "i1"
+    SHORT_NAME = 'i3'
     NUM_SHARDS = 1
     NUM_REPLICAS = 1
 
@@ -24,7 +24,7 @@ module Books::IndexingStrategies::I1
     end
 
     def index(book:, index_name:)
-      documents = I1::BookDocs.new(book: book).docs
+      documents = I3::BookDocs.new(book: book).docs
 
       log_info("Creating index #{index_name} with #{documents.count} documents")
       documents.each {|document| index_document(document: document, index_name: index_name) }
@@ -32,7 +32,7 @@ module Books::IndexingStrategies::I1
     end
 
     def total_number_of_documents_to_index(book:)
-      I1::BookDocs.new(book: book).docs.count
+      I3::BookDocs.new(book: book).docs.count
     end
 
     private
@@ -89,7 +89,7 @@ module Books::IndexingStrategies::I1
     end
 
     def mappings
-      { properties: PageElementDocument.mapping }
+      { dynamic: false, properties: PageDocument.mapping }
     end
   end
 end

@@ -1,4 +1,5 @@
 ACTIVE_INDEXING_STRATEGY_NAMES = [
-  "I1"
+  "I1",
+  "I2",
+  "I3"
 ]
-
