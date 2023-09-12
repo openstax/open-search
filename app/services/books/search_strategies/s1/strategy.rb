@@ -2,7 +2,9 @@ module Books::SearchStrategies::S1
   class Strategy < Books::SearchStrategies::Base
 
     SUPPORTED_INDEX_STRATEGIES = [
-      Books::IndexingStrategies::I1::Strategy
+      Books::IndexingStrategies::I1::Strategy,
+      Books::IndexingStrategies::I2::Strategy,
+      Books::IndexingStrategies::I3::Strategy
     ].map(&:short_name)
 
     MAX_SEARCH_RESULTS = 1000
@@ -45,7 +47,7 @@ module Books::SearchStrategies::S1
         size: MAX_SEARCH_RESULTS,
         query: {
           simple_query_string: {
-            fields: %w(title visible_content),
+            fields: %w(title titleParts contextTitle visible_content),
             query: fuzzify(query_string),
             flags: "FUZZY|PHRASE|WHITESPACE",
             minimum_should_match: "100%",
@@ -53,13 +55,14 @@ module Books::SearchStrategies::S1
           }
         },
         track_total_hits: !!@options[:track_total_hits],
-        _source: %w(element_type element_id page_id page_position),
         highlight: {
           number_of_fragments: 20,
           pre_tags: ["<strong>"],
           post_tags: ["</strong>"],
           fields: {
             title: {},
+            titleParts: {},
+            contextTitle: {},
             visible_content: {}
           }
         }

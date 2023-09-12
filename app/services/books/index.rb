@@ -25,8 +25,7 @@ module Books
       raw_name.gsub(BAD_INDEX_NAME_CHARACTERS, '__')
     end
 
-    def initialize(book_version_id: nil,
-                   indexing_strategy: DEFAULT_INDEXING_STRATEGY)
+    def initialize(book_version_id: nil, indexing_strategy: DEFAULT_INDEXING_STRATEGY)
       @book_version_id = book_version_id
       @indexing_strategy = indexing_strategy.new
     end

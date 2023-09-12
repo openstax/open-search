@@ -5,15 +5,15 @@ RSpec.describe Books::SearchStrategies::Factory do
 
   subject(:factory) {
     described_class.build(book_version_ids: book_version_ids,
-                          index_strategy: index_strategy,
+                          index_strategies: index_strategies,
                           search_strategy: search_strategy)
   }
 
   describe ".build" do
-    let(:index_strategy) { 'i1' }
-    let(:search_strategy) { 's1' }
+    let(:index_strategies) { %w(i1 i2 i3) }
+    let(:search_strategy)  { 's1' }
 
-    it 'pulls out the caption from the figure' do
+    it 'creates the strategy' do
       expect(factory).to be_kind_of(Books::SearchStrategies::S1::Strategy)
     end
 
@@ -26,7 +26,7 @@ RSpec.describe Books::SearchStrategies::Factory do
     end
 
     context 'incompatible strategy' do
-      let(:index_strategy) { 'i_foo' }
+      let(:index_strategies) { %w(i_foo) }
 
       it 'pulls out the caption from the figure' do
         expect { factory }.to raise_error(Books::SearchStrategies::IncompatibleStrategies)
