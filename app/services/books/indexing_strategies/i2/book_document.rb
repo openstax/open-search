@@ -29,9 +29,16 @@ module Books::IndexingStrategies::I2
     end
 
     def body
-      JSON.parse(
-        Net::HTTP.get URI("https://#{orn_domain}/orn/book/#{book.uuid}@#{book.version}:#{book.pipeline}.json")
-      )
+      uri = URI("https://#{orn_domain}/orn/book/#{book.uuid}@#{book.version}:#{book.pipeline}.json")
+
+      json = begin
+        Net::HTTP.get uri
+      rescue
+        # Retry the request one time
+        Net::HTTP.get uri
+      end
+
+      JSON.parse json
     end
 
     def docs

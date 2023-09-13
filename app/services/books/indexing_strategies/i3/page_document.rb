@@ -20,11 +20,16 @@ module Books::IndexingStrategies::I3
     end
 
     def body
-      JSON.parse(
-        Net::HTTP.get(
-          URI("https://#{orn_domain}/orn/book:page/#{book.uuid}@#{book.version}:#{book.pipeline}:#{page.id.split('@', 2).first}.json")
-        )
-      )
+      uri = URI("https://#{orn_domain}/orn/book:page/#{book.uuid}@#{book.version}:#{book.pipeline}:#{page.id.split('@', 2).first}.json")
+
+      json = begin
+        Net::HTTP.get uri
+      rescue
+        # Retry the request one time
+        Net::HTTP.get uri
+      end
+
+      JSON.parse json
     end
   end
 end
