@@ -38,12 +38,7 @@ module Books::IndexingStrategies::I3
     private
 
     def index_document(document:, index_name:)
-      begin
-        OxOpenSearchClient.instance.index(index: index_name, body: document.body)
-      rescue ElementIdMissing => ex
-        Raven.capture_message(ex.message, :extra => element.to_json)
-        log_error(ex)
-      end
+      OxOpenSearchClient.instance.index(index: index_name, id: document.body['orn'], body: document.body)
     end
 
     def settings

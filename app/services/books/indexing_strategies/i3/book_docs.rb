@@ -9,7 +9,7 @@ module Books::IndexingStrategies::I3
         next if page.preface? || page.index?
 
         PageDocument.new page: page
-      end
+      end.compact
     end
   end
 end

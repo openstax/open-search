@@ -1,0 +1,33 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1,20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i2,20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i3/_search
+    body:
+      encoding: UTF-8
+      string: '{"size":1000,"query":{"simple_query_string":{"fields":["title","titleParts","contextTitle","visible_content"],"query":"\"Recall
+        that an atom\"","flags":"WHITESPACE|PHRASE","minimum_should_match":"100%","default_operator":"AND"}},"track_total_hits":true,"highlight":{"number_of_fragments":20,"pre_tags":["\u003cstrong\u003e"],"post_tags":["\u003c/strong\u003e"],"fields":{"title":{},"titleParts":{},"contextTitle":{},"visible_content":{}}}}'
+    headers:
+      User-Agent:
+      - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '1481'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ0b29rIjo3MDksInRpbWVkX291dCI6ZmFsc2UsIl9zaGFyZHMiOnsidG90YWwiOjMsInN1Y2Nlc3NmdWwiOjMsInNraXBwZWQiOjAsImZhaWxlZCI6MH0sImhpdHMiOnsidG90YWwiOnsidmFsdWUiOjEsInJlbGF0aW9uIjoiZXEifSwibWF4X3Njb3JlIjo4LjE0MzcyOCwiaGl0cyI6W3siX2luZGV4IjoiMjAyMzA2MjAuMTgxODExX180ZmQ5OTQ1OC02ZmRmLTQ5YmMtODY4OC1hNmRjMTdhMTI2OGRAZjFjZTllYV9pMSIsIl9pZCI6IlZEazZqNG9CVkhyY3V6V0QwQThGIiwiX3Njb3JlIjo4LjE0MzcyOCwiX3NvdXJjZSI6eyJlbGVtZW50X3R5cGUiOiJwYXJhZ3JhcGgiLCJlbGVtZW50X2lkIjoiZnMtaWQyMTEzMDU4IiwicGFnZV9pZCI6IjJjNjBlMDcyLTc2NjUtNDliOS1hMmM5LTI3MzZiNzJiNTMzY0AiLCJwYWdlX3Bvc2l0aW9uIjo0LCJ0aXRsZSI6bnVsbCwidmlzaWJsZV9jb250ZW50IjoiUmVjYWxsIHRoYXQgYW4gYXRvbSB0eXBpY2FsbHkgaGFzIHRoZSBzYW1lIG51bWJlciBvZiBwb3NpdGl2ZWx5IGNoYXJnZWQgcHJvdG9ucyBhbmQgbmVnYXRpdmVseSBjaGFyZ2VkIGVsZWN0cm9ucy4gQXMgbG9uZyBhcyB0aGlzIHNpdHVhdGlvbiByZW1haW5zLCB0aGUgYXRvbSBpcyBlbGVjdHJpY2FsbHkgbmV1dHJhbC4gQnV0IHdoZW4gYW4gYXRvbSBwYXJ0aWNpcGF0ZXMgaW4gYSBjaGVtaWNhbCByZWFjdGlvbiB0aGF0IHJlc3VsdHMgaW4gdGhlIGRvbmF0aW9uIG9yIGFjY2VwdGFuY2Ugb2Ygb25lIG9yIG1vcmUgZWxlY3Ryb25zLCB0aGUgYXRvbSB3aWxsIHRoZW4gYmVjb21lIHBvc2l0aXZlbHkgb3IgbmVnYXRpdmVseSBjaGFyZ2VkLiBUaGlzIGhhcHBlbnMgZnJlcXVlbnRseSBmb3IgbW9zdCBhdG9tcyBpbiBvcmRlciB0byBoYXZlIGEgZnVsbCB2YWxlbmNlIHNoZWxsLCBhcyBkZXNjcmliZWQgcHJldmlvdXNseS4gVGhpcyBjYW4gaGFwcGVuIGVpdGhlciBieSBnYWluaW5nIGVsZWN0cm9ucyB0byBmaWxsIGEgc2hlbGwgdGhhdCBpcyBtb3JlIHRoYW4gaGFsZi1mdWxsLCBvciBieSBnaXZpbmcgYXdheSBlbGVjdHJvbnMgdG8gZW1wdHkgYSBzaGVsbCB0aGF0IGlzIGxlc3MgdGhhbiBoYWxmLWZ1bGwsIHRoZXJlYnkgbGVhdmluZyB0aGUgbmV4dCBzbWFsbGVyIGVsZWN0cm9uIHNoZWxsIGFzIHRoZSBuZXcsIGZ1bGwsIHZhbGVuY2Ugc2hlbGwuIEFuIGF0b20gdGhhdCBoYXMgYW4gZWxlY3RyaWNhbCBjaGFyZ2XigJR3aGV0aGVyIHBvc2l0aXZlIG9yIG5lZ2F0aXZl4oCUaXMgYW4gaW9uLiIsImhpZGRlbl9jb250ZW50IjpudWxsfSwiaGlnaGxpZ2h0Ijp7InZpc2libGVfY29udGVudCI6WyI8c3Ryb25nPlJlY2FsbDwvc3Ryb25nPiA8c3Ryb25nPnRoYXQ8L3N0cm9uZz4gPHN0cm9uZz5hbjwvc3Ryb25nPiA8c3Ryb25nPmF0b208L3N0cm9uZz4gdHlwaWNhbGx5IGhhcyB0aGUgc2FtZSBudW1iZXIgb2YgcG9zaXRpdmVseSBjaGFyZ2VkIHByb3RvbnMgYW5kIG5lZ2F0aXZlbHkgY2hhcmdlZCJdfX1dfX0=
+  recorded_at: Wed, 13 Sep 2023 16:38:45 GMT
+recorded_with: VCR 6.1.0

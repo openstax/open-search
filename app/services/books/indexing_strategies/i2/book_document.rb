@@ -6,7 +6,7 @@ module Books::IndexingStrategies::I2
       {
         titleParts: {
           properties: {
-            title: 'text'
+            title: { type: 'text' }
           }
         }
       }
