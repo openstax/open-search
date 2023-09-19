@@ -22,6 +22,10 @@ module Books::SearchStrategies::S1
 
     protected
 
+    def fuzzify(query_string)
+      query_string.gsub(/~\d*/, '').scan(/[^\s"]+|"[^"]*"/).map { |str| "#{str}~" }.join(' ')
+    end
+
     def search_body(query_string)
       # query_string = single_quotes_to_double(query_string)
 
@@ -30,8 +34,8 @@ module Books::SearchStrategies::S1
         query: {
           simple_query_string: {
             fields: %w(title visible_content),
-            query: query_string,
-            flags: "WHITESPACE|PHRASE",
+            query: fuzzify(query_string),
+            flags: "FUZZY|NEAR|PHRASE|WHITESPACE",
             minimum_should_match: "100%",
             default_operator: "AND"
           }
