@@ -25,7 +25,11 @@ module Books::SearchStrategies::S1
     protected
 
     def fuzzify(query_string)
-      query_string.gsub(/~\d*/, '').scan(/[^\s"]+|"[^"]*"/).map do |str|
+      # 1. Remove ~ and optional suffix from query (to prevent users setting their own fuzziness)
+      # 2. Split into array of unquoted words and quoted phrases
+      # 3. Add fuzziness to unquoted words only
+      # 4. Join array back into a string with spaces
+      query_string.gsub(/~[^\s"]*/, '').scan(/[^\s"]+|"[^"]*"/).map do |str|
         str.start_with?('"') && str.end_with?('"') ? str : "#{str}~#{FUZZINESS}"
       end.join(' ')
     end
