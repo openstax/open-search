@@ -7,6 +7,8 @@ module Books::SearchStrategies::S1
 
     MAX_SEARCH_RESULTS = 1000
 
+    FUZZINESS = 'AUTO'
+
     def self.short_name
       "s1"
     end
@@ -23,7 +25,9 @@ module Books::SearchStrategies::S1
     protected
 
     def fuzzify(query_string)
-      query_string.gsub(/~\d*/, '').scan(/[^\s"]+|"[^"]*"/).map { |str| "#{str}~" }.join(' ')
+      query_string.gsub(/~\d*/, '').scan(/[^\s"]+|"[^"]*"/).map do |str|
+        str.start_with?('"') && str.end_with?('"') ? str : "#{str}~#{FUZZINESS}"
+      end.join(' ')
     end
 
     def search_body(query_string)
@@ -35,7 +39,7 @@ module Books::SearchStrategies::S1
           simple_query_string: {
             fields: %w(title visible_content),
             query: fuzzify(query_string),
-            flags: "FUZZY|NEAR|PHRASE|WHITESPACE",
+            flags: "FUZZY|PHRASE|WHITESPACE",
             minimum_should_match: "100%",
             default_operator: "AND"
           }
