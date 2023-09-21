@@ -29,8 +29,8 @@ module Books::SearchStrategies::S1
       # 2. Split into array of unquoted words and quoted phrases
       # 3. Add fuzziness to unquoted words only
       # 4. Join array back into a string with spaces
-      query_string.gsub(/~[^\s"]*/, '').scan(/[^\s"]+|"[^"]*"/).map do |str|
-        str.start_with?('"') && str.end_with?('"') ? str : "#{str}~#{FUZZINESS}"
+      query_string.gsub(/~[^\s"]*/, '').scan(/[^\s"]+|"[^"]*"?/).map do |str|
+        str.start_with?('"') ? str : "#{str}~#{FUZZINESS}"
       end.join(' ')
     end
 
