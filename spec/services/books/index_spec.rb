@@ -13,10 +13,11 @@ require 'vcr_helper'
 RSpec.describe Books::Index, vcr: VCR_OPTS do
   let(:pipeline) { '20230620.181811' }
   let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
-  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
+  let(:index_id) { "#{pipeline}/#{book_id_at_version}" }
+  let(:indexing_strategy) { Books::SearchStrategies::Factory::INDEXING_CLASSES.first }
   let(:test_book_json) { JSON.parse(file_fixture('mini.json').read) }
 
-  subject(:index) { described_class.new(book_version_id: book_version_id) }
+  subject(:index) { described_class.new(index_id: index_id, indexing_strategy: indexing_strategy) }
 
   def delete_index
     if OxOpenSearchClient.instance.indices.exists? index: index.name
@@ -68,7 +69,7 @@ RSpec.describe Books::Index, vcr: VCR_OPTS do
     let(:physics_url) { "https://openstax.org/apps/archive/#{pipeline}/contents/#{physics_id_at_version}" }
     let(:physics_page_url) { "#{physics_url}:5f0710fe-1028-4ac4-b8fd-b0a6c792c642" }
 
-    subject(:index) { described_class.new(book_version_id: physics_version_id) }
+    subject(:index) { described_class.new(index_id: physics_version_id, indexing_strategy: indexing_strategy) }
 
     before do
       allow(OpenStax::Cnx::V1).to receive(:fetch).with(physics_url).and_return(physics_json)

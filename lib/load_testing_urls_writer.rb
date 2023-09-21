@@ -46,8 +46,8 @@ class LoadTestingUrlsWriter
 
   def books_ids
     @book_ids ||= begin
-      book_states = BookIndexState.created
-      book_states.map(&:book_version_id)
+      book_states = BookIndexState.where(indexing_strategy_name: 'i1').created
+      book_states.map(&:index_id)
     end
   end
 end

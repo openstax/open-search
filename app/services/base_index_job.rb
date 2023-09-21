@@ -1,21 +1,21 @@
 class BaseIndexJob
   attr_reader :indexing_strategy_name,
-              :book_version_id,
+              :index_id,
               :type
 
   def self.build_object(params:, cleanup_after_call: nil)
-    new(book_version_id:        params[:book_version_id],
+    new(index_id:               params[:index_id],
         indexing_strategy_name: params[:indexing_strategy_name],
         cleanup_after_call:     cleanup_after_call)
   end
 
-  def initialize(book_version_id: nil,
+  def initialize(index_id: nil,
                  indexing_strategy_name: nil,
                  cleanup_after_call: nil)
     @cleanup_after_call = cleanup_after_call
 
     @type = self.class.to_s
-    @book_version_id = book_version_id
+    @index_id = index_id
     @indexing_strategy_name = indexing_strategy_name
   end
 
@@ -45,12 +45,14 @@ class BaseIndexJob
   end
 
   def find_associated_book_index_state
-    BookIndexState.where(book_version_id: book_version_id,
-                         indexing_strategy_name: indexing_strategy_name).first
+    BookIndexState.where(index_id: index_id, indexing_strategy_name: indexing_strategy_name).first
   end
 
   def index
-    @index ||= Books::Index.new(book_version_id: @book_version_id)
+    @index ||= Books::Index.new(
+      index_id: @index_id,
+      indexing_strategy: Books::SearchStrategies::Factory::NAMES_TO_INDEXING_CLASSES[indexing_strategy_name.downcase]
+    )
   end
 
   def cleanup_after_call

@@ -4,10 +4,10 @@ require 'vcr_helper'
 RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS do
   let(:pipeline) { '20230620.181811' }
   let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
-  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
+  let(:index_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:indices) do
     Books::SearchStrategies::Factory::INDEXING_CLASSES.map do |indexing_class|
-      Books::Index.new(book_version_id: book_version_id, indexing_strategy: indexing_class)
+      Books::Index.new(index_id: index_id, indexing_strategy: indexing_class)
     end
   end
 
@@ -142,7 +142,7 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
     end
   end
 
-  def query(q: nil, index_strategy: nil, search_strategy: nil, book_id: book_version_id)
+  def query(q: nil, index_strategy: nil, search_strategy: nil, book_id: index_id)
     "q=#{q}&index_strategy=#{index_strategy}&search_strategy=#{search_strategy}&books=#{book_id}"
   end
 end

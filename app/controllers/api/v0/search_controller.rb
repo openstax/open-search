@@ -71,7 +71,7 @@ class Api::V0::SearchController < Api::V0::BaseController
     started_at = Time.now
 
     search_strategy_instance = Books::SearchStrategies::Factory.build(
-      book_version_ids: params.require(:books).split(','),
+      index_ids: params.require(:books).split(','),
       index_strategies: params.require(:index_strategy).split(','),
       search_strategy: params.require(:search_strategy),
       # V0 API assumes search result counts are always exact

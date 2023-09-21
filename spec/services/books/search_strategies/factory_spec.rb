@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Books::SearchStrategies::Factory do
-  let(:book_version_ids) { ['foo@1.1'] }
+  let(:index_ids) { ['foo@1.1'] }
 
   subject(:factory) {
-    described_class.build(book_version_ids: book_version_ids,
+    described_class.build(index_ids: index_ids,
                           index_strategies: index_strategies,
                           search_strategy: search_strategy)
   }

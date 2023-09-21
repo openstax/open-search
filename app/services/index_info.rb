@@ -33,9 +33,7 @@ class IndexInfo
   def dynamo_books
     books = BookIndexState.all
     books.each do |book|
-      index_name = Books::Index.index_name(
-        book_version_id: book.book_version_id,
-        indexing_strategy_short_name: book.indexing_strategy_name)
+      index_name = Books::Index.index_name( index_id: book.index_id, indexing_strategy_short_name: book.indexing_strategy_name)
 
       update_stat(index: index_name,
                   value_sym: :state,

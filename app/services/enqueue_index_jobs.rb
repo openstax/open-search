@@ -47,37 +47,34 @@ class EnqueueIndexJobs
     @index_states ||= BookIndexState.live.to_a
   end
 
-  def find_book_indexing(book_id, indexing_strategy_name)
+  def find_book_indexing(index_id, indexing_strategy_name)
     @fast_lookup_hash ||= index_states.each_with_object({}) do |book_indexing, hash|
-      hash["#{book_indexing.book_version_id}#{book_indexing.indexing_strategy_name}"] = book_indexing
+      hash["#{book_indexing.index_id}#{book_indexing.indexing_strategy_name}"] = book_indexing
     end
 
-    @fast_lookup_hash["#{book_id}#{indexing_strategy_name}"]
+    @fast_lookup_hash["#{index_id}#{indexing_strategy_name}"]
   end
 
-  def enqueue_create_index_job(book_id, indexing_strategy_name)
-    job = CreateIndexJob.new(book_version_id: book_id,
-                             indexing_strategy_name: indexing_strategy_name)
+  def enqueue_create_index_job(index_id, indexing_strategy_name)
+    job = CreateIndexJob.new(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
     @todo_jobs_queue.write(job)
 
-    BookIndexState.create(book_version_id: book_id,
-                          indexing_strategy_name: indexing_strategy_name)
+    BookIndexState.create(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
 
     @new_create_index_jobs += 1
 
-    log_info { "Enqueued creation for '#{book_id} #{indexing_strategy_name}'" }
+    log_info { "Enqueued creation for '#{index_id} #{indexing_strategy_name}'" }
   end
 
   def enqueue_delete_index_job(book_indexing)
-    job = DeleteIndexJob.new(book_version_id: book_indexing.book_version_id,
-                             indexing_strategy_name: book_indexing.indexing_strategy_name)
+    job = DeleteIndexJob.new(index_id: book_indexing.index_id, indexing_strategy_name: book_indexing.indexing_strategy_name)
     @todo_jobs_queue.write(job)
 
     book_indexing.mark_queued_for_deletion
 
     @new_delete_index_jobs += 1
 
-    log_info { "Enqueued deletion for '#{book_indexing.book_version_id} #{book_indexing.indexing_strategy_name}'" }
+    log_info { "Enqueued deletion for '#{book_indexing.index_id} #{book_indexing.indexing_strategy_name}'" }
   end
 
   def released_book_ids

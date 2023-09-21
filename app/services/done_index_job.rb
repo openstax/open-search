@@ -4,7 +4,7 @@ class DoneIndexJob < BaseIndexJob
               :os_stats,
               :time_took,
               :message,
-              :book_version_id,
+              :index_id,
               :indexing_strategy_name
 
   STATUS = [
@@ -41,7 +41,7 @@ class DoneIndexJob < BaseIndexJob
     @time_took = time_took
     @message = message
     @ran_job = ran_job
-    @book_version_id = ran_job.book_version_id
+    @index_id = ran_job.index_id
     @indexing_strategy_name = ran_job.indexing_strategy_name
   end
 

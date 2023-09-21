@@ -4,7 +4,7 @@ RSpec.describe CreateIndexJob do
   let(:body) {
     {
       type: "CreateIndexJob",
-      book_version_id: "foo@1",
+      index_id: "foo@1",
       indexing_strategy_name: "I1",
       status: { status: "successful" },
       os_stats: { num_docs_in_index: 7000 },
@@ -37,7 +37,7 @@ RSpec.describe CreateIndexJob do
     it 'converts to json' do
       expect(create_index_job.to_json).to include_json(
                                             type: 'CreateIndexJob',
-                                            book_version_id: 'foo@1',
+                                            index_id: 'foo@1',
                                             indexing_strategy_name: "I1")
     end
   end

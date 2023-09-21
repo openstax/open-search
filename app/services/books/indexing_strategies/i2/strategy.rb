@@ -35,6 +35,10 @@ module Books::IndexingStrategies::I2
       BookDocument.new(book: book).docs.count
     end
 
+    def single_book_strategy?
+      false
+    end
+
     private
 
     def index_document(document:, index_name:)

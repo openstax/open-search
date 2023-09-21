@@ -19,7 +19,7 @@ module Books::SearchStrategies
       hash[klass.short_name.downcase] = klass
     end.freeze
 
-    def self.build(book_version_ids:, index_strategies:, search_strategy:, options: {})
+    def self.build(index_ids:, index_strategies:, search_strategy:, options: {})
       strategy_class = NAMES_TO_STRATEGY_CLASSES[search_strategy.downcase]
 
       if strategy_class.nil?
@@ -35,8 +35,8 @@ module Books::SearchStrategies
         indexing_strategy = NAMES_TO_INDEXING_CLASSES[index_strategy]
 
         index_names.concat(
-          book_version_ids.map do |book_version_id|
-            index = Books::Index.new(book_version_id: book_version_id, indexing_strategy: indexing_strategy)
+          index_ids.map do |index_id|
+            index = Books::Index.new(index_id: index_id, indexing_strategy: indexing_strategy)
             index.name
           end
         )
