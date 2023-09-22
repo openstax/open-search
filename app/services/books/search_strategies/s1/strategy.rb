@@ -7,8 +7,6 @@ module Books::SearchStrategies::S1
 
     MAX_SEARCH_RESULTS = 1000
 
-    FUZZINESS = 'AUTO'
-
     def self.short_name
       "s1"
     end
@@ -29,8 +27,14 @@ module Books::SearchStrategies::S1
       # 2. Split into array of unquoted words and quoted phrases
       # 3. Add fuzziness to unquoted words only
       # 4. Join array back into a string with spaces
+      #
+      # Fuzziness values based on AUTO fuzziness of other OpenSearch query types
+      # AUTO doesn't seem to work for simple_query_string
       query_string.gsub(/~[^\s"]*/, '').scan(/[^\s"]+|"[^"]*"?/).map do |str|
-        str.start_with?('"') ? str : "#{str}~#{FUZZINESS}"
+        next str if str.start_with?('"') || str.length <= 2
+
+        fuzziness = str.length <= 5 ? 1 : 2
+        "#{str}~#{fuzziness}"
       end.join(' ')
     end
 
