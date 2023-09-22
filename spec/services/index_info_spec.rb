@@ -7,8 +7,8 @@ RSpec.describe IndexInfo, vcr: VCR_OPTS do
   let(:index_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:indexing_strategy) { Books::SearchStrategies::Factory::INDEXING_CLASSES.first }
   let(:index) { Books::Index.new(index_id: index_id, indexing_strategy: indexing_strategy) }
-  let(:indexing_strategy) { "I1" }
-  let(:book_index_name) { "#{pipeline}__#{book_id_at_version}_#{indexing_strategy}".downcase }
+  let(:indexing_strategy_name) { "I1" }
+  let(:book_index_name) { "#{pipeline}__#{book_id_at_version}_#{indexing_strategy_name}".downcase }
 
   before(:each) do
     do_not_record_or_playback do
@@ -30,7 +30,7 @@ RSpec.describe IndexInfo, vcr: VCR_OPTS do
       it "gets the info" do
         TempAwsEnv.make do |env|
           env.create_dynamodb_table
-          BookIndexState.create(index_id: index_id, indexing_strategy_name: indexing_strategy)
+          BookIndexState.create(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
 
           info = info_service.call
 
