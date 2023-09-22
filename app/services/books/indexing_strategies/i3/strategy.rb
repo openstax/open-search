@@ -23,8 +23,8 @@ module Books::IndexingStrategies::I3
       }
     end
 
-    def index(book:, index_name:)
-      documents = Books::IndexingStrategies::I3::BookDocs.new(book: book).docs
+    def index(obj:, index_name:)
+      documents = Books::IndexingStrategies::I3::BookDocs.new(book: obj).docs
 
       log_info("Creating index #{index_name} with #{documents.count} documents")
       documents.each {|document| index_document(document: document, index_name: index_name) }
@@ -35,8 +35,8 @@ module Books::IndexingStrategies::I3
       Books::IndexingStrategies::I3::BookDocs.new(book: book).docs.count
     end
 
-    def single_book_strategy?
-      false
+    def model_class
+      Rex::Release
     end
 
     private

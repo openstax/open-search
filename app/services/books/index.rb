@@ -61,7 +61,7 @@ module Books
     # This method populates the index with pages from the book
     def populate
       log_debug("populate #{name} called")
-      @indexing_strategy.index(book: book, index_name: name)
+      @indexing_strategy.index(obj: obj, index_name: name)
 
       index_stats
     end
@@ -124,8 +124,8 @@ module Books
       book.version
     end
 
-    def book
-      @book ||= indexing_strategy.single_book_strategy? ? Book.from_id(@index_id) : nil
+    def obj
+      @obj ||= indexing_strategy.model_class.from_id(@index_id)
     end
   end
 end
