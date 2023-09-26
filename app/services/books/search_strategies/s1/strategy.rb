@@ -24,16 +24,17 @@ module Books::SearchStrategies::S1
 
     def fuzzify(query_string)
       # 1. Remove ~ and optional suffix from query (to prevent users setting their own fuzziness)
-      # 2. Split into array of unquoted words and quoted phrases
-      # 3. Add fuzziness to unquoted words only
-      # 4. Join array back into a string with spaces
+      # 2. Convert smart quotes to normal quotes
+      # 3. Split into array of unquoted words and quoted phrases
+      # 4. Fix mismatched quotes, add fuzziness to unquoted words only
+      # 5. Join array back into a string with spaces
       #
       # Fuzziness values based on AUTO fuzziness of other OpenSearch query types
       # AUTO doesn't seem to work for simple_query_string
-      query_string.gsub(/~[^\s"]*/, '').scan(/[^\s"]+|"[^"]*"?/).map do |str|
-        next str if str.start_with?('"') || str.length <= 2
+      query_string.gsub(/~[^\s"]*/, '').gsub(/“|”/, '"').scan(/[^\s"]+|"[^"]*"?/).map do |str|
+        next str.end_with?('"') ? str : "#{str}\"" if str.start_with?('"')
 
-        fuzziness = str.length <= 5 ? 1 : 2
+        fuzziness = str.length <= 2 ? 0 : str.length <= 5 ? 1 : 2
         "#{str}~#{fuzziness}"
       end.join(' ')
     end
