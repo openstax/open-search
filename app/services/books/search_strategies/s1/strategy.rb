@@ -31,10 +31,11 @@ module Books::SearchStrategies::S1
       #
       # Fuzziness values based on AUTO fuzziness of other OpenSearch query types
       # AUTO doesn't seem to work for simple_query_string
-      query_string.gsub(/~[^\s"]*/, '').gsub(/“|”/, '"').scan(/[^\s"]+|"[^"]*"?/).map do |str|
+      query_string.gsub(/~[^\s"]*/, '').gsub(/“|”/, '"').scan(/[^\s"—–-]+|"[^"]*"?/).map do |str|
         next str.end_with?('"') ? str : "#{str}\"" if str.start_with?('"')
+        next str if str.length <= 2
 
-        fuzziness = str.length <= 2 ? 0 : str.length <= 5 ? 1 : 2
+        fuzziness = str.length <= 5 ? 1 : 2
         "#{str}~#{fuzziness}"
       end.join(' ')
     end
