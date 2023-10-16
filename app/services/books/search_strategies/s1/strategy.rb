@@ -47,8 +47,8 @@ module Books::SearchStrategies::S1
         query: {
           simple_query_string: {
             fields: %w(title visible_content),
-            query: fuzzify(query_string),
-            flags: "FUZZY|PHRASE|WHITESPACE",
+            query: query_string,
+            flags: "PHRASE|WHITESPACE",
             minimum_should_match: "100%",
             default_operator: "AND"
           }
