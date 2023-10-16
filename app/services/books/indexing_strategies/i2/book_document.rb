@@ -41,8 +41,8 @@ module Books::IndexingStrategies::I2
       JSON.parse json
     end
 
-    def docs
-      @docs ||= [ body ]
+    def doc
+      @doc ||= body
     end
   end
 end

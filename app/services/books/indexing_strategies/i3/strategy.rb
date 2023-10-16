@@ -24,7 +24,7 @@ module Books::IndexingStrategies::I3
     end
 
     def index(obj:, index_name:)
-      documents = Books::IndexingStrategies::I3::BookDocs.new(book: obj).docs
+      documents = obj.books.flat_map { |book| Books::IndexingStrategies::I3::BookDocs.new(book: book).docs }
 
       log_info("Creating index #{index_name} with #{documents.count} documents")
       documents.each {|document| index_document(document: document, index_name: index_name) }

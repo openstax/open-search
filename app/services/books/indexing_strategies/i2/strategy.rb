@@ -24,7 +24,7 @@ module Books::IndexingStrategies::I2
     end
 
     def index(obj:, index_name:)
-      documents = BookDocument.new(book: obj).docs
+      documents = obj.books.map { |book| BookDocument.new(book: book).doc }
 
       log_info("Creating index #{index_name} with #{documents.count} documents")
       documents.each {|document| index_document(document: document, index_name: index_name) }
