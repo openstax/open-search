@@ -34,7 +34,7 @@ module Books::IndexingStrategies::I3
 
         documents = Books::IndexingStrategies::I3::BookDocs.new(book: book).docs
 
-        log_info("Adding #{documents.count} documents for #{book.id}")
+        log_info("Adding #{documents.count} page documents for #{book.id}")
 
         documents.each {|document| index_document(document: document, index_name: index_name) }
       end
