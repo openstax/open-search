@@ -36,5 +36,9 @@ module Rex
         Book.new(pipeline: pipeline, uuid: uuid, version: info["defaultVersion"])
       end.compact
     end
+
+    def clear_book_cache
+      @books = nil
+    end
   end
 end

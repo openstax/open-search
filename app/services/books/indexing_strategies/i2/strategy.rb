@@ -31,8 +31,8 @@ module Books::IndexingStrategies::I2
       log_info("Finished creating index #{index_name}")
     end
 
-    def total_number_of_documents_to_index(book:)
-      BookDocument.new(book: book).docs.count
+    def total_number_of_documents_to_index(release:)
+      release.books.count
     end
 
     def model_class

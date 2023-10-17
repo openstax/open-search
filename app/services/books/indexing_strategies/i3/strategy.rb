@@ -24,15 +24,26 @@ module Books::IndexingStrategies::I3
     end
 
     def index(obj:, index_name:)
-      documents = obj.books.flat_map { |book| Books::IndexingStrategies::I3::BookDocs.new(book: book).docs }
+      books = obj.books.reverse
+      obj.clear_book_cache
 
-      log_info("Creating index #{index_name} with #{documents.count} documents")
-      documents.each {|document| index_document(document: document, index_name: index_name) }
+      log_info("Creating index #{index_name} with #{books.count} books")
+
+      until books.empty?
+        book = books.pop
+
+        documents = Books::IndexingStrategies::I3::BookDocs.new(book: book).docs
+
+        log_info("Adding #{documents.count} documents for #{book.id}")
+
+        documents.each {|document| index_document(document: document, index_name: index_name) }
+      end
+
       log_info("Finished creating index #{index_name}")
     end
 
-    def total_number_of_documents_to_index(book:)
-      Books::IndexingStrategies::I3::BookDocs.new(book: book).docs.count
+    def total_number_of_documents_to_index(release:)
+      release.books.sum { |book| Books::IndexingStrategies::I3::BookDocs.new(book: book).docs.count }
     end
 
     def model_class
