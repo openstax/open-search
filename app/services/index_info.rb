@@ -3,7 +3,7 @@ class IndexInfo
     state:"not found",
     num_docs: "not found"
   }
-  BOOK_INDEX_MATCH = /[\w-]+@\w+.+_+.+/
+  INDEX_MATCH = /\A[^\/]+_i\d+\z/
 
   def call
     @book_indexes = {}
@@ -45,7 +45,7 @@ class IndexInfo
     os_indices = all_os_indices.stats["indices"]
     os_indices.each do |os_index|
       index_name = os_index.first
-      if BOOK_INDEX_MATCH.match?(index_name)
+      if INDEX_MATCH.match?(index_name)
         update_stat(index: index_name,
                     value_sym: :num_docs,
                     value: os_index.second["primaries"]["docs"]["count"])
