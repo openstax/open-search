@@ -18,8 +18,7 @@ RSpec.describe Books::IndexingStrategies::I2::BookDocument, vcr: VCR_OPTS do
 
   describe ".mapping" do
     it 'builds the book properties' do
-      expect(described_class.mapping).to include(:titleParts)
-      expect(described_class.mapping).to include(:contents)
+      expect(described_class.mapping).to include(:title)
     end
   end
 
