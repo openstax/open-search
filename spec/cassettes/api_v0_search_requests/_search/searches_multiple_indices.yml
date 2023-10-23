@@ -5,8 +5,8 @@ http_interactions:
     uri: http://localhost:9200/20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i1,20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i2,20230620.181811__4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea_i3/_search
     body:
       encoding: UTF-8
-      string: '{"size":1000,"query":{"simple_query_string":{"fields":["title","titleParts","contextTitle","visible_content"],"query":"\"Recall
-        that an atom\"","flags":"WHITESPACE|PHRASE","minimum_should_match":"100%","default_operator":"AND"}},"track_total_hits":true,"highlight":{"number_of_fragments":20,"pre_tags":["\u003cstrong\u003e"],"post_tags":["\u003c/strong\u003e"],"fields":{"title":{},"titleParts":{},"contextTitle":{},"visible_content":{}}}}'
+      string: '{"size":1000,"query":{"simple_query_string":{"fields":["title","contextTitle","visible_content"],"query":"\"Recall
+        that an atom\"","flags":"WHITESPACE|PHRASE","minimum_should_match":"100%","default_operator":"AND"}},"track_total_hits":true,"highlight":{"number_of_fragments":20,"pre_tags":["\u003cstrong\u003e"],"post_tags":["\u003c/strong\u003e"],"fields":{"title":{},"contextTitle":{},"visible_content":{}}}}'
     headers:
       User-Agent:
       - 'opensearch-ruby/2.1.0 (RUBY_VERSION: 2.6.5; darwin ; Faraday v1.10.3)'

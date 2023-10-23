@@ -48,7 +48,7 @@ module Books::SearchStrategies::S1
         size: MAX_SEARCH_RESULTS,
         query: {
           simple_query_string: {
-            fields: %w(title titleParts contextTitle visible_content),
+            fields: %w(title contextTitle visible_content),
             query: query_string,
             flags: "PHRASE|WHITESPACE",
             minimum_should_match: "100%",
@@ -62,7 +62,6 @@ module Books::SearchStrategies::S1
           post_tags: ["</strong>"],
           fields: {
             title: {},
-            titleParts: {},
             contextTitle: {},
             visible_content: {}
           }
