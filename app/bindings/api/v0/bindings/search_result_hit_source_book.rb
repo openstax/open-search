@@ -13,34 +13,21 @@ Swagger Codegen version: 2.4.32
 require 'date'
 
 module Api::V0::Bindings
-  class SearchResultHit
-    # The name of the index from which the hit came
-    attr_accessor :_index
-
-    # The hit's score
-    attr_accessor :_score
-
-    attr_accessor :_source
-
-    attr_accessor :highlight
+  class SearchResultHitSourceBook
+    # The matching book's title
+    attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'_index' => :'_index',
-        :'_score' => :'_score',
-        :'_source' => :'_source',
-        :'highlight' => :'highlight'
+        :'title' => :'title'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'_index' => :'String',
-        :'_score' => :'Float',
-        :'_source' => :'Object',
-        :'highlight' => :'SearchResultHitHighlight'
+        :'title' => :'String'
       }
     end
 
@@ -52,20 +39,8 @@ module Api::V0::Bindings
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'_index')
-        self._index = attributes[:'_index']
-      end
-
-      if attributes.has_key?(:'_score')
-        self._score = attributes[:'_score']
-      end
-
-      if attributes.has_key?(:'_source')
-        self._source = attributes[:'_source']
-      end
-
-      if attributes.has_key?(:'highlight')
-        self.highlight = attributes[:'highlight']
+      if attributes.has_key?(:'title')
+        self.title = attributes[:'title']
       end
     end
 
@@ -73,20 +48,8 @@ module Api::V0::Bindings
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @_index.nil?
-        invalid_properties.push('invalid value for "_index", _index cannot be nil.')
-      end
-
-      if @_score.nil?
-        invalid_properties.push('invalid value for "_score", _score cannot be nil.')
-      end
-
-      if @_source.nil?
-        invalid_properties.push('invalid value for "_source", _source cannot be nil.')
-      end
-
-      if @highlight.nil?
-        invalid_properties.push('invalid value for "highlight", highlight cannot be nil.')
+      if @title.nil?
+        invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
       invalid_properties
@@ -95,10 +58,7 @@ module Api::V0::Bindings
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @_index.nil?
-      return false if @_score.nil?
-      return false if @_source.nil?
-      return false if @highlight.nil?
+      return false if @title.nil?
       true
     end
 
@@ -107,10 +67,7 @@ module Api::V0::Bindings
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          _index == o._index &&
-          _score == o._score &&
-          _source == o._source &&
-          highlight == o.highlight
+          title == o.title
     end
 
     # @see the `==` method
@@ -122,7 +79,7 @@ module Api::V0::Bindings
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [_index, _score, _source, highlight].hash
+      [title].hash
     end
 
     # Builds the object from hash

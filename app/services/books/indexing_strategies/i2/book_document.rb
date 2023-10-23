@@ -2,22 +2,8 @@ module Books::IndexingStrategies::I2
   class BookDocument
     attr_reader :book
 
-    def self.titlePartsMapping
-      {
-        titleParts: {
-          properties: {
-            title: { type: 'text' }
-          }
-        }
-      }
-    end
-
     def self.mapping
-      titlePartsMapping.merge(
-        contents: {
-          properties: titlePartsMapping
-        }
-      )
+      { title: { type: 'text' } }
     end
 
     def initialize(book:)

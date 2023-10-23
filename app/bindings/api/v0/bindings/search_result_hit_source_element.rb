@@ -13,7 +13,7 @@ Swagger Codegen version: 2.4.32
 require 'date'
 
 module Api::V0::Bindings
-  class SearchResultHitSource
+  class SearchResultHitSourceElement
     # The page UUID@version containing the hit
     attr_accessor :page_id
 

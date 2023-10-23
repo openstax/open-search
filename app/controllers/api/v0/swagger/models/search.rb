@@ -25,7 +25,7 @@ module Api::V0::Swagger::Models::Search
     end
   end
 
-  swagger_schema :SearchResultHitSource do
+  swagger_schema :SearchResultHitSourceElement do
     key :required, [:page_id, :element_type, :element_id, :page_position]
     property :page_id do
       key :type, :string
@@ -50,6 +50,24 @@ module Api::V0::Swagger::Models::Search
     end
   end
 
+  swagger_schema :SearchResultHitSourceBook do
+    key :required, [:title]
+    property :title do
+      key :type, :string
+      key :readOnly, true
+      key :description, "The matching book's title"
+    end
+  end
+
+  swagger_schema :SearchResultHitSourcePage do
+    key :required, [:contextTitle]
+    property :contextTitle do
+      key :type, :string
+      key :readOnly, true
+      key :description, "The matching page's title"
+    end
+  end
+
   swagger_schema :SearchResultHit do
     key :required, [:_index, :_score, :_source, :highlight]
     property :_index do
@@ -64,7 +82,17 @@ module Api::V0::Swagger::Models::Search
       key :description, "The hit's score"
     end
     property :_source do
-      key :'$ref', :SearchResultHitSource
+      one_of do
+        key :'$ref', :SearchResultHitSourceElement
+      end
+
+      one_of do
+        key :'$ref', :SearchResultHitSourceBook
+      end
+
+      one_of do
+        key :'$ref', :SearchResultHitSourcePage
+      end
     end
     property :highlight do
       key :'$ref', :SearchResultHitHighlight
