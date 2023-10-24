@@ -4,8 +4,9 @@ require 'vcr_helper'
 RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0, vcr: VCR_OPTS do
   let(:pipeline) { '20230620.181811' }
   let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
-  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
-  let(:index) { Books::Index.new(book_version_id: book_version_id) }
+  let(:index_id) { "#{pipeline}/#{book_id_at_version}" }
+  let(:indexing_strategy) { Books::SearchStrategies::Factory::INDEXING_CLASSES.first }
+  let(:index) { Books::Index.new(index_id: index_id, indexing_strategy: indexing_strategy) }
   let(:index_name) { "#{pipeline}__#{book_id_at_version}_i1" }
 
   subject(:search_strategy) { Books::SearchStrategies::S1::Strategy.new(index_names: index_names) }
@@ -44,16 +45,16 @@ RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0,
       let(:math_page_json) { JSON.parse(file_fixture('mini_math_page.json').read) }
       let(:math_book_url) { "https://openstax.org/apps/archive/#{pipeline}/contents/#{book_id_at_version}"}
       let(:math_page_url) { "#{math_book_url}:ada35081-9ec4-4eb8-98b2-3ce350d5427f"}
-      let(:index) { Books::Index.new(book_version_id: book_version_id) }
-  
+      let(:index) { Books::Index.new(index_id: index_id, indexing_strategy: indexing_strategy) }
+
       let(:paragraph_search_term) { 'general equation' }
       let(:figure_search_term) { 'proficiency' }
       let(:search_term_embedded_in_mathml) { 'hpo4' }
-  
+
       before do
         allow(OpenStax::Cnx::V1).to receive(:fetch).with(math_book_url).and_return(math_book_json)
         allow(OpenStax::Cnx::V1).to receive(:fetch).with(math_page_url).and_return(math_page_json)
-  
+
         do_not_record_or_playback do
           if !index.exists?
             index.create
@@ -62,24 +63,24 @@ RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0,
           end
         end
       end
-  
+
       it 'finds the search term in a paragraph excluding the mathml' do
         result = search_strategy.search(query_string: paragraph_search_term)
-  
+
         paragraph_search_term.split(' ').each do |term|
           expect(result["hits"]["hits"].first["highlight"]["visible_content"].first.include?(term)).to be_truthy
         end
         expect(result["hits"]["hits"].first["highlight"]["visible_content"].first.include?(Books::IndexingStrategies::I1::PageElementDocument::MATHML_REPLACEMENT)).to be_truthy
       end
-  
+
       it 'doesnt find a search term embedded in the mathml' do
         result = search_strategy.search(query_string: search_term_embedded_in_mathml)
         expect(result["hits"]["hits"].count).to eq 0
       end
-  
+
       it 'finds the search term in a figure' do
         result = search_strategy.search(query_string: figure_search_term)
-  
+
         expect(result["hits"]["hits"].first["highlight"]["visible_content"].first.include?(figure_search_term)).to be_truthy
       end
     end
@@ -87,8 +88,8 @@ RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0,
 
   context 'multiple indexes' do
     let(:book_id_at_version2) { '8d50a0af-948b-4204-a71d-4826cba765b8@3bf8607' }
-    let(:book_version_id2) { "#{pipeline}/#{book_id_at_version2}" }
-    let(:index2) { Books::Index.new(book_version_id: book_version_id2) }
+    let(:index_id2) { "#{pipeline}/#{book_id_at_version2}" }
+    let(:index2) { Books::Index.new(index_id: index_id2, indexing_strategy: indexing_strategy) }
     let(:index_name2) { "#{pipeline}__#{book_id_at_version2}_i1" }
 
     let(:index_names) { [index_name, index_name2] }

@@ -6,7 +6,7 @@ require 'vcr_helper'
 RSpec.describe BookIndexState, vcr: VCR_OPTS do
   let(:pipeline) { '20230620.181811' }
   let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
-  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
+  let(:index_id) { "#{pipeline}/#{book_id_at_version}" }
   let(:indexing_strategy_name) { 'I1' }
 
   subject(:book_index_state) { described_class }
@@ -16,8 +16,8 @@ RSpec.describe BookIndexState, vcr: VCR_OPTS do
       TempAwsEnv.make do |env|
         env.create_dynamodb_table
 
-        book = book_index_state.create(book_version_id: book_version_id, indexing_strategy_name: indexing_strategy_name)
-        created_book_arel = BookIndexState.where(book_version_id: book_version_id)
+        book = book_index_state.create(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
+        created_book_arel = BookIndexState.where(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
         expect(created_book_arel.count).to eq 1
 
         book_status_log = book.status_log
@@ -28,26 +28,26 @@ RSpec.describe BookIndexState, vcr: VCR_OPTS do
   end
 
   describe ".live_book_indexings" do
-    let(:book_id1) { 'book@1' }
-    let(:book_id2) { 'book@2' }
-    let(:book_id3) { 'book@3' }
-    let(:book_id4) { 'book@4' }
+    let(:index_id1) { 'book@1' }
+    let(:index_id2) { 'book@2' }
+    let(:index_id3) { 'book@3' }
+    let(:index_id4) { 'book@4' }
 
     def init_test
       book_index_state.new(state: BookIndexState::STATE_CREATE_PENDING,
-                           book_version_id: book_id1,
+                           index_id: index_id1,
                            indexing_strategy_name: indexing_strategy_name,
                            message: 'message 1').save!
       book_index_state.new(state: BookIndexState::STATE_DELETE_PENDING,
-                           book_version_id: book_id2,
+                           index_id: index_id2,
                            indexing_strategy_name: indexing_strategy_name,
                            message: 'message 2').save!
       book_index_state.new(state: BookIndexState::STATE_CREATED,
-                           book_version_id: book_id3,
+                           index_id: index_id3,
                            indexing_strategy_name: indexing_strategy_name,
                            message: 'message 3').save!
       book_index_state.new(state: BookIndexState::STATE_HTTP_ERROR,
-                           book_version_id: book_id4,
+                           index_id: index_id4,
                            indexing_strategy_name: indexing_strategy_name,
                            message: 'message 4').save!
     end
@@ -65,7 +65,7 @@ RSpec.describe BookIndexState, vcr: VCR_OPTS do
 
   describe "#mark_queued_for_deletion" do
     let(:live_indexing) do
-      book_index_state.create(book_version_id: book_version_id, indexing_strategy_name: indexing_strategy_name)
+      book_index_state.create(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
     end
 
     it 'updates the document to be deleted' do
@@ -81,7 +81,7 @@ RSpec.describe BookIndexState, vcr: VCR_OPTS do
 
   describe "#mark_created" do
     let(:live_indexing) do
-      book_index_state.create(book_version_id: book_version_id, indexing_strategy_name: indexing_strategy_name)
+      book_index_state.create(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
     end
 
     it 'updates the document to created and updates the status log' do

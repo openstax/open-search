@@ -6,7 +6,7 @@ class DeleteIndexJob < BaseIndexJob
   def as_json(*)
     {
       type: type,
-      book_version_id: book_version_id,
+      index_id: index_id,
       indexing_strategy_name: indexing_strategy_name
     }
   end

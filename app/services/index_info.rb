@@ -3,7 +3,7 @@ class IndexInfo
     state:"not found",
     num_docs: "not found"
   }
-  BOOK_INDEX_MATCH = /[\w-]+@\w+.+_+.+/
+  INDEX_MATCH = /\A[^\/]+_i\d+\z/
 
   def call
     @book_indexes = {}
@@ -33,9 +33,7 @@ class IndexInfo
   def dynamo_books
     books = BookIndexState.all
     books.each do |book|
-      index_name = Books::Index.index_name(
-        book_version_id: book.book_version_id,
-        indexing_strategy_short_name: book.indexing_strategy_name)
+      index_name = Books::Index.index_name( index_id: book.index_id, indexing_strategy_short_name: book.indexing_strategy_name)
 
       update_stat(index: index_name,
                   value_sym: :state,
@@ -47,7 +45,7 @@ class IndexInfo
     os_indices = all_os_indices.stats["indices"]
     os_indices.each do |os_index|
       index_name = os_index.first
-      if BOOK_INDEX_MATCH.match?(index_name)
+      if INDEX_MATCH.match?(index_name)
         update_stat(index: index_name,
                     value_sym: :num_docs,
                     value: os_index.second["primaries"]["docs"]["count"])

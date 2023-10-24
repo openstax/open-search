@@ -4,12 +4,16 @@ require 'vcr_helper'
 RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS do
   let(:pipeline) { '20230620.181811' }
   let(:book_id_at_version) { '4fd99458-6fdf-49bc-8688-a6dc17a1268d@f1ce9ea' }
-  let(:book_version_id) { "#{pipeline}/#{book_id_at_version}" }
-  let(:index) { Books::Index.new(book_version_id: book_version_id) }
+  let(:index_id) { "#{pipeline}/#{book_id_at_version}" }
+  let(:indices) do
+    Books::SearchStrategies::Factory::INDEXING_CLASSES.map do |indexing_class|
+      Books::Index.new(index_id: index_id, indexing_strategy: indexing_class)
+    end
+  end
 
   before(:each) do
     do_not_record_or_playback do
-      if !index.exists?
+      indices.reject(&:exists?).each do |index|
         index.create
         index.populate
       end
@@ -17,8 +21,23 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
   end
 
   context "#search" do
-    it "searches!" do
+    it "searches one index" do
       api_get "search?#{query(q: "\"Recall that an atom\"", index_strategy: "i1", search_strategy: "s1")}"
+      expect(response).to have_http_status(:ok)
+
+      json = json_response
+      expect(json[:overall_took]).not_to be_nil
+      expect(json[:hits][:total]).to eq 1
+      expect(json[:hits][:hits][0][:_source]).to include(
+        page_id: "2c60e072-7665-49b9-a2c9-2736b72b533c@",
+        element_type: "paragraph",
+        page_position: 4
+      )
+      expect(json[:hits][:hits][0][:highlight][:visible_content][0]).to start_with "<strong>Recall</strong>"
+    end
+
+    it "searches multiple indices" do
+      api_get "search?#{query(q: "\"Recall that an atom\"", index_strategy: "i1,i2,i3", search_strategy: "s1")}"
       expect(response).to have_http_status(:ok)
 
       json = json_response
@@ -123,7 +142,7 @@ RSpec.describe 'api v0 search requests', type: :request, api: :v0, vcr: VCR_OPTS
     end
   end
 
-  def query(q: nil, index_strategy: nil, search_strategy: nil, book_id: book_version_id)
+  def query(q: nil, index_strategy: nil, search_strategy: nil, book_id: index_id)
     "q=#{q}&index_strategy=#{index_strategy}&search_strategy=#{search_strategy}&books=#{book_id}"
   end
 end

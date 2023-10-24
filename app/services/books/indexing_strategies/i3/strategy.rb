@@ -1,12 +1,12 @@
-module Books::IndexingStrategies::I1
+module Books::IndexingStrategies::I3
   # The indexing strategy is the encapsulation for the index's structure and
   # inspect (including index settings & mappings).
   #
   # The strategy also declares what page element objects it wants indexed.
   class Strategy
-    prefix_logger "Books::IndexingStrategies::I1::Strategy"
+    prefix_logger 'Books::IndexingStrategies::I3::Strategy'
 
-    SHORT_NAME = "i1"
+    SHORT_NAME = 'i3'
     NUM_SHARDS = 1
     NUM_REPLICAS = 1
 
@@ -24,30 +24,36 @@ module Books::IndexingStrategies::I1
     end
 
     def index(obj:, index_name:)
-      documents = Books::IndexingStrategies::I1::BookDocs.new(book: obj).docs
+      books = obj.books.reverse
+      obj.clear_book_cache
 
-      log_info("Creating index #{index_name} with #{documents.count} documents")
-      documents.each {|document| index_document(document: document, index_name: index_name) }
+      log_info("Creating index #{index_name} with #{books.count} books")
+
+      until books.empty?
+        book = books.pop
+
+        documents = Books::IndexingStrategies::I3::BookDocs.new(book: book).docs
+
+        log_info("Adding #{documents.count} page documents for #{book.id}")
+
+        documents.each {|document| index_document(document: document, index_name: index_name) }
+      end
+
       log_info("Finished creating index #{index_name}")
     end
 
-    def total_number_of_documents_to_index(book:)
-      Books::IndexingStrategies::I1::BookDocs.new(book: book).docs.count
+    def total_number_of_documents_to_index(release:)
+      release.books.sum { |book| Books::IndexingStrategies::I3::BookDocs.new(book: book).docs.count }
     end
 
     def model_class
-      Book
+      Rex::Release
     end
 
     private
 
     def index_document(document:, index_name:)
-      begin
-        OxOpenSearchClient.instance.index(index: index_name, body: document.body)
-      rescue ElementIdMissing => ex
-        Raven.capture_message(ex.message, :extra => element.to_json)
-        log_error(ex)
-      end
+      OxOpenSearchClient.instance.index(index: index_name, id: document.body['orn'], body: document.body)
     end
 
     def settings
@@ -93,7 +99,7 @@ module Books::IndexingStrategies::I1
     end
 
     def mappings
-      { properties: PageElementDocument.mapping }
+      { dynamic: false, properties: PageDocument.mapping }
     end
   end
 end

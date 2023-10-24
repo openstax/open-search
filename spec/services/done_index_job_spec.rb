@@ -1,14 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe DoneIndexJob do
-  let(:ran_created_job) { CreateIndexJob.new(book_version_id: "foo@1",
-                                         indexing_strategy_name: "I1")}
+  let(:ran_created_job) { CreateIndexJob.new(index_id: "foo@1", indexing_strategy_name: "I1")}
   let(:status) { "successful" }
   let(:body) {
     {
       type: "DoneIndexJob",
       status: status,
-      book_version_id: "foo@1",
+      index_id: "foo@1",
       ran_job: ran_created_job.to_hash,
       indexing_strategy_name: "I1"
     }
@@ -72,7 +71,7 @@ RSpec.describe DoneIndexJob do
       expect(done_index_job.to_json).to include_json(
                                           ran_job: {
                                             type: 'CreateIndexJob',
-                                            book_version_id: 'foo@1',
+                                            index_id: 'foo@1',
                                             indexing_strategy_name: 'I1'
                                           })
       expect(done_index_job.ran_job).to be_kind_of(CreateIndexJob)

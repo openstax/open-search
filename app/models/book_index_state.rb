@@ -1,7 +1,7 @@
 # BookIndexState represents the dynamodb documents ORM
 #
 # PK (used for internal sharding) is:
-#    hash_key: book_version_id + range_key: indexing_strategy_name
+#    hash_key: index_id + range_key: indexing_strategy_name
 #
 # To created this table in development, run:  rake dynamoid:create_tables
 class BookIndexState
@@ -37,7 +37,7 @@ class BookIndexState
   end
 
   table name: Rails.application.secrets.dynamodb[:index_state_table_name],
-        key: :book_version_id
+        key: :index_id
 
   range :indexing_strategy_name
 
@@ -53,28 +53,28 @@ class BookIndexState
     STATE_HTTP_ERROR = "http error",
     STATE_CREATED = "created"
   ]
-  VALID_INDEXING_STRATEGY_NAMES = %w(I1)
+  VALID_INDEXING_STRATEGY_NAMES = %w(I1 I2 I3)
 
   validates :state, inclusion: { in: STATES }
   validates :indexing_strategy_name, inclusion: { in: VALID_INDEXING_STRATEGY_NAMES }
 
   attr_accessor :in_demand
 
-  def self.create(book_version_id:, indexing_strategy_name:, state: STATE_CREATE_PENDING)
+  def self.create(index_id:, indexing_strategy_name:, state: STATE_CREATE_PENDING)
     new(
       state: state,
-      book_version_id: book_version_id,
+      index_id: index_id,
       indexing_strategy_name: indexing_strategy_name,
       status_log: [StatusLog.new(action: StatusLog::ACTION_CREATE)]
     ).save!
   end
 
   def self.live
-    all.reject{ |doc| doc.deleting? }
+    all.reject(&:deleting?)
   end
 
   def self.created
-    live.select{ |doc| doc.created? }
+    live.select(&:created?)
   end
 
   def initialize(*args)

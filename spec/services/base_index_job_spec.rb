@@ -5,7 +5,7 @@ RSpec.describe BaseIndexJob do
   let(:proc) { -> { test.foobar } }
 
   subject(:base_index_job) {
-    described_class.new(book_version_id:        'foo@1',
+    described_class.new(index_id:               'foo@1',
                         indexing_strategy_name: 'I1',
                         cleanup_after_call:     proc)
   }
