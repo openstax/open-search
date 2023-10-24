@@ -11,9 +11,9 @@ class EnqueueIndexJobs
   def call
     log_info { "Starting..." }
 
-    released_book_ids.each do |book_id|
-      ACTIVE_INDEXING_STRATEGY_NAMES.each do |strategy_name|
-        existing_book_indexing = find_book_indexing(book_id, strategy_name)
+    BOOK_INDEXING_STRATEGY_NAMES.each do |strategy_name|
+      released_book_ids.each do |book_id|
+        existing_book_indexing = find_indexing(book_id, strategy_name)
 
         if existing_book_indexing
           existing_book_indexing.in_demand = true
@@ -23,10 +23,22 @@ class EnqueueIndexJobs
       end
     end
 
-    unneeded_book_indexings = index_states.reject(&:in_demand)
+    REX_RELEASE_INDEXING_STRATEGY_NAMES.each do |strategy_name|
+      rex_release_ids.each do |rex_release_id|
+        existing_release_indexing = find_indexing(rex_release_id, strategy_name)
 
-    unneeded_book_indexings.each do |unneeded_book_indexing|
-      enqueue_delete_index_job(unneeded_book_indexing)
+        if existing_release_indexing
+          existing_release_indexing.in_demand = true
+        else
+          enqueue_create_index_job(rex_release_id, strategy_name)
+        end
+      end
+    end
+
+    unneeded_indexings = index_states.reject(&:in_demand)
+
+    unneeded_indexings.each do |unneeded_indexing|
+      enqueue_delete_index_job(unneeded_indexing)
     end
 
     log_info { "Completed: #{stats}" }
@@ -47,41 +59,42 @@ class EnqueueIndexJobs
     @index_states ||= BookIndexState.live.to_a
   end
 
-  def find_book_indexing(book_id, indexing_strategy_name)
-    @fast_lookup_hash ||= index_states.each_with_object({}) do |book_indexing, hash|
-      hash["#{book_indexing.book_version_id}#{book_indexing.indexing_strategy_name}"] = book_indexing
+  def find_indexing(index_id, indexing_strategy_name)
+    @fast_lookup_hash ||= index_states.each_with_object({}) do |indexing, hash|
+      hash["#{indexing.index_id}#{indexing.indexing_strategy_name}"] = indexing
     end
 
-    @fast_lookup_hash["#{book_id}#{indexing_strategy_name}"]
+    @fast_lookup_hash["#{index_id}#{indexing_strategy_name}"]
   end
 
-  def enqueue_create_index_job(book_id, indexing_strategy_name)
-    job = CreateIndexJob.new(book_version_id: book_id,
-                             indexing_strategy_name: indexing_strategy_name)
+  def enqueue_create_index_job(index_id, indexing_strategy_name)
+    job = CreateIndexJob.new(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
     @todo_jobs_queue.write(job)
 
-    BookIndexState.create(book_version_id:  book_id,
-                          indexing_strategy_name: indexing_strategy_name)
+    BookIndexState.create(index_id: index_id, indexing_strategy_name: indexing_strategy_name)
 
     @new_create_index_jobs += 1
 
-    log_info { "Enqueued creation for '#{book_id} #{indexing_strategy_name}'" }
+    log_info { "Enqueued creation for '#{index_id} #{indexing_strategy_name}'" }
   end
 
   def enqueue_delete_index_job(book_indexing)
-    job = DeleteIndexJob.new(book_version_id: book_indexing.book_version_id,
-                             indexing_strategy_name: book_indexing.indexing_strategy_name)
+    job = DeleteIndexJob.new(index_id: book_indexing.index_id, indexing_strategy_name: book_indexing.indexing_strategy_name)
     @todo_jobs_queue.write(job)
 
     book_indexing.mark_queued_for_deletion
 
     @new_delete_index_jobs += 1
 
-    log_info { "Enqueued deletion for '#{book_indexing.book_version_id} #{book_indexing.indexing_strategy_name}'" }
+    log_info { "Enqueued deletion for '#{book_indexing.index_id} #{book_indexing.indexing_strategy_name}'" }
   end
 
   def released_book_ids
     @released_book_ids ||= Rex::Releases.new.book_ids
+  end
+
+  def rex_release_ids
+    @rex_release_ids ||= Rex::Releases.new.release_ids
   end
 
   def new_jobs

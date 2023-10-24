@@ -6,7 +6,7 @@ RSpec.describe WorkIndexJobs do
   let(:indexing_strategy_name) { 'I1' }
   let(:job_body) {
     {
-      book_version_id: 'foo',
+      index_id: 'foo',
       indexing_strategy_name: indexing_strategy_name
     }
   }

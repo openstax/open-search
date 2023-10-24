@@ -8,7 +8,6 @@ module Books
   class Index
     prefix_logger "Books::Index"
 
-    DEFAULT_INDEXING_STRATEGY = IndexingStrategies::I1::Strategy
     BAD_INDEX_NAME_CHARACTERS = /\//
 
     class IndexResourceNotReadyError < StandardError; end
@@ -20,14 +19,13 @@ module Books
 
     delegate :index_name, to: :class
 
-    def self.index_name(book_version_id:, indexing_strategy_short_name:)
-      raw_name = "#{book_version_id}_#{indexing_strategy_short_name.downcase}"
+    def self.index_name(index_id:, indexing_strategy_short_name:)
+      raw_name = "#{index_id}_#{indexing_strategy_short_name.downcase}"
       raw_name.gsub(BAD_INDEX_NAME_CHARACTERS, '__')
     end
 
-    def initialize(book_version_id: nil,
-                   indexing_strategy: DEFAULT_INDEXING_STRATEGY)
-      @book_version_id = book_version_id
+    def initialize(index_id:, indexing_strategy:)
+      @index_id = index_id
       @indexing_strategy = indexing_strategy.new
     end
 
@@ -63,7 +61,7 @@ module Books
     # This method populates the index with pages from the book
     def populate
       log_debug("populate #{name} called")
-      @indexing_strategy.index(book: book, index_name: name)
+      @indexing_strategy.index(obj: obj, index_name: name)
 
       index_stats
     end
@@ -81,8 +79,7 @@ module Books
     end
 
     def name
-      index_name(book_version_id: @book_version_id,
-                 indexing_strategy_short_name: @indexing_strategy.short_name)
+      index_name(index_id: @index_id, indexing_strategy_short_name: @indexing_strategy.short_name)
     end
 
     def exists?
@@ -127,8 +124,8 @@ module Books
       book.version
     end
 
-    def book
-      @book ||= Book.from_id(@book_version_id)
+    def obj
+      @obj ||= indexing_strategy.model_class.from_id(@index_id)
     end
   end
 end

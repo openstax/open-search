@@ -4,7 +4,7 @@ RSpec.describe DeleteIndexJob do
   let(:body) {
     {
       type: "DeleteIndexJob",
-      book_version_id: "foo@1",
+      index_id: "foo@1",
       indexing_strategy_name: "I1"
     }
   }
@@ -22,7 +22,7 @@ RSpec.describe DeleteIndexJob do
     it 'converts to json' do
       expect(delete_index_job.as_json).to include_json(
                                             type: 'DeleteIndexJob',
-                                            book_version_id: 'foo@1')
+                                            index_id: 'foo@1')
     end
   end
 end

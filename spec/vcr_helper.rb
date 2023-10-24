@@ -32,6 +32,10 @@ VCR.configure do |c|
     $1
   end
 
+  c.filter_sensitive_data('<OrnDomain>') do |interaction|
+    Rails.application.secrets.orn_domain
+  end
+
   # This block lets us skip writing a few requests to a cassette.  Note those requests
   # must be skipped when a cassette isn't being recorded, otherwise VCR won't know what
   # to do with those requests.
