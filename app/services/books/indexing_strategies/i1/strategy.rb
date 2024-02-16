@@ -16,9 +16,12 @@ module Books::IndexingStrategies::I1
       SHORT_NAME
     end
 
-    def index_metadata
-      @index_meta ||= {
-        settings: settings,
+    def index_metadata(obj:)
+      language = obj.hash.fetch('language', 'en')
+
+      @index_meta = {}
+      @index_meta[language] ||= {
+        settings: settings(language: language),
         mappings: mappings
       }
     end
@@ -50,7 +53,7 @@ module Books::IndexingStrategies::I1
       end
     end
 
-    def settings
+    def common_settings
       {
         index: {
           number_of_shards: NUM_SHARDS,
@@ -67,29 +70,205 @@ module Books::IndexingStrategies::I1
               }
             }
           }
-        },
+        }
+      }
+    end
+
+    def package_ids_secrets
+      Rails.application.secrets.open_search[:package_ids]
+    end
+
+    def stopwords_secrets
+      package_ids_secrets[:stopwords]
+    end
+
+    def synonyms_secrets
+      package_ids_secrets[:synonyms]
+    end
+
+    def en_settings
+      common_words = stopwords_secrets[:en].present? ?
+        { common_words_path: "analyzers/#{stopwords_secrets[:en]}" } :
+        { common_words: '_english_' }
+
+      result = {
         analysis: {
+          char_filter: [
+            'quotes'
+          ],
+          filter: {
+            english_possessive_stemmer: {
+              type: 'stemmer',
+              language: 'possessive_english'
+            },
+            light_english_stemmer: {
+              type: 'stemmer',
+              language: 'light_english'
+            },
+            english_index_common: common_words.merge({
+              type: 'common_grams'
+            }),
+            english_search_common: common_words.merge({
+              type: 'common_grams',
+              query_mode: true
+            })
+          },
           analyzer: {
             default: {
-              tokenizer: "standard",
-              char_filter: [
-                "quotes"
-              ],
+              tokenizer: 'standard',
               filter: [
-                "lowercase"
+                'english_possessive_stemmer',
+                'lowercase',
+                'light_english_stemmer',
+                'asciifolding',
+                'english_index_common'
               ]
-            }
-          },
-          char_filter: {
-            quotes: {
-              mappings: [
-                "’=>'",
-              ],
-              type: "mapping"
+            },
+            default_search: {
+              tokenizer: 'standard',
+              filter: [
+                'english_possessive_stemmer',
+                'lowercase',
+                'light_english_stemmer',
+                'asciifolding',
+                'english_search_common'
+              ]
             }
           }
         }
       }
+
+      if synonyms_secrets[:en].present?
+        result[:analysis][:filter][:english_synonyms] = {
+          type: 'synonym_graph',
+          synonyms_path: "analyzer/#{synonyms_secrets[:en]}",
+          updateable: true
+        }
+
+        # Synonyms should happen before search_common, in query mode only
+        result[:analysis][:analyzer][:default_search][:filter][-1] = 'english_synonyms'
+        result[:analysis][:analyzer][:default_search][:filter] << 'english_search_common'
+      end
+
+      result
+    end
+
+    def es_settings
+      common_words = stopwords_secrets[:es].present? ?
+        { common_words_path: "analyzers/#{stopwords_secrets[:es]}" } :
+        { common_words: '_spanish_' }
+
+      result = {
+        analysis: {
+          char_filter: [
+            'quotes'
+          ],
+          filter: {
+            light_spanish_stemmer: {
+              type: 'stemmer',
+              language: 'light_spanish'
+            },
+            spanish_index_common: common_words.merge({
+              type: 'common_grams'
+            }),
+            spanish_search_common: common_words.merge({
+              type: 'common_grams',
+              query_mode: true
+            })
+          },
+          analyzer: {
+            default: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'light_spanish_stemmer',
+                'spanish_index_common'
+              ]
+            },
+            default_search: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'light_spanish_stemmer',
+                'spanish_search_common'
+              ]
+            }
+          }
+        }
+      }
+
+      if synonyms_secrets[:es].present?
+        result[:analysis][:filter][:spanish_synonyms] = {
+          type: 'synonym_graph',
+          synonyms_path: "analyzer/#{synonyms_secrets[:es]}",
+          updateable: true
+        }
+
+        # Synonyms should happen before search_common, in query mode only
+        result[:analysis][:analyzer][:default_search][:filter][-1] = 'spanish_synonyms'
+        result[:analysis][:analyzer][:default_search][:filter] << 'spanish_search_common'
+      end
+
+      result
+    end
+
+    def pl_settings
+      common_words = stopwords_secrets[:pl].present? ?
+        { common_words_path: "analyzers/#{stopwords_secrets[:pl]}" } :
+        { common_words: '_polish_' }
+
+      result = {
+        analysis: {
+          char_filter: [
+            'quotes'
+          ],
+          filter: {
+            polish_index_common: common_words.merge({
+              type: 'common_grams'
+            }),
+            polish_search_common: common_words.merge({
+              type: 'common_grams',
+              query_mode: true
+            })
+          },
+          analyzer: {
+            default: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'polish_stem',
+                'polish_index_common'
+              ]
+            },
+            default_search: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'polish_stem',
+                'polish_search_common'
+              ]
+            }
+          }
+        }
+      }
+
+      if synonyms_secrets[:pl].present?
+        result[:analysis][:filter][:polish_synonyms] = {
+          type: 'synonym_graph',
+          synonyms_path: "analyzer/#{synonyms_secrets[:pl]}",
+          updateable: true
+        }
+
+        # Synonyms should happen before search_common, in query mode only
+        result[:analysis][:analyzer][:default_search][:filter][-1] = 'polish_synonyms'
+        result[:analysis][:analyzer][:default_search][:filter] << 'polish_search_common'
+      end
+
+      result
+    end
+
+    def settings(language:)
+      common_settings.merge send("#{language}_settings")
     end
 
     def mappings

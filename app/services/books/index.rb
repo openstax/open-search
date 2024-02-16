@@ -51,7 +51,7 @@ module Books
       with_retry("Index create") do
         OxOpenSearchClient.instance.indices.create(
           index: name,
-          body: @indexing_strategy.index_metadata
+          body: @indexing_strategy.index_metadata(obj: obj)
         )
       end
 

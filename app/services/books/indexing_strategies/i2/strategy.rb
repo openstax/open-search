@@ -16,7 +16,7 @@ module Books::IndexingStrategies::I2
       SHORT_NAME
     end
 
-    def index_metadata
+    def index_metadata(obj:)
       @index_meta ||= {
         settings: settings,
         mappings: mappings
