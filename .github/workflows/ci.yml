@@ -10,9 +10,8 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
       with:
+        bundler: 2.1.4
         ruby-version: 2.6.5
-    - name: Install Bundler
-      run: gem install bundler:2.1.4
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
