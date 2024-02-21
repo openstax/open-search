@@ -141,7 +141,7 @@ module Books::IndexingStrategies::I1
       if synonyms_secrets[:en].present?
         result[:analysis][:filter][:english_synonyms] = {
           type: 'synonym_graph',
-          synonyms_path: "analyzer/#{synonyms_secrets[:en]}",
+          synonyms_path: "analyzers/#{synonyms_secrets[:en]}",
           updateable: true
         }
 
@@ -200,7 +200,7 @@ module Books::IndexingStrategies::I1
       if synonyms_secrets[:es].present?
         result[:analysis][:filter][:spanish_synonyms] = {
           type: 'synonym_graph',
-          synonyms_path: "analyzer/#{synonyms_secrets[:es]}",
+          synonyms_path: "analyzers/#{synonyms_secrets[:es]}",
           updateable: true
         }
 
@@ -255,7 +255,7 @@ module Books::IndexingStrategies::I1
       if synonyms_secrets[:pl].present?
         result[:analysis][:filter][:polish_synonyms] = {
           type: 'synonym_graph',
-          synonyms_path: "analyzer/#{synonyms_secrets[:pl]}",
+          synonyms_path: "analyzers/#{synonyms_secrets[:pl]}",
           updateable: true
         }
 
