@@ -142,7 +142,8 @@ module Books::IndexingStrategies::I1
         result[:analysis][:filter][:english_synonyms] = {
           type: 'synonym_graph',
           synonyms_path: "analyzers/#{synonyms_secrets[:en]}",
-          updateable: true
+          updateable: true,
+          lenient: true
         }
 
         # Synonyms should happen before search_common, in query mode only
@@ -201,7 +202,8 @@ module Books::IndexingStrategies::I1
         result[:analysis][:filter][:spanish_synonyms] = {
           type: 'synonym_graph',
           synonyms_path: "analyzers/#{synonyms_secrets[:es]}",
-          updateable: true
+          updateable: true,
+          lenient: true
         }
 
         # Synonyms should happen before search_common, in query mode only
@@ -256,7 +258,8 @@ module Books::IndexingStrategies::I1
         result[:analysis][:filter][:polish_synonyms] = {
           type: 'synonym_graph',
           synonyms_path: "analyzers/#{synonyms_secrets[:pl]}",
-          updateable: true
+          updateable: true,
+          lenient: true
         }
 
         # Synonyms should happen before search_common, in query mode only
