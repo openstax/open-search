@@ -1,10 +1,17 @@
+MAX_SHARDS_PER_NODE = 2000
+
 desc <<-DESC.strip_heredoc
   Adds indexing jobs (creation and deletion of indexes) into an SQS queue and ensures
   that workers are available to work them.
 DESC
 task enqueue_index_jobs: :environment do
-
   OpenStax::Aws::AutoScalingInstance.me.unless_waiting_for_termination(hook_name: 'TerminationHook') do
+    shard_setting = OxOpenSearchClient.instance.cluster.get_settings['persistent']['cluster']['max_shards_per_node']
+    max_shards_per_node = MAX_SHARDS_PER_NODE.to_s
+    OxOpenSearchClient.instance.cluster.put_settings(body: {
+      persistent: { 'cluster.max_shards_per_node': max_shards_per_node }
+    }.to_json) if shard_setting != max_shards_per_node
+
     stats = EnqueueIndexJobs.new.call
 
     worker_asg = OpenStax::Aws::AutoScalingGroup.new(
