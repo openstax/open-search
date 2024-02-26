@@ -67,7 +67,10 @@ module Books
     end
 
     def recreate
-      delete rescue OpenSearch::Transport::Transport::Errors::NotFound
+      begin
+        delete
+      rescue OpenSearch::Transport::Transport::Errors::NotFound
+      end
       create
       populate
     end
