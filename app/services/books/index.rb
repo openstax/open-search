@@ -38,7 +38,8 @@ module Books
       rescue OpenSearch::Transport::Transport::ServerError => exception
         log_error("#{action_for_log} error, attempt #{attempt_number}: " \
                   "#{exception.class.name} #{exception.message}")
-        raise if attempt_number >= 4
+        # Don't retry HTTP 400 error codes
+        raise if exception.instance_of?(OpenSearch::Transport::Transport::Errors::BadRequest) || attempt_number >= 4
 
         sleep(2 ** attempt_number + 5) unless Rails.env.test?
         retry
