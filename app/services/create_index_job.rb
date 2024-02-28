@@ -15,6 +15,7 @@ class CreateIndexJob < BaseIndexJob
   private
 
   def _call
-    index.recreate
+    index.create
+    index.populate
   end
 end
