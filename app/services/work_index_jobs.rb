@@ -46,6 +46,10 @@ class WorkIndexJobs
       handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_INVALID_INDEXING_STRATEGY)
     rescue OpenStax::HTTPError => ex
       handle_openstax_http_error(job, ex)
+    rescue OpenSearch::Transport::Transport::Errors::BadRequest => ex
+      # Do not enqueue a done job for duplicate indices (handle SQS duplicate message delivery)
+      handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_OTHER_ERROR,
+                   enqueue_done: !ex.message.include? 'resource_already_exists_exception')
     rescue => ex
       handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_OTHER_ERROR)
     end
@@ -71,13 +75,12 @@ class WorkIndexJobs
     handle_error(exception: ex, job: job, status: status_error)
   end
 
-  def handle_error(exception:, job:, status:)
+  def handle_error(exception:, job:, status:, enqueue_done: true)
     Raven.capture_exception(exception, :extra => job.inspect)
     log_error("Error occurred for #{job.to_json}. #{exception.message}")
     enqueue_done_job(job: job,
                      status: status,
-                     message: "#{exception.message}-#{exception.backtrace.join("\n")}")
-
+                     message: "#{exception.message}-#{exception.backtrace.join("\n")}") if enqueue_done
   end
 
   class InvalidIndexingStrategy < StandardError; end
