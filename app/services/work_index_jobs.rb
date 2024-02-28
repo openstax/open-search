@@ -49,7 +49,7 @@ class WorkIndexJobs
     rescue OpenSearch::Transport::Transport::Errors::BadRequest => ex
       # Do not enqueue a done job for duplicate indices (handle SQS duplicate message delivery)
       handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_OTHER_ERROR,
-                   enqueue_done: !ex.message.include? 'resource_already_exists_exception')
+                   enqueue_done: !ex.message.include?('resource_already_exists_exception'))
     rescue => ex
       handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_OTHER_ERROR)
     end
