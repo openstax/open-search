@@ -20,6 +20,12 @@ RSpec.describe "enqueue_index_jobs", type: :rake do
   }
 
   it "increments worker ASG capacity" do
+    expect_any_instance_of(OpenSearch::API::Cluster::ClusterClient).to receive(:get_settings).and_return(
+      { 'persistent' => { 'cluster' => { 'max_shards_per_node' => '1000' } } }
+    )
+    expect_any_instance_of(OpenSearch::API::Cluster::ClusterClient).to receive(:put_settings).with(
+      body: { persistent: { 'cluster.max_shards_per_node': MAX_SHARDS_PER_NODE.to_s } }.to_json
+    )
     expect_any_instance_of(OpenStax::Aws::AutoScalingGroup).to receive(:increase_desired_capacity).with(by: 5)
     call
   end
