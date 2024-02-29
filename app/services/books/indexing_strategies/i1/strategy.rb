@@ -82,10 +82,6 @@ module Books::IndexingStrategies::I1
       package_ids_secrets[:stopwords]
     end
 
-    def synonyms_secrets
-      package_ids_secrets[:synonyms]
-    end
-
     def en_settings
       common_words = stopwords_secrets[:en].present? ?
         { common_words_path: "analyzers/#{stopwords_secrets[:en]}" } :
@@ -138,19 +134,6 @@ module Books::IndexingStrategies::I1
         }
       }
 
-      if synonyms_secrets[:en].present?
-        result[:analysis][:filter][:english_synonyms] = {
-          type: 'synonym_graph',
-          synonyms_path: "analyzers/#{synonyms_secrets[:en]}",
-          updateable: true,
-          lenient: true
-        }
-
-        # Synonyms should happen before search_common, in query mode only
-        result[:analysis][:analyzer][:default_search][:filter][-1] = 'english_synonyms'
-        result[:analysis][:analyzer][:default_search][:filter] << 'english_search_common'
-      end
-
       result
     end
 
@@ -198,19 +181,6 @@ module Books::IndexingStrategies::I1
         }
       }
 
-      if synonyms_secrets[:es].present?
-        result[:analysis][:filter][:spanish_synonyms] = {
-          type: 'synonym_graph',
-          synonyms_path: "analyzers/#{synonyms_secrets[:es]}",
-          updateable: true,
-          lenient: true
-        }
-
-        # Synonyms should happen before search_common, in query mode only
-        result[:analysis][:analyzer][:default_search][:filter][-1] = 'spanish_synonyms'
-        result[:analysis][:analyzer][:default_search][:filter] << 'spanish_search_common'
-      end
-
       result
     end
 
@@ -253,19 +223,6 @@ module Books::IndexingStrategies::I1
           }
         }
       }
-
-      if synonyms_secrets[:pl].present?
-        result[:analysis][:filter][:polish_synonyms] = {
-          type: 'synonym_graph',
-          synonyms_path: "analyzers/#{synonyms_secrets[:pl]}",
-          updateable: true,
-          lenient: true
-        }
-
-        # Synonyms should happen before search_common, in query mode only
-        result[:analysis][:analyzer][:default_search][:filter][-1] = 'polish_synonyms'
-        result[:analysis][:analyzer][:default_search][:filter] << 'polish_search_common'
-      end
 
       result
     end
