@@ -34,7 +34,7 @@ module Books::SearchStrategies::S1
       # Fuzziness values replicate the AUTO fuzziness of other OpenSearch query types
       # simple_query_string doesn't seem to support AUTO fuzziness
       query_string.gsub(/~[^\s"]*/, '').gsub(/“|”/, '"').scan(/[^\s"—–-]+|"[^"]*"/).map do |str|
-        next str if str.start_with?('"') || str.length <= 2
+        next str if str.start_with?('"') || str.length <= 3
 
         fuzziness = str.length <= 5 ? 1 : 2
         "#{str}~#{fuzziness}"
@@ -49,10 +49,11 @@ module Books::SearchStrategies::S1
         query: {
           simple_query_string: {
             fields: %w(title contextTitle visible_content),
-            query: query_string,
-            flags: "PHRASE|WHITESPACE",
+            query: fuzzify(query_string),
+            flags: "FUZZY|PHRASE|WHITESPACE",
             minimum_should_match: "100%",
-            default_operator: "AND"
+            default_operator: "AND",
+            fuzzy_prefix_length: 3
           }
         },
         track_total_hits: !!@options[:track_total_hits],
