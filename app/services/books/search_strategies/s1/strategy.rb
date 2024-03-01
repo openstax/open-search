@@ -34,7 +34,7 @@ module Books::SearchStrategies::S1
       # Fuzziness values replicate the AUTO fuzziness of other OpenSearch query types
       # simple_query_string doesn't seem to support AUTO fuzziness
       query_string.gsub(/~[^\s"]*/, '').gsub(/“|”/, '"').scan(/[^\s"—–-]+|"[^"]*"/).map do |str|
-        next str if str.start_with?('"') || str.length <= 3
+        next str if str.start_with?('"') || str.length <= 2
 
         fuzziness = str.length <= 5 ? 1 : 2
         "#{str}~#{fuzziness}"
