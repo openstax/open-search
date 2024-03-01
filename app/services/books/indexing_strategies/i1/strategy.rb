@@ -89,9 +89,6 @@ module Books::IndexingStrategies::I1
 
       result = {
         analysis: {
-          char_filter: [
-            'quotes'
-          ],
           filter: {
             english_possessive_stemmer: {
               type: 'stemmer',
@@ -177,6 +174,14 @@ module Books::IndexingStrategies::I1
                 'spanish_search_common'
               ]
             }
+          },
+          char_filter: {
+            quotes: {
+              mappings: [
+                "’=>'",
+              ],
+              type: 'mapping'
+            }
           }
         }
       }
@@ -219,6 +224,14 @@ module Books::IndexingStrategies::I1
                 'polish_stem',
                 'polish_search_common'
               ]
+            }
+          },
+          char_filter: {
+            quotes: {
+              mappings: [
+                "’=>'",
+              ],
+              type: 'mapping'
             }
           }
         }
