@@ -16,6 +16,7 @@ RSpec.describe CreateIndexJob do
 
   describe '#_call' do
     it "creates and populates the index" do
+      expect_any_instance_of(Books::Index).to receive(:not_exists?).once.and_return(true)
       expect_any_instance_of(Books::Index).to receive(:create).once
       expect_any_instance_of(Books::Index).to receive(:populate).once
 
