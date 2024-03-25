@@ -15,6 +15,10 @@ class CreateIndexJob < BaseIndexJob
   private
 
   def _call
-    index.recreate
+    # We call index.create instead of index.recreate here because this job
+    # has to be idempotent due to the possibility of duplicate message delivery from SQS
+    # If the index already exists, we simply attempt to recreate all the records
+    index.create if index.not_exists?
+    index.populate
   end
 end

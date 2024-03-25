@@ -49,10 +49,11 @@ module Books::SearchStrategies::S1
         query: {
           simple_query_string: {
             fields: %w(title contextTitle visible_content),
-            query: query_string,
-            flags: "PHRASE|WHITESPACE",
+            query: fuzzify(query_string),
+            flags: "FUZZY|PHRASE|WHITESPACE",
             minimum_should_match: "100%",
-            default_operator: "AND"
+            default_operator: "AND",
+            fuzzy_prefix_length: 3
           }
         },
         track_total_hits: !!@options[:track_total_hits],

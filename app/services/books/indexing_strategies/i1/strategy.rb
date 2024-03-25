@@ -16,9 +16,12 @@ module Books::IndexingStrategies::I1
       SHORT_NAME
     end
 
-    def index_metadata
-      @index_meta ||= {
-        settings: settings,
+    def index_metadata(obj:)
+      language = obj.hash.fetch('language', 'en')
+
+      @index_meta = {}
+      @index_meta[language] ||= {
+        settings: settings(language: language),
         mappings: mappings
       }
     end
@@ -50,7 +53,7 @@ module Books::IndexingStrategies::I1
       end
     end
 
-    def settings
+    def common_settings
       {
         index: {
           number_of_shards: NUM_SHARDS,
@@ -67,16 +70,108 @@ module Books::IndexingStrategies::I1
               }
             }
           }
-        },
+        }
+      }
+    end
+
+    def package_ids_secrets
+      Rails.application.secrets.open_search[:package_ids]
+    end
+
+    def stopwords_secrets
+      package_ids_secrets[:stopwords]
+    end
+
+    def en_settings
+      common_words = stopwords_secrets[:en].present? ?
+        { common_words_path: "analyzers/#{stopwords_secrets[:en]}" } :
+        { common_words: '_english_' }
+
+      result = {
         analysis: {
+          filter: {
+            english_possessive_stemmer: {
+              type: 'stemmer',
+              language: 'possessive_english'
+            },
+            light_english_stemmer: {
+              type: 'stemmer',
+              language: 'light_english'
+            },
+            english_index_common: common_words.merge({
+              type: 'common_grams'
+            }),
+            english_search_common: common_words.merge({
+              type: 'common_grams',
+              query_mode: true
+            })
+          },
           analyzer: {
             default: {
-              tokenizer: "standard",
-              char_filter: [
-                "quotes"
-              ],
+              tokenizer: 'standard',
               filter: [
-                "lowercase"
+                'english_possessive_stemmer',
+                'lowercase',
+                'light_english_stemmer',
+                'asciifolding',
+                'english_index_common'
+              ]
+            },
+            default_search: {
+              tokenizer: 'standard',
+              filter: [
+                'english_possessive_stemmer',
+                'lowercase',
+                'light_english_stemmer',
+                'asciifolding',
+                'english_search_common'
+              ]
+            }
+          }
+        }
+      }
+
+      result
+    end
+
+    def es_settings
+      common_words = stopwords_secrets[:es].present? ?
+        { common_words_path: "analyzers/#{stopwords_secrets[:es]}" } :
+        { common_words: '_spanish_' }
+
+      result = {
+        analysis: {
+          char_filter: [
+            'quotes'
+          ],
+          filter: {
+            light_spanish_stemmer: {
+              type: 'stemmer',
+              language: 'light_spanish'
+            },
+            spanish_index_common: common_words.merge({
+              type: 'common_grams'
+            }),
+            spanish_search_common: common_words.merge({
+              type: 'common_grams',
+              query_mode: true
+            })
+          },
+          analyzer: {
+            default: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'light_spanish_stemmer',
+                'spanish_index_common'
+              ]
+            },
+            default_search: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'light_spanish_stemmer',
+                'spanish_search_common'
               ]
             }
           },
@@ -85,11 +180,68 @@ module Books::IndexingStrategies::I1
               mappings: [
                 "’=>'",
               ],
-              type: "mapping"
+              type: 'mapping'
             }
           }
         }
       }
+
+      result
+    end
+
+    def pl_settings
+      common_words = stopwords_secrets[:pl].present? ?
+        { common_words_path: "analyzers/#{stopwords_secrets[:pl]}" } :
+        { common_words: '_polish_' }
+
+      result = {
+        analysis: {
+          char_filter: [
+            'quotes'
+          ],
+          filter: {
+            polish_index_common: common_words.merge({
+              type: 'common_grams'
+            }),
+            polish_search_common: common_words.merge({
+              type: 'common_grams',
+              query_mode: true
+            })
+          },
+          analyzer: {
+            default: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'polish_stem',
+                'polish_index_common'
+              ]
+            },
+            default_search: {
+              tokenizer: 'standard',
+              filter: [
+                'lowercase',
+                'polish_stem',
+                'polish_search_common'
+              ]
+            }
+          },
+          char_filter: {
+            quotes: {
+              mappings: [
+                "’=>'",
+              ],
+              type: 'mapping'
+            }
+          }
+        }
+      }
+
+      result
+    end
+
+    def settings(language:)
+      common_settings.merge send("#{language}_settings")
     end
 
     def mappings
