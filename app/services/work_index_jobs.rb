@@ -46,6 +46,9 @@ class WorkIndexJobs
       handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_INVALID_INDEXING_STRATEGY)
     rescue OpenStax::HTTPError => ex
       handle_openstax_http_error(job, ex)
+    rescue OpenSearch::Transport::Transport::Errors::BadRequest => ex
+      # Do not enqueue a done job for duplicate indices (handle SQS duplicate message delivery)
+      handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_OTHER_ERROR)
     rescue => ex
       handle_error(exception: ex, job: job, status: DoneIndexJob::STATUS_OTHER_ERROR)
     end
@@ -77,7 +80,6 @@ class WorkIndexJobs
     enqueue_done_job(job: job,
                      status: status,
                      message: "#{exception.message}-#{exception.backtrace.join("\n")}")
-
   end
 
   class InvalidIndexingStrategy < StandardError; end

@@ -86,6 +86,7 @@ RSpec.describe WorkIndexJobs do
         allow_any_instance_of(TodoJobsQueue).to receive(:read).and_return(create_job)
 
         allow(create_job).to receive(:inspect)
+        expect_any_instance_of(Books::Index).to receive(:not_exists?).once.and_return(true)
         allow_any_instance_of(Books::Index).to receive(:delete)
         allow_any_instance_of(Books::Index).to receive(:create)
       end

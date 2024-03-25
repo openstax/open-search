@@ -15,8 +15,10 @@ RSpec.describe CreateIndexJob do
   subject(:create_index_job) { described_class.build_object(params: body, cleanup_after_call: nil) }
 
   describe '#_call' do
-    it "recreates the index" do
-      expect_any_instance_of(Books::Index).to receive(:recreate).once
+    it "creates and populates the index" do
+      expect_any_instance_of(Books::Index).to receive(:not_exists?).once.and_return(true)
+      expect_any_instance_of(Books::Index).to receive(:create).once
+      expect_any_instance_of(Books::Index).to receive(:populate).once
 
       create_index_job.send(:_call)
     end
