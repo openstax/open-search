@@ -115,4 +115,14 @@ RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0,
       expect((result["hits"]["hits"].select{|hit| hit['_index'].include?('8d50a0af')}).present?).to be_truthy
     end
   end
+
+  context 'fuzzify' do
+    let(:index_names) { [index_name] }
+
+    it 'applies fuzzy modifiers to unquoted words outside of parentheses only' do
+      expect(search_strategy.send(
+        :fuzzify, 'a humongous word "in quotes" (and parentheses) sometimes(without)"spaces"'
+      )).to eq 'a humongous~2 word~1 "in quotes" (and parentheses) sometimes~2 (without) "spaces"'
+    end
+  end
 end
