@@ -122,7 +122,7 @@ RSpec.describe Books::SearchStrategies::S1::Strategy , type: :request, api: :v0,
     it 'applies fuzzy modifiers to unquoted words outside of parentheses only' do
       expect(search_strategy.send(
         :fuzzify, 'a humongous word "in quotes" (and parentheses) sometimes"(without)"("spaces")'
-      )).to eq 'a humongous~2 word~1 "in quotes" (and parentheses) sometimes~2 "(without)" ("spaces")'
+      )).to eq 'a humongous~2 word~1 "in quotes" ( and~1 parentheses~2 ) sometimes~2 "(without)" ( "spaces" )'
     end
   end
 end

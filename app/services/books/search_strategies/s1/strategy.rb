@@ -38,8 +38,8 @@ module Books::SearchStrategies::S1
       # Note: For whatever reason the outer group in the scan needs to be named
       #       or it won't work, even though the name itself is irrelevant
       query_string.gsub(/~[^\s"]*/, '').gsub(/“|”/, '"')
-                  .scan(/(?<all>[^\s"()—–-]+|"[^"]*"|(?<paren>\((?>[^)(]+|\g<paren>)*\)))/)
-                  .map(&:first).map do |str|
+                  .scan(/[^\s"()—–-]+|"[^"]*"|[()]/)
+                  .map do |str|
         next str if str.start_with?('"', '(') || str.end_with?(')')|| str.length <= 2
 
         fuzziness = str.length <= 5 ? 1 : 2
