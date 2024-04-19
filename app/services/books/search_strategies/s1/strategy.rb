@@ -32,6 +32,7 @@ module Books::SearchStrategies::S1
         query: {
           multi_match: {
             fields: %w(title contextTitle visible_content),
+            fuzziness: 'AUTO',
             operator: 'AND',
             prefix_length: 3,
             query: query_string
