@@ -94,9 +94,9 @@ module Books::IndexingStrategies::I1
               type: 'stemmer',
               language: 'possessive_english'
             },
-            light_english_stemmer: {
+            plural_english_stemmer: {
               type: 'stemmer',
-              language: 'light_english'
+              language: 'plural_english'
             },
             english_index_common: common_words.merge({
               type: 'common_grams'
@@ -112,7 +112,7 @@ module Books::IndexingStrategies::I1
               filter: [
                 'english_possessive_stemmer',
                 'lowercase',
-                'light_english_stemmer',
+                'plural_english_stemmer',
                 'asciifolding',
                 'english_index_common'
               ]
@@ -122,7 +122,7 @@ module Books::IndexingStrategies::I1
               filter: [
                 'english_possessive_stemmer',
                 'lowercase',
-                'light_english_stemmer',
+                'plural_english_stemmer',
                 'asciifolding',
                 'english_search_common'
               ]
@@ -145,9 +145,9 @@ module Books::IndexingStrategies::I1
             'quotes'
           ],
           filter: {
-            light_spanish_stemmer: {
+            spanish_stemmer: {
               type: 'stemmer',
-              language: 'light_spanish'
+              language: 'spanish'
             },
             spanish_index_common: common_words.merge({
               type: 'common_grams'
@@ -162,7 +162,7 @@ module Books::IndexingStrategies::I1
               tokenizer: 'standard',
               filter: [
                 'lowercase',
-                'light_spanish_stemmer',
+                'spanish_stemmer',
                 'spanish_index_common'
               ]
             },
@@ -170,7 +170,7 @@ module Books::IndexingStrategies::I1
               tokenizer: 'standard',
               filter: [
                 'lowercase',
-                'light_spanish_stemmer',
+                'spanish_stemmer',
                 'spanish_search_common'
               ]
             }
