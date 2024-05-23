@@ -15,7 +15,7 @@ module Books::IndexingStrategies::I2
     end
 
     def body
-      uri = URI("https://#{orn_domain}/orn/book/#{book.uuid}@#{book.version}:#{book.pipeline}.json")
+      uri = URI("https://#{orn_domain}/orn/book/#{book.uuid}@#{book.version}:#{book.pipeline}.json?skipCache=true")
 
       json = begin
         Net::HTTP.get uri

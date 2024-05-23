@@ -20,7 +20,8 @@ module Books::IndexingStrategies::I3
     end
 
     def body
-      uri = URI("https://#{orn_domain}/orn/book:page/#{book.uuid}@#{book.version}:#{book.pipeline}:#{page.id.split('@', 2).first}.json")
+      uri = URI("https://#{orn_domain}/orn/book:page/#{book.uuid}@#{book.version}:#{book.pipeline}:#{
+                page.id.split('@', 2).first}.json?skipCache=true")
 
       json = begin
         Net::HTTP.get uri
