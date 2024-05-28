@@ -12,7 +12,8 @@ module Books::SearchStrategies
     end.freeze
 
     STRATEGY_CLASSES = [
-      S1::Strategy
+      S1::Strategy,
+      S2::Strategy
     ].freeze
 
     NAMES_TO_STRATEGY_CLASSES = STRATEGY_CLASSES.each_with_object({}) do |klass, hash|
