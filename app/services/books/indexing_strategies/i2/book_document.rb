@@ -3,7 +3,11 @@ module Books::IndexingStrategies::I2
     attr_reader :book
 
     def self.mapping
-      { title: { type: 'text' } }
+      {
+        orn: { type: 'keyword' },
+        versionedOrn: { type: 'keyword' },
+        title: { type: 'text' }
+      }
     end
 
     def initialize(book:)

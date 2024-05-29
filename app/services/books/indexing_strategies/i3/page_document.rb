@@ -4,7 +4,11 @@ module Books::IndexingStrategies::I3
     attr_reader :page
 
     def self.mapping
-      { contextTitle: { type: 'text' } }
+      {
+        orn: { type: 'keyword' },
+        versionedOrn: { type: 'keyword' },
+        contextTitle: { type: 'text' }
+      }
     end
 
     def initialize(page:)
