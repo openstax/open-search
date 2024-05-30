@@ -83,9 +83,13 @@ class Api::V0::SearchController < Api::V0::BaseController
     # #bind now checks for the presence of overall_took so we have to set it before calling it
     raw_results['overall_took'] = ((Time.now - started_at)*1000).round
 
-    # translate total from OpenSearch object format back to integer for our V0 API
     hits = raw_results['hits']
+
+    # translate total from OpenSearch object format back to integer for our V0 API
     hits['total'] = hits['total']['value'] if hits.respond_to?(:[]) && hits['total'].respond_to?(:[])
+
+    # some search strategies may not use the "highlight" key but our V0 API requires it
+    hits['hits'].each { |hit| hit['highlight'] ||= {} }
 
     binding, error = bind(raw_results.with_indifferent_access, Api::V0::Bindings::SearchResult)
 
