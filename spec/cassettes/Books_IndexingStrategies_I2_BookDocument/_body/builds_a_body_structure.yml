@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://<OrnDomain>/orn/book/a31df062-930a-4f46-8953-605711e6d204@ccb5581:20230620.181811.json
+    uri: https://<OrnDomain>/orn/book/a31df062-930a-4f46-8953-605711e6d204@ccb5581:20230620.181811.json?skipCache=true
     body:
       encoding: US-ASCII
       string: ''

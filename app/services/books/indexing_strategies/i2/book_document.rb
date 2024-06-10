@@ -3,7 +3,11 @@ module Books::IndexingStrategies::I2
     attr_reader :book
 
     def self.mapping
-      { title: { type: 'text' } }
+      {
+        orn: { type: 'keyword' },
+        versionedOrn: { type: 'keyword' },
+        title: { type: 'text' }
+      }
     end
 
     def initialize(book:)
@@ -15,7 +19,7 @@ module Books::IndexingStrategies::I2
     end
 
     def body
-      uri = URI("https://#{orn_domain}/orn/book/#{book.uuid}@#{book.version}:#{book.pipeline}.json")
+      uri = URI("https://#{orn_domain}/orn/book/#{book.uuid}@#{book.version}:#{book.pipeline}.json?skipCache=true")
 
       json = begin
         Net::HTTP.get uri

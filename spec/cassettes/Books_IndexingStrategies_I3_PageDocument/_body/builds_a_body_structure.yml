@@ -53,7 +53,7 @@ http_interactions:
   recorded_at: Thu, 24 Aug 2023 22:01:50 GMT
 - request:
     method: get
-    uri: https://<OrnDomain>/orn/book:page/a31df062-930a-4f46-8953-605711e6d204@ccb5581:20230620.181811:a4579e90-f894-4438-88c3-14772d3da9ff.json
+    uri: https://<OrnDomain>/orn/book:page/a31df062-930a-4f46-8953-605711e6d204@ccb5581:20230620.181811:a4579e90-f894-4438-88c3-14772d3da9ff.json?skipCache=true
     body:
       encoding: US-ASCII
       string: ''
