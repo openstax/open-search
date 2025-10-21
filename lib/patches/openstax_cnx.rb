@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module OpenStax::Cnx::V1
 
   class << self
