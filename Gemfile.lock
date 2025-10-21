@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/openstax/cnx-ruby.git
-  revision: 157d4142353f6afd028e464ede749140d5345264
-  ref: 157d4142353f6afd028e464ede749140d5345264
-  specs:
-    openstax_cnx (0.1.1)
-      addressable
-      nokogiri
-
-GIT
   remote: https://github.com/openstax/path_prefixer.git
   revision: 5e23f62ccbc7036852e9d8aebc7c123519c6961c
   specs:
@@ -252,6 +243,9 @@ GEM
       aws-sdk-ssm (~> 1)
       git
       ox
+    openstax_cnx (0.1.1)
+      addressable
+      nokogiri
     openstax_healthcheck (1.0.1)
       rails (>= 3.0)
     ostruct (0.6.3)
@@ -415,7 +409,7 @@ DEPENDENCIES
   opensearch-aws-sigv4
   opensearch-ruby
   openstax_aws
-  openstax_cnx!
+  openstax_cnx
   openstax_healthcheck
   openstax_path_prefixer!
   openstax_swagger!
