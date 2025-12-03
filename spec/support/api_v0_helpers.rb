@@ -100,7 +100,7 @@ module ApiV0Helpers
 
   def prep_request_args(args, kwargs)
     kwargs[:headers] ||= {}
-    kwargs[:headers]['CONTENT_TYPE'] = "application/json"
+    kwargs[:headers]['CONTENT_TYPE'] ||= "application/json"
 
     args.dup.tap do |copy|
       copy[0] = "/api/v0/#{copy[0]}"
