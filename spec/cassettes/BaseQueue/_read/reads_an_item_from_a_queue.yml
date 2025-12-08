@@ -5,29 +5,35 @@ http_interactions:
     uri: https://sqs.us-east-2.amazonaws.com/
     body:
       encoding: UTF-8
-      string: Action=CreateQueue&QueueName=two&Version=2012-11-05
+      string: '{"QueueName":"two"}'
     headers:
       Accept-Encoding:
       - ''
+      Amz-Sdk-Invocation-Id:
+      - 83ac33a7-28c0-4d8d-9744-c474898a1dbe
       Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
-      User-Agent:
-      - aws-sdk-ruby3/3.180.1 ua/2.0 api/sqs#1.62.0 os/macos#22 md/arm lang/ruby#2.6.5
-        md/2.6.5 cfg/retry-mode#legacy
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - AmazonSQS.CreateQueue
+      X-Amzn-Query-Mode:
+      - 'true'
       Host:
       - sqs.us-east-2.amazonaws.com
       X-Amz-Date:
-      - 20230922T161030Z
+      - 20251021T181301Z
       X-Amz-Security-Token:
       - AWS_SESSION_TOKEN
       X-Amz-Content-Sha256:
-      - 1ca8d2c534ca060462a7bdd4dc2d3c345b1817ac7ab48bd65c3091f4ff002403
+      - 5ae8b865cbf1a144d6b3f119b48c433a3f6f384758fe7ba8d36d6645b3a4d558
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230922/us-east-2/sqs/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token,
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20251021/us-east-2/sqs/aws4_request,
+        SignedHeaders=amz-sdk-invocation-id;content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target;x-amzn-query-mode,
         Signature=<SignatureValue>
+      User-Agent:
+      - aws-sdk-ruby3/3.233.0 ua/2.1 api/sqs#1.104.0 os/macos#24 md/arm64 lang/ruby#3.1.7
+        md/3.1.7 m/Z,b,D,e
       Content-Length:
-      - '51'
+      - '19'
       Accept:
       - "*/*"
   response:
@@ -36,47 +42,53 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - def740bc-9880-5382-acea-1d3b2636f8b7
+      - '09c0c0ca-c022-54a8-a0d2-a1bb0f4f3d63'
       Date:
-      - Fri, 22 Sep 2023 16:10:30 GMT
+      - Tue, 21 Oct 2025 18:13:02 GMT
       Content-Type:
-      - text/xml
+      - application/x-amz-json-1.0
       Content-Length:
-      - '325'
+      - '69'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: <?xml version="1.0"?><CreateQueueResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><CreateQueueResult><QueueUrl>https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two</QueueUrl></CreateQueueResult><ResponseMetadata><RequestId>def740bc-9880-5382-acea-1d3b2636f8b7</RequestId></ResponseMetadata></CreateQueueResponse>
-  recorded_at: Fri, 22 Sep 2023 16:10:30 GMT
+      string: '{"QueueUrl":"https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two"}'
+  recorded_at: Tue, 21 Oct 2025 18:13:01 GMT
 - request:
     method: post
     uri: https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two
     body:
       encoding: UTF-8
-      string: Action=SendMessage&MessageBody=%7B%22type%22%3A%22CreateIndexJob%22%2C%22index_id%22%3A%22foo%401%22%2C%22indexing_strategy_name%22%3A%22I1%22%7D&QueueUrl=https%3A%2F%2Fsqs.us-east-2.amazonaws.com%2FAWS_ACCOUNT_ID%2Ftwo&Version=2012-11-05
+      string: '{"MessageBody":"{\"type\":\"CreateIndexJob\",\"index_id\":\"foo@1\",\"indexing_strategy_name\":\"I1\"}","QueueUrl":"https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two"}'
     headers:
       Accept-Encoding:
       - ''
+      Amz-Sdk-Invocation-Id:
+      - 86538a21-bf08-438c-b2c6-0b6d3a25f17d
       Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
-      User-Agent:
-      - aws-sdk-ruby3/3.180.1 ua/2.0 api/sqs#1.62.0 os/macos#22 md/arm lang/ruby#2.6.5
-        md/2.6.5 cfg/retry-mode#legacy ft/resource
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - AmazonSQS.SendMessage
+      X-Amzn-Query-Mode:
+      - 'true'
       Host:
       - sqs.us-east-2.amazonaws.com
       X-Amz-Date:
-      - 20230922T161030Z
+      - 20251021T181302Z
       X-Amz-Security-Token:
       - AWS_SESSION_TOKEN
       X-Amz-Content-Sha256:
-      - 3aee14cfdfd0f159091a0c50cc3b4d0b926ecf84cb3b5e5b0ad3fd9d9cc1f473
+      - ccaf4ff51716dc9ff2eae632dd735f1c6eb46dd4ff66d1aac610cf51acde1813
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230922/us-east-2/sqs/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token,
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20251021/us-east-2/sqs/aws4_request,
+        SignedHeaders=amz-sdk-invocation-id;content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target;x-amzn-query-mode,
         Signature=<SignatureValue>
+      User-Agent:
+      - aws-sdk-ruby3/3.233.0 ua/2.1 api/sqs#1.104.0 os/macos#24 md/arm64 lang/ruby#3.1.7
+        md/3.1.7 m/A,Z,b,D,e
       Content-Length:
-      - '236'
+      - '170'
       Accept:
       - "*/*"
   response:
@@ -85,47 +97,53 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 0463264e-3b84-5806-86c6-7bc985322333
+      - f07481c6-73e7-5e15-9fb6-e0b7bc89e7de
       Date:
-      - Fri, 22 Sep 2023 16:10:30 GMT
+      - Tue, 21 Oct 2025 18:13:02 GMT
       Content-Type:
-      - text/xml
+      - application/x-amz-json-1.0
       Content-Length:
-      - '378'
+      - '106'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: <?xml version="1.0"?><SendMessageResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><SendMessageResult><MessageId>be903c06-d673-44a9-8228-2022f29ba81f</MessageId><MD5OfMessageBody>d7e6067d80f35a54d05ce7df98875fd4</MD5OfMessageBody></SendMessageResult><ResponseMetadata><RequestId>0463264e-3b84-5806-86c6-7bc985322333</RequestId></ResponseMetadata></SendMessageResponse>
-  recorded_at: Fri, 22 Sep 2023 16:10:30 GMT
+      string: '{"MD5OfMessageBody":"d7e6067d80f35a54d05ce7df98875fd4","MessageId":"46dd5e1d-29d8-4df5-a5c7-935c5e6be836"}'
+  recorded_at: Tue, 21 Oct 2025 18:13:02 GMT
 - request:
     method: post
     uri: https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two
     body:
       encoding: UTF-8
-      string: Action=ReceiveMessage&QueueUrl=https%3A%2F%2Fsqs.us-east-2.amazonaws.com%2FAWS_ACCOUNT_ID%2Ftwo&Version=2012-11-05
+      string: '{"QueueUrl":"https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two"}'
     headers:
       Accept-Encoding:
       - ''
+      Amz-Sdk-Invocation-Id:
+      - 207731a9-6060-4ab9-987f-d07240f801a8
       Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
-      User-Agent:
-      - aws-sdk-ruby3/3.180.1 ua/2.0 api/sqs#1.62.0 os/macos#22 md/arm lang/ruby#2.6.5
-        md/2.6.5 cfg/retry-mode#legacy ft/resource
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - AmazonSQS.ReceiveMessage
+      X-Amzn-Query-Mode:
+      - 'true'
       Host:
       - sqs.us-east-2.amazonaws.com
       X-Amz-Date:
-      - 20230922T161030Z
+      - 20251021T181302Z
       X-Amz-Security-Token:
       - AWS_SESSION_TOKEN
       X-Amz-Content-Sha256:
-      - fa8c61480f7d1ef08d93d21d06a57918af5366cdfebae3f9739d2b88680e25ad
+      - a5da3dd0a4947d7f175a3df203979f9f1674217d2e5e2d0b219dfa5684181433
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230922/us-east-2/sqs/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token,
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20251021/us-east-2/sqs/aws4_request,
+        SignedHeaders=amz-sdk-invocation-id;content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target;x-amzn-query-mode,
         Signature=<SignatureValue>
+      User-Agent:
+      - aws-sdk-ruby3/3.233.0 ua/2.1 api/sqs#1.104.0 os/macos#24 md/arm64 lang/ruby#3.1.7
+        md/3.1.7 m/A,Z,b,D,e
       Content-Length:
-      - '112'
+      - '67'
       Accept:
       - "*/*"
   response:
@@ -134,47 +152,53 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 3d786c59-e832-5fb6-a7cf-31de5684d483
+      - fed2ec7e-a440-5ac0-9521-8d0f6b2ee30b
       Date:
-      - Fri, 22 Sep 2023 16:10:30 GMT
+      - Tue, 21 Oct 2025 18:13:02 GMT
       Content-Type:
-      - text/xml
+      - application/x-amz-json-1.0
       Content-Length:
-      - '961'
+      - '617'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: <?xml version="1.0"?><ReceiveMessageResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><ReceiveMessageResult><Message><MessageId>be903c06-d673-44a9-8228-2022f29ba81f</MessageId><ReceiptHandle>AQEBYL8yXCRfEOAgR2DLD3EV49Pkf2ttJehlUoA9cXLTeDnGTbLQLC8tRlYNZMEqDTYlGv6jCEbCJUbAxuEKW+iaaH8M/AIIqHk3nXtl+DjfadxyuQP9Tt4FsH9OJfwU+VtHxWiQj8JhYWIyER1yraeHcshC+9Z9Jztym3wQ8Q5lTLf3SeebYfdD+rroNC2J5gepJIM9MJgYJ8pl/ZV3h3wziQT+nW1o7OpSyP5F6J6hdafaYQkTqjeCdnFuxwPVrPY0dP6ZXqQfpj8qkwNJyjcMxtEBQobXlaFcnw/9pLluLOSwCzKjzyugmGl5HW9XewIVMIwAIIi9iqtGYlEWamtd2lnIsB7IHxPW0XDrCQYqcZPPn+dCdM9BnZIB3C17eAA9</ReceiptHandle><MD5OfBody>d7e6067d80f35a54d05ce7df98875fd4</MD5OfBody><Body>{&quot;type&quot;:&quot;CreateIndexJob&quot;,&quot;index_id&quot;:&quot;foo@1&quot;,&quot;indexing_strategy_name&quot;:&quot;I1&quot;}</Body></Message></ReceiveMessageResult><ResponseMetadata><RequestId>3d786c59-e832-5fb6-a7cf-31de5684d483</RequestId></ResponseMetadata></ReceiveMessageResponse>
-  recorded_at: Fri, 22 Sep 2023 16:10:30 GMT
+      string: '{"Messages":[{"Body":"{\"type\":\"CreateIndexJob\",\"index_id\":\"foo@1\",\"indexing_strategy_name\":\"I1\"}","MD5OfBody":"d7e6067d80f35a54d05ce7df98875fd4","MessageId":"46dd5e1d-29d8-4df5-a5c7-935c5e6be836","ReceiptHandle":"AQEBU8BGtvNZsBFwjlPl3hq5Za86oWUYB//ywxeiDYaCP+JgYoE1hW9uzgWN0+941AWzOFuHVIjKJDg36sHsxev43O/7ObYz6s6Ih5GuLPwe45PKwcGWilq35NnMkecksRhL02qNs6tADtltJmUGTJxJlKl72Al6ZvGpvHg7tV8SSWO6j7KArOxo+oqla8o7edMqq34KeSX4yzRmoLYyoX50gbaqC/6zLEk+pIBX3kaVVSmcAa4xmSABoxMcUtVDWtoMoJ3+bkk8xdvT712ws+r13xb3APdrT0fqdp7kYhoXz4/QOBTGWQnwqSVvVo95FD86Y7SGKrIYxecpAQeyrAUxTzltUsE0aQUDBkYBJfNxai/Z43S8v7+unkJ4mCK8CmsS"}]}'
+  recorded_at: Tue, 21 Oct 2025 18:13:02 GMT
 - request:
     method: post
     uri: https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two
     body:
       encoding: UTF-8
-      string: Action=DeleteQueue&QueueUrl=https%3A%2F%2Fsqs.us-east-2.amazonaws.com%2FAWS_ACCOUNT_ID%2Ftwo&Version=2012-11-05
+      string: '{"QueueUrl":"https://sqs.us-east-2.amazonaws.com/AWS_ACCOUNT_ID/two"}'
     headers:
       Accept-Encoding:
       - ''
+      Amz-Sdk-Invocation-Id:
+      - 2919858d-9cb2-42f3-8036-9fe6ccce8b6d
       Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
-      User-Agent:
-      - aws-sdk-ruby3/3.180.1 ua/2.0 api/sqs#1.62.0 os/macos#22 md/arm lang/ruby#2.6.5
-        md/2.6.5 cfg/retry-mode#legacy
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - AmazonSQS.DeleteQueue
+      X-Amzn-Query-Mode:
+      - 'true'
       Host:
       - sqs.us-east-2.amazonaws.com
       X-Amz-Date:
-      - 20230922T161030Z
+      - 20251021T181302Z
       X-Amz-Security-Token:
       - AWS_SESSION_TOKEN
       X-Amz-Content-Sha256:
-      - 91abd00f4881f4a54f66a6ae121efc19d1753772903b953ccbcab1ba052d2892
+      - a5da3dd0a4947d7f175a3df203979f9f1674217d2e5e2d0b219dfa5684181433
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20230922/us-east-2/sqs/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token,
+      - AWS4-HMAC-SHA256 Credential=AWS_ACCESS_KEY_ID/20251021/us-east-2/sqs/aws4_request,
+        SignedHeaders=amz-sdk-invocation-id;content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target;x-amzn-query-mode,
         Signature=<SignatureValue>
+      User-Agent:
+      - aws-sdk-ruby3/3.233.0 ua/2.1 api/sqs#1.104.0 os/macos#24 md/arm64 lang/ruby#3.1.7
+        md/3.1.7 m/Z,b,D,e
       Content-Length:
-      - '109'
+      - '67'
       Accept:
       - "*/*"
   response:
@@ -183,17 +207,17 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - bce79e07-241a-58a3-889e-c3809aacc396
+      - d1af85fd-c65d-54f8-8188-e48c09332d33
       Date:
-      - Fri, 22 Sep 2023 16:10:30 GMT
+      - Tue, 21 Oct 2025 18:13:02 GMT
       Content-Type:
-      - text/xml
+      - application/x-amz-json-1.0
       Content-Length:
-      - '211'
+      - '0'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: <?xml version="1.0"?><DeleteQueueResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><ResponseMetadata><RequestId>bce79e07-241a-58a3-889e-c3809aacc396</RequestId></ResponseMetadata></DeleteQueueResponse>
-  recorded_at: Fri, 22 Sep 2023 16:10:30 GMT
-recorded_with: VCR 6.1.0
+      string: ''
+  recorded_at: Tue, 21 Oct 2025 18:13:02 GMT
+recorded_with: VCR 6.3.1

@@ -1,15 +1,17 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '6.1.7.10'
+
+# Remove this entry after Rails is updated further
+gem 'concurrent-ruby', '1.3.4'
+
 # Use sqlite3 as the database for Active Record
-gem 'puma', '~> 4.3'
+gem 'puma'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', require: false
 
 # Gives 200 OK from /ping
 gem 'openstax_healthcheck'
@@ -30,7 +32,7 @@ gem "aws-sdk-sqs"
 gem "versionist"
 
 # https://github.com/lsegal/yard/security/advisories/GHSA-xfhh-rx56-rxcr
-gem "yard", ">= 0.9.20"
+gem "yard"
 
 # Access AWS dynamo db
 gem 'dynamoid'
@@ -44,9 +46,9 @@ gem "whenever"
 # Unlike in most of our projects, this is used in production (to set the node type)
 gem 'dotenv-rails'
 
-gem "openstax_path_prefixer", github: "openstax/path_prefixer", ref: "b6d8f45d8"
+gem "openstax_path_prefixer", github: "openstax/path_prefixer"
 
-gem "openstax_aws", github: "openstax/aws-ruby", ref: 'a123f496e8'
+gem "openstax_aws"
 
 # More concise, one-liner logs (better for production)
 gem "lograge"
@@ -55,9 +57,9 @@ gem 'sentry-raven'
 
 gem 'nokogiri'
 
-gem 'openstax_cnx', github: 'openstax/cnx-ruby', ref: 'ad1bef4'
+gem 'openstax_cnx'
 
-gem "openstax_swagger", github: 'openstax/swagger-rails', ref: 'c88e569'
+gem "openstax_swagger", github: 'openstax/swagger-rails'
 
 # CORS
 gem 'rack-cors'
@@ -68,7 +70,7 @@ group :development, :test do
 
   gem 'pry-rails'
 
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails'
   gem 'rspec-json_expectations'
 
   # Stubs HTTP requests
@@ -89,8 +91,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring', '< 4.3.0'
+  gem 'spring-watcher-listen'
 end
