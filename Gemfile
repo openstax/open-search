@@ -44,7 +44,7 @@ gem 'opensearch-aws-sigv4'
 gem "whenever"
 
 # Unlike in most of our projects, this is used in production (to set the node type)
-gem 'dotenv-rails'
+gem 'dotenv-rails', '3.1.4'
 
 gem "openstax_path_prefixer", github: "openstax/path_prefixer"
 
